@@ -1,6 +1,6 @@
 @echo off
 echo ========================================
-echo Starting Kitenge Bora Frontend
+echo Starting Esoko Frontend
 echo ========================================
 echo.
 cd /d "%~dp0"

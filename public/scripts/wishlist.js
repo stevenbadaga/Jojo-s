@@ -1,4 +1,4 @@
-// Kitenge Bora - Wishlist page
+// Esoko - Wishlist page
 
 const formatPrice = (num) =>
   "RWF " + (num || 0).toLocaleString("en-RW");

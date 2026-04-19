@@ -5,6 +5,7 @@ import CartDrawer from './CartDrawer'
 import BackToTop from './BackToTop'
 import ErrorBoundary from './ErrorBoundary'
 import MobileBottomNav from './MobileBottomNav'
+import BackendStatusBanner from './BackendStatusBanner'
 
 const Layout = () => {
   const location = useLocation()
@@ -29,6 +30,9 @@ const Layout = () => {
           <Header />
         </ErrorBoundary>
       )}
+      <ErrorBoundary>
+        <BackendStatusBanner />
+      </ErrorBoundary>
       <main className={`flex-grow ${showStoreChrome && !isAuthRoute ? 'pb-24 lg:pb-0' : ''}`}>
         <ErrorBoundary>
           <Outlet />

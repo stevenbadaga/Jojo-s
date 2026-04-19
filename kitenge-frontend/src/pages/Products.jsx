@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
-import { productsAPI } from '../services/api'
+import { isBackendConnectionIssue, productsAPI } from '../services/api'
 import ProductCard from '../components/ProductCard'
 import QuickViewModal from '../components/QuickViewModal'
 import Breadcrumbs from '../components/Breadcrumbs'
@@ -8,6 +8,7 @@ import { Search, Filter, Grid, List, X, SlidersHorizontal, Sparkles, ChevronLeft
 import { useToast } from '../contexts/ToastContext'
 import { ProductGridSkeleton, LoadingSpinner } from '../components/SkeletonLoader'
 import { EmptyProducts, EmptySearch } from '../components/EmptyState'
+import useBackendStatus from '../hooks/useBackendStatus'
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -25,6 +26,7 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [productsPerPage] = useState(12)
   const toast = useToast()
+  const { state: backendState } = useBackendStatus()
 
   useEffect(() => {
     loadProducts()
@@ -41,8 +43,10 @@ const Products = () => {
       setProducts(response.data || [])
       setFilteredProducts(response.data || [])
     } catch (error) {
-      console.error('Failed to load products:', error)
-      toast.error('Failed to load products')
+      if (!isBackendConnectionIssue(error)) {
+        console.error('Failed to load products:', error)
+        toast.error('Failed to load products')
+      }
     } finally {
       setLoading(false)
     }
@@ -136,9 +140,18 @@ const Products = () => {
             All Products
           </h1>
           <p className="text-sm sm:text-lg text-gray-600 dark:text-gray-400 leading-snug">
-            Discover our curated collection of African fabrics and outfits
+            Explore products across fashion, home, beauty, accessories, and everyday essentials
           </p>
         </div>
+
+        {products.length === 0 && backendState !== 'ready' && (
+          <div className="mb-4 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-4 text-sm text-amber-900 shadow-sm dark:border-amber-900/50 dark:bg-amber-950/40 dark:text-amber-100 sm:px-5">
+            <p className="font-semibold">The backend is still starting.</p>
+            <p className="mt-1 opacity-90">
+              Product requests are being retried automatically. This page will fill in once the API is reachable.
+            </p>
+          </div>
+        )}
 
         {/* Main Search and Quick Filters Bar */}
         <div className="card p-3 sm:p-5 mb-4 sm:mb-6">

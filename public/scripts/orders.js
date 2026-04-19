@@ -17,7 +17,7 @@ async function checkAdminAccess() {
       return (window.location.href = "/login.html");
     }
 
-    if (data.user.email !== "admin@kitenge.com") {
+    if (data.user.email !== "esoko@gmail.com") {
       await fetch("/api/logout", { method: "POST" });
       return (window.location.href = "/login.html");
     }

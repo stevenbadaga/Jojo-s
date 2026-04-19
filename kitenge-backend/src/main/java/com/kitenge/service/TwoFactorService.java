@@ -85,14 +85,14 @@ public class TwoFactorService {
 
             emailService.sendText(
                     email,
-                    "Your Two-Factor Authentication Code - Kitenge Bora",
+                    "Your Two-Factor Authentication Code - Esoko",
                     "Hello,\n\n" +
                             "Your two-factor authentication code is:\n\n" +
                             code + "\n\n" +
                             "This code will expire in 10 minutes.\n\n" +
                             "If you didn't request this code, please ignore this email.\n\n" +
                             "Best regards,\n" +
-                            "Kitenge Bora Team"
+                            "Esoko Team"
             );
         } catch (Exception e) {
             logger.warn("Failed to send 2FA code", e);

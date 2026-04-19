@@ -14,8 +14,8 @@ const FAQ = () => {
           a: 'Browse our products, add items to your cart, and proceed to checkout. You can checkout via WhatsApp where you\'ll be connected directly with us to complete your order.'
         },
         {
-          q: 'Do you offer custom tailoring?',
-          a: 'Yes! We offer custom tailoring services. Please contact us via WhatsApp (+250 788 883 986) or email (kitengeboraa@gmail.com) to discuss your requirements.'
+          q: 'Do you handle special requests or bulk orders?',
+          a: 'Yes. If you need help with bulk purchases, business orders, or sourcing a specific item, contact us via WhatsApp (+250 788 883 986) or email (esoko@gmail.com).'
         },
         {
           q: 'What payment methods do you accept?',
@@ -55,7 +55,7 @@ const FAQ = () => {
       questions: [
         {
           q: 'What is your return policy?',
-          a: 'You have 7 days from delivery to return items in original, unused condition with tags attached. Custom items are not eligible for return.'
+          a: 'You have 7 days from delivery to return items in original, unused condition with tags attached. Personalized or special-order items are not eligible for return.'
         },
         {
           q: 'How do I return an item?',
@@ -98,8 +98,8 @@ const FAQ = () => {
       icon: ShoppingBag,
       questions: [
         {
-          q: 'What sizes are available?',
-          a: 'Sizes vary by product. Check individual product pages for available sizes. We also offer custom sizing for tailored items.'
+          q: 'What options are available?',
+          a: 'Available options vary by product. Check individual product pages for sizes, colors, styles, and other listed variants.'
         },
         {
           q: 'Are the colors accurate in photos?',
@@ -190,7 +190,7 @@ const FAQ = () => {
           </p>
           <div className="space-y-2 text-gray-700 dark:text-gray-300">
             <p>📱 WhatsApp: +250 788 883 986</p>
-            <p>📧 Email: kitengeboraa@gmail.com</p>
+            <p>📧 Email: esoko@gmail.com</p>
             <p>📍 Visit us: Kigali, Rwanda</p>
           </div>
         </div>

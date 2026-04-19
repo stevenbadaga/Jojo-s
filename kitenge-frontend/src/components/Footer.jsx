@@ -12,29 +12,29 @@ const Footer = () => {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10 md:gap-12 mb-8 sm:mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 mb-6 sm:mb-8">
           {/* Brand Section */}
-          <div className="col-span-2 md:col-span-1 space-y-4 sm:space-y-6">
+          <div className="col-span-2 md:col-span-1 space-y-3 sm:space-y-4">
             <div>
-              <h3 className="text-3xl sm:text-4xl font-black text-white mb-3 sm:mb-4 bg-gradient-to-r from-accent-400 via-accent-500 to-accent-600 to-accent-500 bg-clip-text text-transparent">
-                KITENGE BORA
+              <h3 className="text-2xl sm:text-3xl font-black leading-[0.95] tracking-tight text-white mb-2 sm:mb-3 bg-gradient-to-r from-accent-400 via-accent-500 to-accent-600 to-accent-500 bg-clip-text text-transparent">
+                ESOKO
               </h3>
-              <p className="text-sm sm:text-base text-gray-400 leading-relaxed mb-4 sm:mb-6 font-medium">
-                Curated African fabrics & outfits. Bringing authentic African fashion to your doorstep with passion and quality.
+              <p className="text-sm sm:text-[15px] text-gray-400 leading-relaxed mb-3 sm:mb-4 font-medium">
+                Esoko brings fashion, home, beauty, accessories, and everyday essentials into one simple shopping experience.
               </p>
             </div>
             
             {/* Social Media Icons */}
             <div>
-              <p className="text-sm font-bold text-white mb-3 sm:mb-4 uppercase tracking-wider">Follow Us</p>
+              <p className="text-sm font-bold text-white mb-2 sm:mb-3 uppercase tracking-wider">Follow Us</p>
               <div className="flex flex-wrap gap-3">
                 <a
                   href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-12 h-12 min-w-[48px] min-h-[48px] rounded-xl bg-gradient-to-br from-[#1877F2] to-[#166FE5] active:from-[#166FE5] active:to-[#1877F2] flex items-center justify-center transition-all duration-300 shadow-lg active:shadow-xl active:scale-110 active:-translate-y-1 touch-manipulation"
+                  className="group w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-gradient-to-br from-[#1877F2] to-[#166FE5] active:from-[#166FE5] active:to-[#1877F2] flex items-center justify-center transition-all duration-300 shadow-lg active:shadow-xl active:scale-110 active:-translate-y-1 touch-manipulation"
                   aria-label="Facebook"
                 >
                   <Facebook className="w-5 h-5 text-white group-active:scale-110 transition-transform duration-300" />
@@ -43,7 +43,7 @@ const Footer = () => {
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-12 h-12 min-w-[48px] min-h-[48px] rounded-xl bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCB045] active:from-[#6B2F94] active:via-[#E01A1A] active:to-[#E09A3A] flex items-center justify-center transition-all duration-300 shadow-lg active:shadow-xl active:scale-110 active:-translate-y-1 touch-manipulation"
+                  className="group w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCB045] active:from-[#6B2F94] active:via-[#E01A1A] active:to-[#E09A3A] flex items-center justify-center transition-all duration-300 shadow-lg active:shadow-xl active:scale-110 active:-translate-y-1 touch-manipulation"
                   aria-label="Instagram"
                 >
                   <Instagram className="w-5 h-5 text-white group-active:scale-110 transition-transform duration-300" />
@@ -52,7 +52,7 @@ const Footer = () => {
                   href="https://x.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-12 h-12 min-w-[48px] min-h-[48px] rounded-xl bg-gradient-to-br from-black to-gray-900 active:from-gray-900 active:to-black flex items-center justify-center transition-all duration-300 shadow-lg active:shadow-xl active:scale-110 active:-translate-y-1 border border-gray-800 touch-manipulation"
+                  className="group w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-gradient-to-br from-black to-gray-900 active:from-gray-900 active:to-black flex items-center justify-center transition-all duration-300 shadow-lg active:shadow-xl active:scale-110 active:-translate-y-1 border border-gray-800 touch-manipulation"
                   aria-label="X (Twitter)"
                 >
                   <X className="w-5 h-5 text-white group-active:scale-110 transition-transform duration-300" />
@@ -61,7 +61,7 @@ const Footer = () => {
                   href="https://wa.me/250788883986"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group w-12 h-12 min-w-[48px] min-h-[48px] rounded-xl bg-gradient-to-br from-[#25D366] to-[#20BA5A] active:from-[#20BA5A] active:to-[#25D366] flex items-center justify-center transition-all duration-300 shadow-lg active:shadow-xl active:scale-110 active:-translate-y-1 touch-manipulation"
+                  className="group w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-gradient-to-br from-[#25D366] to-[#20BA5A] active:from-[#20BA5A] active:to-[#25D366] flex items-center justify-center transition-all duration-300 shadow-lg active:shadow-xl active:scale-110 active:-translate-y-1 touch-manipulation"
                   aria-label="WhatsApp"
                 >
                   <svg className="w-5 h-5 text-white group-active:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
@@ -74,11 +74,11 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-black text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2 uppercase tracking-wide">
+            <h4 className="text-white font-black text-sm sm:text-base mb-3 sm:mb-4 flex items-center gap-2 uppercase tracking-wide">
               <Sparkles className="w-5 h-5 text-accent" />
               Quick Links
             </h4>
-            <ul className="grid grid-cols-1 min-[430px]:grid-cols-2 sm:grid-cols-1 gap-x-6 gap-y-2 sm:gap-y-3">
+            <ul className="grid grid-cols-1 min-[430px]:grid-cols-2 sm:grid-cols-1 gap-x-6 gap-y-1.5 sm:gap-y-2.5">
               {[
                 { to: '/', label: 'Home' },
                 { to: '/products', label: 'Products' },
@@ -101,11 +101,11 @@ const Footer = () => {
 
           {/* Customer Service */}
           <div>
-            <h4 className="text-white font-black text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2 uppercase tracking-wide">
+            <h4 className="text-white font-black text-sm sm:text-base mb-3 sm:mb-4 flex items-center gap-2 uppercase tracking-wide">
               <Heart className="w-5 h-5 text-accent" />
               Customer Service
             </h4>
-            <ul className="grid grid-cols-1 min-[430px]:grid-cols-2 sm:grid-cols-1 gap-x-6 gap-y-2 sm:gap-y-3">
+            <ul className="grid grid-cols-1 min-[430px]:grid-cols-2 sm:grid-cols-1 gap-x-6 gap-y-1.5 sm:gap-y-2.5">
               {[
                 { to: '/account', label: 'My Account' },
                 { to: '/profile', label: 'Profile Settings' },
@@ -128,14 +128,14 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="col-span-2 md:col-span-1">
-            <h4 className="text-white font-black text-base sm:text-lg mb-4 sm:mb-6 flex items-center gap-2 uppercase tracking-wide">
+            <h4 className="text-white font-black text-sm sm:text-base mb-3 sm:mb-4 flex items-center gap-2 uppercase tracking-wide">
               <MapPin className="w-5 h-5 text-accent" />
               Get in Touch
             </h4>
-            <ul className="space-y-3 sm:space-y-4">
+            <ul className="space-y-2.5 sm:space-y-3">
               <li>
                 <a
-                  href="mailto:kitengeboraa@gmail.com"
+                  href="mailto:esoko@gmail.com"
                   className="group flex items-start gap-3 text-gray-400 hover:text-accent transition-all"
                 >
                   <div className="p-2 bg-gray-800 rounded-lg group-hover:bg-accent/20 transition-colors mt-0.5">
@@ -143,7 +143,7 @@ const Footer = () => {
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 mb-0.5">Email</p>
-                    <p className="text-sm sm:text-base">kitengeboraa@gmail.com</p>
+                    <p className="text-sm sm:text-base">esoko@gmail.com</p>
                   </div>
                 </a>
               </li>
@@ -182,12 +182,12 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-6 sm:pt-10">
+        <div className="border-t border-gray-800 pt-5 sm:pt-7">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2 text-sm text-gray-400 font-medium">
               <Heart className="w-4 h-4 text-accent fill-current animate-pulse" />
               <p>
-                Made with love in Rwanda © {currentYear} Kitenge Bora. All rights reserved.
+                Made with love in Rwanda © {currentYear} Esoko. All rights reserved.
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm">

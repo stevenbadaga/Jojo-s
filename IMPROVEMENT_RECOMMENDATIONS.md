@@ -1,7 +1,7 @@
-# Kitenge Bora - Comprehensive Improvement Recommendations
+# Esoko - Comprehensive Improvement Recommendations
 
 ## Executive Summary
-Your Kitenge Bora e-commerce platform is well-structured with good separation of concerns. Here are strategic improvements to enhance code quality, performance, security, and maintainability.
+Your Esoko e-commerce platform is well-structured with good separation of concerns. Here are strategic improvements to enhance code quality, performance, security, and maintainability.
 
 ---
 
@@ -867,7 +867,7 @@ export const useOrderStore = create((set) => ({
 # Dockerfile for backend
 FROM openjdk:17-jdk-slim
 WORKDIR /app
-COPY target/kitenge-bora-backend-1.0.0.jar app.jar
+COPY target/esoko-backend-1.0.0.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
 ```

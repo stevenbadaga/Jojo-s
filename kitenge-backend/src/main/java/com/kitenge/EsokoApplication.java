@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KitengeBoraApplication {
+public class EsokoApplication {
     public static void main(String[] args) {
-        SpringApplication.run(KitengeBoraApplication.class, args);
+        SpringApplication.run(EsokoApplication.class, args);
     }
 }
 

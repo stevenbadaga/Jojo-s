@@ -1,6 +1,6 @@
-# Kitenge Bora Backend - Spring Boot
+# Esoko Backend - Spring Boot
 
-A modern Spring Boot backend for the Kitenge Bora e-commerce platform, replacing the Node.js/Express implementation with a more robust, scalable solution.
+A modern Spring Boot backend for the Esoko e-commerce platform, replacing the Node.js/Express implementation with a more robust, scalable solution.
 
 ## Features
 
@@ -27,9 +27,10 @@ A modern Spring Boot backend for the Kitenge Bora e-commerce platform, replacing
 ## Prerequisites
 
 - Java 17 or higher
-- Maven 3.6+
 - PostgreSQL 12+
 - Optional: Email account for order notifications
+
+This project includes the Maven Wrapper, so a separate Maven installation is not required.
 
 ## Setup Instructions
 
@@ -70,13 +71,20 @@ ADMIN_DEFAULT_PASSWORD=change-me
 cd kitenge-backend
 
 # Build the project
-mvn clean install
+./mvnw clean install
 
 # Run the application
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
-Or use your IDE to run `KitengeBoraApplication.java`.
+On Windows Command Prompt or PowerShell, use:
+
+```powershell
+.\mvnw.cmd clean install
+.\mvnw.cmd spring-boot:run
+```
+
+Or use your IDE to run `EsokoApplication.java`.
 
 The server will start on `http://localhost:8080`.
 
@@ -219,4 +227,4 @@ kitenge-backend/
 
 ## License
 
-This project is part of the Kitenge Bora e-commerce platform.
+This project is part of the Esoko e-commerce platform.

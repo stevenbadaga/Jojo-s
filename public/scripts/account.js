@@ -1,4 +1,4 @@
-// Kitenge Bora - My account page
+// Esoko - My account page
 
 const formatPrice = (num) =>
   "RWF " + (num || 0).toLocaleString("en-RW");

@@ -345,7 +345,7 @@ public class WhatsAppService {
                 + (order.getDeliveryFee() != null ? order.getDeliveryFee() : 0);
 
         StringBuilder message = new StringBuilder();
-        message.append("Kitenge Bora\n");
+        message.append("Esoko\n");
 
         if ("PENDING".equals(normalized)) {
             message.append("We have received your order #").append(orderNumber).append(".\n");

@@ -107,7 +107,7 @@ const Contact = () => {
               </div>
               <div className="space-y-4">
                 <a
-                  href="mailto:kitengeboraa@gmail.com"
+                  href="mailto:esoko@gmail.com"
                   className="flex items-start gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-100 dark:hover:from-orange-900/20 dark:hover:to-orange-800/20 border border-transparent hover:border-orange-200 dark:hover:border-orange-800 transition-all duration-300 group"
                 >
                   <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg group-hover:bg-orange-200 dark:group-hover:bg-orange-900/50 transition-colors flex-shrink-0">
@@ -118,7 +118,7 @@ const Contact = () => {
                       Email
                     </h3>
                     <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 group-hover:text-accent transition-colors break-all">
-                      kitengeboraa@gmail.com
+                      esoko@gmail.com
                     </p>
                   </div>
                 </a>

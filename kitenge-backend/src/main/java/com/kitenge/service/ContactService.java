@@ -10,10 +10,10 @@ public class ContactService {
     
     private final EmailService emailService;
     
-    @Value("${app.admin.email:kitengeboraa@gmail.com}")
+    @Value("${app.admin.email:esoko@gmail.com}")
     private String adminEmail;
     
-    @Value("${app.admin.notification.email:kitengeboraa@gmail.com}")
+    @Value("${app.admin.notification.email:esoko@gmail.com}")
     private String adminNotificationEmail;
     
     public void sendContactMessage(String name, String email, String subject, String message) {
@@ -43,14 +43,14 @@ public class ContactService {
             // Send confirmation email to user
             emailService.sendText(
                     email,
-                    "Thank you for contacting Kitenge Bora",
+                    "Thank you for contacting Esoko",
                     "Dear " + name + ",\n\n" +
-                            "Thank you for contacting Kitenge Bora. We have received your message and will get back to you as soon as possible.\n\n" +
+                            "Thank you for contacting Esoko. We have received your message and will get back to you as soon as possible.\n\n" +
                             "Your message:\n" +
                             "Subject: " + subject + "\n" +
                             "Message: " + message + "\n\n" +
                             "Best regards,\n" +
-                            "Kitenge Bora Team",
+                            "Esoko Team",
                     senderEmail
             );
         } catch (Exception e) {

@@ -16,10 +16,10 @@ const SocialShare = ({ product, variant = 'full', className = '' }) => {
   }
 
   const shareUrl = getShareUrl()
-  const shareTitle = product?.name || 'Kitenge Bora'
+  const shareTitle = product?.name || 'Esoko'
   const shareText = product?.name
-    ? `Check out "${product.name}" on Kitenge Bora.`
-    : 'Check this out on Kitenge Bora.'
+    ? `Check out "${product.name}" on Esoko.`
+    : 'Check this out on Esoko.'
 
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`
   const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`

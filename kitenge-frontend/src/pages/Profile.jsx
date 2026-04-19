@@ -430,7 +430,7 @@ const Profile = () => {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `kitenge-bora-data-${Date.now()}.json`
+    a.download = `esoko-data-${Date.now()}.json`
     a.click()
     URL.revokeObjectURL(url)
     toast.success('Data downloaded successfully!')

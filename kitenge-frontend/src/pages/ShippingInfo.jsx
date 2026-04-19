@@ -105,7 +105,7 @@ const ShippingInfo = () => {
               You can use this to track your package's journey to your doorstep.
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-500">
-              For tracking inquiries, please contact us at +250 788 883 986 or email us at kitengeboraa@gmail.com
+              For tracking inquiries, please contact us at +250 788 883 986 or email us at esoko@gmail.com
             </p>
           </div>
 

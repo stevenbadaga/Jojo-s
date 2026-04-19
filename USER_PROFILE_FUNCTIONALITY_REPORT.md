@@ -227,7 +227,7 @@ The user profile feature has been thoroughly analyzed. Below is a detailed break
   - Addresses
   - Notifications
   - Export timestamp
-- **File Format:** `kitenge-bora-data-{timestamp}.json`
+- **File Format:** `esoko-data-{timestamp}.json`
 
 ### 6.2 Deactivate Account
 **Status:** ⚠️ NOT IMPLEMENTED

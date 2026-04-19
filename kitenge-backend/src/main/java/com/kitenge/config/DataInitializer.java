@@ -102,11 +102,11 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         Product first = new Product();
-        first.setName("Kitenge Sunrise");
-        first.setDescription("Bright orange and yellow pattern.");
-        first.setCategory("Modern");
-        first.setPrice(15000);
-        first.setImage("https://placehold.co/400x300/f97316/ffffff?text=Sunrise");
+        first.setName("Wireless Earbuds Pro");
+        first.setDescription("Compact everyday audio with clear sound and long battery life.");
+        first.setCategory("Electronics");
+        first.setPrice(45000);
+        first.setImage("https://placehold.co/400x300/f97316/ffffff?text=Earbuds");
         first.setInStock(true);
         first.setIsPromo(true);
         first.setOriginalPrice(20000);
@@ -114,11 +114,11 @@ public class DataInitializer implements CommandLineRunner {
         first.setActive(true);
 
         Product second = new Product();
-        second.setName("Royal Ankara");
-        second.setDescription("Deep blue and gold for special occasions.");
-        second.setCategory("Traditional");
-        second.setPrice(25000);
-        second.setImage("https://placehold.co/400x300/1d4ed8/ffffff?text=Ankara");
+        second.setName("Minimal Desk Lamp");
+        second.setDescription("Warm ambient lighting for study spaces, desks, and bedside tables.");
+        second.setCategory("Home");
+        second.setPrice(28000);
+        second.setImage("https://placehold.co/400x300/1d4ed8/ffffff?text=Lamp");
         second.setInStock(true);
         second.setIsPromo(false);
         second.setActive(true);

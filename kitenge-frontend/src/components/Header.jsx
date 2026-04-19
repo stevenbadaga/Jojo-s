@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { useCart } from '../contexts/CartContext'
 import { useTheme } from '../contexts/ThemeContext'
 import { useState, useEffect, useRef } from 'react'
-import { productsAPI } from '../services/api'
+import { isBackendConnectionIssue, productsAPI } from '../services/api'
 import { getImageUrl } from '../utils/imageUtils'
 
 const Header = () => {
@@ -97,7 +97,9 @@ const Header = () => {
           .slice(0, 5)
         setSearchResults(filtered)
       } catch (error) {
-        console.error('Search failed:', error)
+        if (!isBackendConnectionIssue(error)) {
+          console.error('Search failed:', error)
+        }
       } finally {
         setSearchLoading(false)
       }
@@ -181,22 +183,11 @@ const Header = () => {
               </div>
 
               <Link to="/" className="flex-shrink-0 mx-2 min-h-[44px] flex items-center justify-center gap-2">
-                <div className="relative w-9 h-9 rounded-md overflow-hidden flex-shrink-0 shadow-sm bg-white dark:bg-gray-800 ring-1 ring-gray-200 dark:ring-gray-700">
-                  <img
-                    src="/kitenge-logo.png"
-                    alt="Kitenge Bora Logo"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      if (e.target.src.includes('kitenge-logo.png')) {
-                        e.target.src = '/kitenge-logo.png.png'
-                      } else {
-                        e.target.src = '/igitenge1.jpeg'
-                      }
-                    }}
-                  />
+                <div className="relative w-9 h-9 rounded-md flex-shrink-0 shadow-sm bg-gradient-to-br from-accent-500 to-amber-400 ring-1 ring-orange-300/40 flex items-center justify-center">
+                  <ShoppingBag className="w-5 h-5 text-slate-950" />
                 </div>
                 <div className="text-sm font-extrabold text-gray-900 dark:text-white tracking-wide">
-                  KITENGE <span className="text-accent-600">BORA</span>
+                  ESOKO
                 </div>
               </Link>
 
@@ -438,27 +429,15 @@ const Header = () => {
         <div className="hidden lg:flex items-center justify-between h-16 px-4 lg:px-8">
           {/* Brand - Desktop */}
           <Link to="/" className="flex items-center space-x-3 group flex-shrink-0">
-            <div className="relative w-12 h-12 rounded-xl overflow-hidden flex-shrink-0 shadow-md group-hover:shadow-lg transition-all duration-300 ring-2 ring-transparent group-hover:ring-accent/20">
-              <img
-                src="/kitenge-logo.png"
-                alt="Kitenge Bora Logo"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  // Try alternative logo paths
-                  if (e.target.src.includes('kitenge-logo.png')) {
-                    e.target.src = '/kitenge-logo.png.png'
-                  } else {
-                    e.target.src = '/igitenge1.jpeg'
-                  }
-                }}
-              />
+            <div className="relative w-12 h-12 rounded-xl flex-shrink-0 shadow-md group-hover:shadow-lg transition-all duration-300 ring-2 ring-transparent group-hover:ring-accent/20 bg-gradient-to-br from-accent-500 to-amber-400 flex items-center justify-center">
+              <ShoppingBag className="w-6 h-6 text-slate-950" />
             </div>
             <div>
               <div className="text-xl font-black bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-100 dark:to-white bg-clip-text text-transparent group-hover:from-accent group-hover:via-accent-600 group-hover:to-accent transition-all duration-300 leading-tight tracking-tight">
-                KITENGE BORA
+                ESOKO
               </div>
               <div className="text-xs text-gray-500 dark:text-gray-400 font-semibold">
-                Curated African fabrics & outfits
+                Shop fashion, home and more
               </div>
             </div>
           </Link>
@@ -467,35 +446,35 @@ const Header = () => {
           <nav className="hidden lg:flex items-center space-x-1">
             <Link
               to="/"
-              className="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-accent hover:bg-gradient-to-r hover:from-accent-50 hover:to-accent-100 dark:hover:from-accent-900/20 dark:hover:to-accent-800/20 rounded-xl transition-all duration-300 relative group"
+              className="px-4 py-2 text-sm xl:text-base font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:text-accent hover:bg-gradient-to-r hover:from-accent-50 hover:to-accent-100 dark:hover:from-accent-900/20 dark:hover:to-accent-800/20 rounded-xl transition-all duration-300 relative group"
             >
               Home
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-accent-600 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               to="/products"
-              className="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-accent hover:bg-gradient-to-r hover:from-accent-50 hover:to-accent-100 dark:hover:from-accent-900/20 dark:hover:to-accent-800/20 rounded-xl transition-all duration-300 relative group"
+              className="px-4 py-2 text-sm xl:text-base font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:text-accent hover:bg-gradient-to-r hover:from-accent-50 hover:to-accent-100 dark:hover:from-accent-900/20 dark:hover:to-accent-800/20 rounded-xl transition-all duration-300 relative group"
             >
               Products
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-accent-600 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               to="/about"
-              className="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-accent hover:bg-gradient-to-r hover:from-accent-50 hover:to-accent-100 dark:hover:from-accent-900/20 dark:hover:to-accent-800/20 rounded-xl transition-all duration-300 relative group"
+              className="px-4 py-2 text-sm xl:text-base font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:text-accent hover:bg-gradient-to-r hover:from-accent-50 hover:to-accent-100 dark:hover:from-accent-900/20 dark:hover:to-accent-800/20 rounded-xl transition-all duration-300 relative group"
             >
               About
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-accent-600 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               to="/contact"
-              className="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-accent hover:bg-gradient-to-r hover:from-accent-50 hover:to-accent-100 dark:hover:from-accent-900/20 dark:hover:to-accent-800/20 rounded-xl transition-all duration-300 relative group"
+              className="px-4 py-2 text-sm xl:text-base font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:text-accent hover:bg-gradient-to-r hover:from-accent-50 hover:to-accent-100 dark:hover:from-accent-900/20 dark:hover:to-accent-800/20 rounded-xl transition-all duration-300 relative group"
             >
               Contact
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-accent to-accent-600 group-hover:w-full transition-all duration-300"></span>
             </Link>
             <Link
               to="/wishlist"
-              className="px-4 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-accent hover:bg-gradient-to-r hover:from-accent-50 hover:to-accent-100 dark:hover:from-accent-900/20 dark:hover:to-accent-800/20 rounded-xl transition-all duration-300 flex items-center gap-1.5 relative group"
+              className="px-4 py-2 text-sm xl:text-base font-bold uppercase tracking-wide text-gray-700 dark:text-gray-300 hover:text-accent hover:bg-gradient-to-r hover:from-accent-50 hover:to-accent-100 dark:hover:from-accent-900/20 dark:hover:to-accent-800/20 rounded-xl transition-all duration-300 flex items-center gap-2 relative group"
             >
               <Heart className="w-4 h-4" />
               Wishlist

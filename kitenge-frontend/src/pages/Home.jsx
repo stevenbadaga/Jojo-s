@@ -5,7 +5,7 @@ import ProductCard from '../components/ProductCard'
 import RecentlyViewed from '../components/RecentlyViewed'
 import Newsletter from '../components/Newsletter'
 import QuickViewModal from '../components/QuickViewModal'
-import { Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Search, Filter, ChevronLeft, ChevronRight, ArrowRight, Sparkles, ShoppingBag } from 'lucide-react'
 import { ProductGridSkeleton, LoadingSpinner } from '../components/SkeletonLoader'
 import { EmptyProducts } from '../components/EmptyState'
 import { getImageUrl } from '../utils/imageUtils'
@@ -44,21 +44,21 @@ const Home = () => {
 
   const loadProducts = async () => {
     try {
-      console.log('🔄 Loading products...')
+      console.log('ðŸ”„ Loading products...')
       const response = await productsAPI.getPublicProducts()
-      console.log('✅ Products loaded:', response.data?.length || 0, 'items')
+      console.log('âœ… Products loaded:', response.data?.length || 0, 'items')
       setProducts(response.data || [])
       setFilteredProducts(response.data || [])
       
       if (!response.data || response.data.length === 0) {
-        console.warn('⚠️ No products found. Check if:')
+        console.warn('âš ï¸ No products found. Check if:')
         console.warn('   1. Backend is running')
         console.warn('   2. Database has products with active=true')
         console.warn('   3. API endpoint is correct')
       }
     } catch (error) {
-      console.error('❌ Failed to load products:', error)
-      console.error('💡 Check browser console Network tab for details')
+      console.error('âŒ Failed to load products:', error)
+      console.error('ðŸ’¡ Check browser console Network tab for details')
       setProducts([])
       setFilteredProducts([])
     } finally {
@@ -116,6 +116,10 @@ const Home = () => {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + featuredProducts.length) % featuredProducts.length)
+  }
+
+  const scrollToCollection = () => {
+    document.getElementById('collection')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   const goToSlide = (index) => {
@@ -184,56 +188,119 @@ const Home = () => {
         <div className="absolute inset-0 bg-black/15 sm:bg-black/10 z-10"></div>
 
         {/* Text Content - Mobile and Desktop */}
-        <div className="relative z-20 w-full px-4 sm:px-6 max-w-5xl animate-fade-in-up">
+        <div className="relative z-20 w-full max-w-6xl px-4 sm:px-6 lg:px-8 animate-fade-in-up">
           {/* Mobile hero copy (match desktop wording) */}
           <div className="sm:hidden flex justify-center">
-            <div className="w-full max-w-sm text-center bg-gradient-to-br from-black/70 via-black/60 to-black/70 backdrop-blur-xl border border-white/25 rounded-2xl px-5 py-6 shadow-2xl">
-              <div className="text-[10px] font-bold mb-3 text-accent-300 uppercase tracking-widest drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                New drop A Kitenge prints
+            <div className="relative w-full max-w-sm overflow-hidden rounded-[28px] border border-white/15 bg-black/50 text-center shadow-[0_28px_80px_rgba(0,0,0,0.55)] backdrop-blur-2xl">
+              <div className="absolute inset-x-10 top-0 h-24 rounded-full bg-orange-400/20 blur-3xl"></div>
+              <div className="absolute -bottom-6 left-0 h-24 w-24 rounded-full bg-amber-300/10 blur-3xl"></div>
+              <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-orange-200/80 to-transparent"></div>
+
+              <div className="relative px-5 py-6">
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.26em] text-orange-200 shadow-[0_10px_24px_rgba(0,0,0,0.25)]">
+                  <span className="flex h-4 w-4 items-center justify-center rounded-full bg-orange-400/20">
+                    <Sparkles className="h-2.5 w-2.5" />
+                  </span>
+                  Fresh picks across every category
+                </div>
+
+                <h1 className="mt-4 text-[30px] font-black leading-[0.96] tracking-[-0.04em] text-white">
+                  Shop fashion, home, beauty
+                  <span className="mt-1 block text-orange-50/95">and more.</span>
+                </h1>
+
+                <p className="mt-4 px-1 text-sm font-medium leading-relaxed text-white/82">
+                  Discover everyday essentials, trending finds, and quality products
+                  across fashion, home, beauty, accessories, and tech.
+                </p>
+
+                <div className="mt-5 flex flex-wrap justify-center gap-2">
+                  <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-white/80">
+                    Everyday essentials
+                  </span>
+                  <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-white/80">
+                    Home and lifestyle
+                  </span>
+                  <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-white/80">
+                    New arrivals
+                  </span>
+                </div>
+
+                <div className="mt-6 space-y-3">
+                  <button
+                    onClick={scrollToCollection}
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-orange-500 via-orange-400 to-amber-300 px-6 py-3.5 text-sm font-black text-slate-950 shadow-[0_18px_40px_rgba(249,115,22,0.4)] transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
+                  >
+                    Shop now
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </button>
+
+                  <button
+                    onClick={() => navigate('/products')}
+                    className="inline-flex w-full items-center justify-center rounded-full border border-white/15 bg-white/10 px-6 py-3 text-sm font-semibold text-white/90 backdrop-blur-sm transition-all duration-300 hover:border-orange-200/40 hover:bg-white/15"
+                  >
+                    Browse all products
+                  </button>
+                </div>
               </div>
-              <h1 className="text-[28px] font-black mb-3 text-white drop-shadow-[0_4px_18px_rgba(0,0,0,0.95)] leading-tight">
-                Bold African prints for everyday wear.
-              </h1>
-              <p className="text-sm text-white/90 mb-5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] leading-relaxed font-semibold px-1">
-                Carefully selected kitenge, ankara and wax fabrics ready to be
-                tailored into your favourite looks.
-              </p>
-              <button
-                onClick={() =>
-                  document
-                    .getElementById('collection')
-                    ?.scrollIntoView({ behavior: 'smooth' })
-                }
-                className="w-full btn-primary bg-white text-accent hover:bg-gray-50 shadow-2xl hover:shadow-accent-lg active:scale-95 transition-all duration-300 text-sm px-6 py-3 font-bold min-h-[48px] touch-manipulation"
-              >
-                Shop the collection
-              </button>
             </div>
           </div>
 
           {/* Desktop hero copy */}
           <div className="hidden sm:block text-center">
-            <div className="relative inline-block px-6 sm:px-8 md:px-10 py-5 sm:py-6 md:py-8 rounded-2xl sm:rounded-3xl backdrop-blur-xl bg-gradient-to-br from-black/70 via-black/60 to-black/70 border-2 border-white/30 shadow-2xl">
-              <div className="text-[10px] sm:text-xs md:text-sm font-bold mb-3 sm:mb-4 md:mb-5 text-accent-300 uppercase tracking-widest drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-                New drop A Kitenge prints
+            <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[34px] border border-white/15 bg-black/45 shadow-[0_35px_120px_rgba(0,0,0,0.55)] backdrop-blur-2xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-[#2f1407]/75"></div>
+              <div className="absolute -top-16 left-1/2 h-40 w-80 -translate-x-1/2 rounded-full bg-orange-400/20 blur-3xl"></div>
+              <div className="absolute -bottom-10 left-10 h-32 w-32 rounded-full bg-amber-300/10 blur-3xl"></div>
+              <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-orange-200/80 to-transparent"></div>
+
+              <div className="relative px-8 md:px-12 lg:px-16 py-8 md:py-10 lg:py-12">
+                <div className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs md:text-sm font-bold uppercase tracking-[0.28em] text-orange-200 shadow-[0_12px_32px_rgba(0,0,0,0.18)]">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange-400/20">
+                    <Sparkles className="h-3.5 w-3.5" />
+                  </span>
+                  Fresh picks across every category
+                </div>
+
+                <h1 className="mx-auto mt-6 max-w-4xl text-4xl md:text-5xl lg:text-[4.1rem] xl:text-[4.55rem] font-black leading-[0.92] tracking-[-0.04em] text-white">
+                  Shop fashion, home, beauty
+                  <span className="mt-1 block text-orange-50/95">and more.</span>
+                </h1>
+
+                <p className="mx-auto mt-5 max-w-3xl text-base font-medium leading-relaxed text-white/82 md:text-lg lg:text-[1.35rem]">
+                  Discover everyday essentials, trending finds, and quality products
+                  across fashion, home, beauty, accessories, and tech.
+                </p>
+
+                <div className="mt-7 flex flex-wrap justify-center gap-3">
+                  <span className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/78">
+                    Everyday essentials
+                  </span>
+                  <span className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/78">
+                    Home and lifestyle
+                  </span>
+                  <span className="rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/78">
+                    Fresh seasonal drop
+                  </span>
+                </div>
+
+                <div className="mt-8 flex flex-wrap justify-center gap-4">
+                  <button
+                    onClick={scrollToCollection}
+                    className="group inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-orange-500 via-orange-400 to-amber-300 px-7 py-4 text-base font-black text-slate-950 shadow-[0_18px_40px_rgba(249,115,22,0.42)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(249,115,22,0.55)]"
+                  >
+                    Shop now
+                    <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </button>
+
+                  <button
+                    onClick={() => navigate('/products')}
+                    className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/10 px-7 py-4 text-base font-semibold text-white/90 backdrop-blur-sm transition-all duration-300 hover:border-orange-200/50 hover:bg-white/15"
+                  >
+                    Browse all products
+                  </button>
+                </div>
               </div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-4 sm:mb-5 md:mb-7 text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] leading-tight sm:leading-tight">
-                Bold African prints for everyday wear.
-              </h1>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/95 mb-6 sm:mb-8 md:mb-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] leading-relaxed font-semibold max-w-2xl mx-auto px-2">
-                Carefully selected kitenge, ankara and wax fabrics ready to be
-                tailored into your favourite looks.
-              </p>
-              <button
-                onClick={() =>
-                  document
-                    .getElementById('collection')
-                    ?.scrollIntoView({ behavior: 'smooth' })
-                }
-                className="btn-primary bg-white text-accent hover:bg-gray-50 shadow-2xl hover:shadow-accent-lg hover:scale-110 transition-all duration-300 text-sm sm:text-base md:text-lg px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 font-bold min-h-[48px] touch-manipulation"
-              >
-                Shop the collection
-              </button>
             </div>
           </div>
         </div>
@@ -293,18 +360,18 @@ const Home = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="mb-8 sm:mb-10 md:mb-12 text-center">
               <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5 animate-fade-in-up">
-                <span className="text-4xl sm:text-5xl md:text-6xl animate-pulse filter drop-shadow-lg">🔥</span>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white leading-tight bg-gradient-to-r from-red-600 via-orange-600 to-red-600 bg-clip-text text-transparent animate-gradient">
+                <span className="text-4xl sm:text-5xl md:text-6xl animate-pulse filter drop-shadow-lg">ðŸ”¥</span>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white leading-tight bg-gradient-to-r from-red-600 via-orange-600 to-red-600 bg-clip-text text-transparent animate-gradient">
                   Special Promotions
                 </h2>
               </div>
               <p className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-gray-200 font-bold max-w-2xl mx-auto px-4 mb-4 sm:mb-5">
-                Limited time offers - Don't miss out on these amazing deals! ⚡
+                Limited time offers - Don't miss out on these amazing deals! âš¡
               </p>
               {/* Enhanced promo count badge */}
               <div className="mt-4 sm:mt-5 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                 <span className="inline-block px-5 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-red-500 via-orange-500 to-red-500 text-white text-sm sm:text-base md:text-lg font-black rounded-full shadow-2xl border-2 border-white/50 hover:scale-110 transition-transform duration-300 animate-pulse-slow">
-                  🎉 {products.filter(p => p.is_promo).length} Products on Sale 🎉
+                  ðŸŽ‰ {products.filter(p => p.is_promo).length} Products on Sale ðŸŽ‰
                 </span>
               </div>
             </div>
@@ -356,7 +423,7 @@ const Home = () => {
                   }}
                   className="btn-primary px-8 sm:px-10 md:px-12 py-4 sm:py-4.5 text-base sm:text-lg font-black shadow-2xl hover:shadow-accent-lg hover:scale-110 transition-all duration-300 min-h-[52px] touch-manipulation border-2 border-white/30"
                 >
-                  View All Promos ({products.filter(p => p.is_promo).length}) →
+                  View All Promos ({products.filter(p => p.is_promo).length}) â†’
                 </button>
               </div>
             )}
@@ -371,11 +438,11 @@ const Home = () => {
             <div className="inline-block mb-2 sm:mb-4">
               <span className="text-accent font-bold text-xs sm:text-sm uppercase tracking-widest bg-accent/10 px-4 py-2 rounded-full">Products</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-3 sm:mb-5 text-gray-900 dark:text-white leading-tight">
-              Our Collection
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-3 sm:mb-5 text-gray-900 dark:text-white leading-tight">
+                Shop the catalog
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 font-semibold max-w-2xl mx-auto px-4">
-              Browse our curated selection of premium African fabrics
+              Browse products across fashion, home, beauty, accessories, and everyday essentials.
             </p>
           </div>
 
@@ -521,12 +588,12 @@ const Home = () => {
                 <span className="text-accent font-bold text-xs sm:text-sm uppercase tracking-widest">About Us</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 sm:mb-5 md:mb-6 text-gray-900 dark:text-white leading-tight">
-                Our story
+                Why shop Esoko
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
-                Kitenge Bora celebrates African craftsmanship by connecting you
-                to quality fabrics sourced with care. Every fabric tells a
-                story — of culture, identity, and beauty.
+                Esoko brings together fashion, home, beauty, accessories, and
+                everyday essentials in one convenient shopping experience built
+                for modern customers across Rwanda.
               </p>
             </div>
             <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl hover:shadow-accent-lg transition-all duration-500 order-1 md:order-2 group bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40 min-h-[192px] sm:min-h-[256px] md:min-h-[320px] lg:min-h-[384px] relative">
@@ -534,15 +601,15 @@ const Home = () => {
                 <>
                   <img
                     src="/kitenge-fabrics-display.jpeg"
-                    alt="Colorful display of Kitenge fabrics arranged on shelves"
+                    alt="Featured products arranged on display shelves"
                     className={`w-full h-full object-cover group-hover:scale-110 transition-all duration-700 ${storyImageLoaded ? 'opacity-100' : 'opacity-0'}`}
                     loading="eager"
                     onError={(e) => {
-                      console.error('❌ Image failed to load:', e.target.src)
+                      console.error('âŒ Image failed to load:', e.target.src)
                       setStoryImageError(true)
                     }}
                     onLoad={(e) => {
-                      console.log('✅ Image loaded successfully:', e.target.src)
+                      console.log('âœ… Image loaded successfully:', e.target.src)
                       setStoryImageLoaded(true)
                     }}
                   />
@@ -555,9 +622,9 @@ const Home = () => {
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-400 to-orange-600 text-white absolute inset-0">
                   <div className="text-center p-8">
-                    <div className="text-5xl sm:text-6xl mb-4">🧵</div>
-                    <div className="text-2xl sm:text-3xl font-black mb-2">Kitenge Bora</div>
-                    <div className="text-base sm:text-lg font-medium opacity-90">African Fabrics & Outfits</div>
+                    <ShoppingBag className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4" />
+                    <div className="text-2xl sm:text-3xl font-black mb-2">Esoko</div>
+                    <div className="text-base sm:text-lg font-medium opacity-90">Marketplace and everyday finds</div>
                   </div>
                 </div>
               )}

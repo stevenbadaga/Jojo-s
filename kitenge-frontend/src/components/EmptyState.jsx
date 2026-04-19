@@ -63,7 +63,7 @@ export const EmptyWishlist = () => (
   <EmptyState
     icon={Heart}
     title="Your Wishlist is Empty"
-    description="Start exploring our beautiful collection of African fabrics and outfits. Save items you love to your wishlist!"
+    description="Start exploring products across fashion, home, beauty, accessories, and everyday essentials. Save items you love to your wishlist!"
     actionLabel="Start Shopping"
     actionLink="/products"
   />

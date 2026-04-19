@@ -48,7 +48,12 @@ function App() {
         <AuthProvider>
           <CartProvider>
             <ToastProvider>
-              <Router>
+              <Router
+                future={{
+                  v7_startTransition: true,
+                  v7_relativeSplatPath: true,
+                }}
+              >
                 <Suspense fallback={<PageLoader />}>
                   <Routes>
                     <Route path="/" element={<Layout />}>

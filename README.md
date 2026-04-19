@@ -1,4 +1,4 @@
-# Kitenge Bora - Full Stack E-Commerce Application
+# Esoko - Full Stack E-Commerce Application
 
 Modern React frontend + Spring Boot backend for a complete e-commerce experience.
 
@@ -62,7 +62,7 @@ Visit: `http://localhost:3000`
 ## Project Structure
 
 ```
-kitengebora/
+esoko/
 - kitenge-backend/      # Spring Boot Backend (Port 8080)
   - src/main/java/      # Java source code
   - src/main/resources/application.properties

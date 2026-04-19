@@ -7,3 +7,4 @@ bin/
 .vscode/ 
 /uploads/
 /kitenge-backend/data/
+/kitenge-backend/.m2repo/

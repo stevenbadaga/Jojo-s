@@ -28,13 +28,13 @@ const About = () => {
       img.src = imagePaths[currentIndex]
       
       img.onload = () => {
-        console.log('✅ Image loaded from:', imagePaths[currentIndex])
+        console.log('âœ… Image loaded from:', imagePaths[currentIndex])
         setImageSrc(imagePaths[currentIndex])
         setImageLoaded(true)
       }
       
       img.onerror = () => {
-        console.warn('⚠️ Failed to load from:', imagePaths[currentIndex])
+        console.warn('âš ï¸ Failed to load from:', imagePaths[currentIndex])
         currentIndex++
         tryNextPath()
       }
@@ -45,23 +45,23 @@ const About = () => {
   const features = [
     {
       icon: ShoppingBag,
-      title: 'Curated Collection',
-      description: 'Carefully selected African fabrics and outfits',
+      title: 'Wide Product Range',
+      description: 'Fashion, home, beauty, accessories, and everyday essentials',
     },
     {
       icon: Award,
       title: 'Quality Guaranteed',
-      description: 'Premium quality materials and craftsmanship',
+      description: 'Reliable products chosen for value, quality, and everyday use',
     },
     {
       icon: Users,
-      title: 'Community Focused',
-      description: 'Supporting local artisans and communities',
+      title: 'Customer Focused',
+      description: 'Built around smooth shopping, clear pricing, and dependable support',
     },
     {
       icon: Heart,
-      title: 'Passion for Fashion',
-      description: 'Celebrating African culture and style',
+      title: 'Easy Shopping',
+      description: 'Simple browsing, secure checkout, and delivery you can trust',
     },
   ]
 
@@ -73,10 +73,10 @@ const About = () => {
             <span className="text-accent font-bold text-sm uppercase tracking-widest">About Us</span>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 dark:text-white mb-4 sm:mb-6 leading-tight">
-            About Kitenge Bora
+            About Esoko
           </h1>
           <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 font-medium max-w-3xl mx-auto">
-            Your trusted source for authentic African fabrics and outfits
+            Your trusted online store for fashion, home, beauty, accessories, and everyday essentials
           </p>
         </div>
 
@@ -91,40 +91,39 @@ const About = () => {
             </h2>
             <div className="w-24 h-1.5 bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 mx-auto rounded-full"></div>
           </div>
-          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center mb-6">
+          <div className="grid md:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] gap-8 sm:gap-12 items-center mb-6">
             <div className="order-2 md:order-1 space-y-6">
               <p className="text-gray-800 dark:text-gray-200 mb-5 text-lg sm:text-xl leading-relaxed font-medium">
-                Founded with a vision to make authentic African fashion accessible to everyone,
-                Kitenge Bora has grown into a trusted name in the industry. We work directly with
-                skilled artisans and manufacturers to ensure every product meets our high standards of
-                quality and authenticity.
+                Esoko was created to make online shopping more convenient, reliable,
+                and accessible for everyday customers. We carefully select products
+                that combine value, quality, and style for modern living.
               </p>
               <p className="text-gray-800 dark:text-gray-200 mb-5 text-lg sm:text-xl leading-relaxed font-medium">
-                Kitenge Bora is a premier destination for curated African fabrics and outfits. We are
-                passionate about bringing you the finest selection of traditional and contemporary
-                African fashion.
+                Today, Esoko is growing into a versatile ecommerce destination
+                where shoppers can discover fashion, home goods, beauty items,
+                accessories, and other everyday finds in one place.
               </p>
               <p className="text-gray-800 dark:text-gray-200 text-lg sm:text-xl leading-relaxed font-medium">
-                Our mission is to celebrate African culture through fashion, supporting local artisans
-                and providing our customers with authentic, high-quality products that tell a story
-                of heritage, craftsmanship, and style.
+                Our mission is simple: make it easier to shop with confidence by
+                offering dependable products, clear pricing, secure checkout, and
+                customer support that stays close to the people we serve.
               </p>
             </div>
-            <div className="rounded-3xl overflow-hidden shadow-2xl hover:shadow-accent-lg transition-all duration-500 order-1 md:order-2 group relative bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40 min-h-[224px] sm:min-h-[288px] md:min-h-[384px]">
+            <div className="w-full max-w-md lg:max-w-lg md:ml-auto rounded-3xl overflow-hidden shadow-2xl hover:shadow-accent-lg transition-all duration-500 order-1 md:order-2 group relative bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40 min-h-[224px] sm:min-h-[288px] md:min-h-[340px]">
               {!imageError ? (
-                <div className="relative w-full h-56 sm:h-72 md:h-96">
+                <div className="relative w-full h-56 sm:h-72 md:h-[340px] lg:h-[380px]">
                   <img
                     src={imageSrc}
-                    alt="Colorful display of Kitenge fabrics arranged on shelves showcasing vibrant African patterns"
+                    alt="Featured Esoko products arranged on display shelves"
                     className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
                     style={{ display: 'block', opacity: 1 }}
                     loading="eager"
                     onError={(e) => {
-                      console.error('❌ Image failed to load:', e.target.src)
+                      console.error('âŒ Image failed to load:', e.target.src)
                       setImageError(true)
                     }}
                     onLoad={(e) => {
-                      console.log('✅ Image loaded successfully:', e.target.src)
+                      console.log('âœ… Image loaded successfully:', e.target.src)
                       setImageLoaded(true)
                     }}
                   />
@@ -135,11 +134,11 @@ const About = () => {
                   )}
                 </div>
               ) : (
-                <div className="w-full h-56 sm:h-72 md:h-96 flex items-center justify-center bg-gradient-to-br from-orange-400 to-orange-600 text-white">
+                <div className="w-full h-56 sm:h-72 md:h-[340px] lg:h-[380px] flex items-center justify-center bg-gradient-to-br from-orange-400 to-orange-600 text-white">
                   <div className="text-center p-8">
-                    <div className="text-5xl sm:text-6xl mb-4">🧵</div>
-                    <div className="text-2xl sm:text-3xl font-black mb-2">Kitenge Bora</div>
-                    <div className="text-base sm:text-lg font-medium opacity-90">African Fabrics & Outfits</div>
+                    <ShoppingBag className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4" />
+                    <div className="text-2xl sm:text-3xl font-black mb-2">Esoko</div>
+                    <div className="text-base sm:text-lg font-medium opacity-90">Marketplace and everyday finds</div>
                   </div>
                 </div>
               )}

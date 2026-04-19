@@ -1,6 +1,6 @@
-# Kitenge Bora - React Frontend
+# Esoko - React Frontend
 
-Modern, beautiful React frontend for Kitenge Bora e-commerce platform.
+Modern, beautiful React frontend for Esoko e-commerce platform.
 
 ## 🚀 Tech Stack
 
@@ -104,5 +104,5 @@ kitenge-frontend/
 
 ---
 
-Built with ❤️ for Kitenge Bora
+Built with ❤️ for Esoko
 

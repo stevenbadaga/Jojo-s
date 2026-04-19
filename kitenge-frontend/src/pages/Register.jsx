@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import { productsAPI } from '../services/api'
+import { isBackendConnectionIssue, productsAPI } from '../services/api'
 import { Mail, Lock, Eye, EyeOff, User, Phone } from 'lucide-react'
 import { getImageUrl } from '../utils/imageUtils'
 
@@ -30,7 +30,9 @@ const Register = () => {
         .slice(0, 8)
       setProducts(productsWithImages)
     } catch (error) {
-      console.error('Failed to load products:', error)
+      if (!isBackendConnectionIssue(error)) {
+        console.error('Failed to load products:', error)
+      }
     }
   }
 
@@ -353,10 +355,10 @@ const Register = () => {
         <div className="relative z-10 flex items-center justify-center p-12 text-white">
           <div className="bg-black/50 backdrop-blur-md rounded-3xl px-10 py-12 border border-white/30 shadow-2xl max-w-lg text-center">
             <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
-              Welcome to Kitenge Bora
+              Welcome to Esoko
             </h2>
             <p className="text-xl lg:text-2xl text-white/95 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] leading-relaxed">
-              Discover curated African fabrics and save your favourites for later.
+              Create an account to save favourites, track orders, and shop faster across every category.
             </p>
           </div>
         </div>

@@ -82,15 +82,15 @@ public class EmailVerificationService {
 
             emailService.sendText(
                     email,
-                    "Verify Your Email - Kitenge Bora",
+                    "Verify Your Email - Esoko",
                     "Hello,\n\n" +
-                            "Thank you for registering with Kitenge Bora!\n\n" +
+                            "Thank you for registering with Esoko!\n\n" +
                             "Please verify your email address by clicking the link below:\n" +
                             frontendUrl + "/verify-email?token=" + token + "\n\n" +
                             "This link will expire in 7 days.\n\n" +
                             "If you didn't create an account, please ignore this email.\n\n" +
                             "Best regards,\n" +
-                            "Kitenge Bora Team"
+                            "Esoko Team"
             );
         } catch (Exception e) {
             logger.warn("Failed to send verification email", e);

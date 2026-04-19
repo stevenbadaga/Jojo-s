@@ -14,8 +14,9 @@ timeout /t 2 /nobreak >nul
 
 echo.
 echo Starting Spring Boot server...
+echo Wait for "Esoko backend is running" before using the API.
 echo.
-mvn spring-boot:run
+call mvnw.cmd spring-boot:run
 
 pause
 

@@ -18,7 +18,7 @@ public class SmsService {
     @Value("${app.sms.webhook.url:}")
     private String smsWebhookUrl;
 
-    @Value("${app.sms.sender:KitengeBora}")
+    @Value("${app.sms.sender:Esoko}")
     private String smsSender;
 
     private final RestTemplate restTemplate = new RestTemplate();

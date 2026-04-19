@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { authAPI } from '../services/api'
+import { authAPI, getApiErrorMessage, isBackendConnectionIssue } from '../services/api'
+import useBackendStatus from '../hooks/useBackendStatus'
 
 const AuthContext = createContext()
 
@@ -16,15 +17,24 @@ export const AuthProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [hasStoredToken, setHasStoredToken] = useState(() => Boolean(localStorage.getItem('kb_jwt_token')))
+  const { state: backendState } = useBackendStatus()
 
   useEffect(() => {
     checkAuth()
   }, [])
 
+  useEffect(() => {
+    if (backendState === 'ready' && hasStoredToken && !isAuthenticated && !loading) {
+      checkAuth()
+    }
+  }, [backendState, hasStoredToken, isAuthenticated, loading])
+
   const checkAuth = async () => {
     try {
       const token = localStorage.getItem('kb_jwt_token')
       if (!token) {
+        setHasStoredToken(false)
         setLoading(false)
         return
       }
@@ -36,12 +46,16 @@ export const AuthProvider = ({ children }) => {
         setUser(data.user)
         setIsAdmin(data.isAdmin || false)
         setIsAuthenticated(true)
+        setHasStoredToken(true)
       } else {
         localStorage.removeItem('kb_jwt_token')
+        setHasStoredToken(false)
       }
     } catch (error) {
-      console.error('Auth check failed:', error)
-      localStorage.removeItem('kb_jwt_token')
+      if (!isBackendConnectionIssue(error)) {
+        localStorage.removeItem('kb_jwt_token')
+        setHasStoredToken(false)
+      }
     } finally {
       setLoading(false)
     }
@@ -59,6 +73,7 @@ export const AuthProvider = ({ children }) => {
 
       if (data.token) {
         localStorage.setItem('kb_jwt_token', data.token)
+        setHasStoredToken(true)
         // Immediately update state with admin status from response
         const adminStatus = data.isAdmin === true || data.admin === true || false
         setUser(data.user)
@@ -70,7 +85,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       return {
         success: false,
-        error: error.response?.data?.error || 'Login failed',
+        error: getApiErrorMessage(error, 'Login failed'),
       }
     }
   }
@@ -82,6 +97,7 @@ export const AuthProvider = ({ children }) => {
 
       if (data.token) {
         localStorage.setItem('kb_jwt_token', data.token)
+        setHasStoredToken(true)
         setUser(data.user)
         setIsAdmin(data.isAdmin || false)
         setIsAuthenticated(true)
@@ -91,7 +107,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       return {
         success: false,
-        error: error.response?.data?.error || 'Registration failed',
+        error: getApiErrorMessage(error, 'Registration failed'),
       }
     }
   }
@@ -101,6 +117,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null)
     setIsAdmin(false)
     setIsAuthenticated(false)
+    setHasStoredToken(false)
   }
 
   const value = {
@@ -108,6 +125,7 @@ export const AuthProvider = ({ children }) => {
     setUser,
     isAdmin,
     isAuthenticated,
+    hasStoredToken,
     loading,
     login,
     register,

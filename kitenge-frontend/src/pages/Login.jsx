@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import { authAPI, productsAPI } from '../services/api'
+import { authAPI, getApiErrorMessage, isBackendConnectionIssue, productsAPI } from '../services/api'
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
 import { getImageUrl } from '../utils/imageUtils'
 
@@ -28,7 +28,9 @@ const Login = () => {
         .slice(0, 8)
       setProducts(productsWithImages)
     } catch (error) {
-      console.error('Failed to load products:', error)
+      if (!isBackendConnectionIssue(error)) {
+        console.error('Failed to load products:', error)
+      }
     }
   }
 
@@ -72,7 +74,7 @@ const Login = () => {
       } else if (errorMessage.toLowerCase().includes('user not found')) {
         errorMessage = 'User not found'
       } else if (errorMessage.toLowerCase().includes('network') || errorMessage.toLowerCase().includes('connection')) {
-        errorMessage = 'Network error'
+        errorMessage = 'Backend is starting. Please wait a few seconds and try again.'
       }
       setError(errorMessage)
     }
@@ -92,7 +94,7 @@ const Login = () => {
         navigate(isAdminUser ? '/admin' : '/')
       }
     } catch (err) {
-      setError(err.response?.data?.error || 'Invalid verification code')
+      setError(getApiErrorMessage(err, 'Invalid verification code'))
     } finally {
       setLoading(false)
     }
@@ -108,7 +110,7 @@ const Login = () => {
               Hello Again
             </h1>
             <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 font-medium">
-              Your favourite kitenge pieces are waiting for you.
+              Your next favourite finds are waiting for you.
             </p>
           </div>
 
@@ -138,7 +140,7 @@ const Login = () => {
                           : error.toLowerCase().includes('user not found')
                             ? 'No account found with this email address.'
                             : error.toLowerCase().includes('network') || error.toLowerCase().includes('connection')
-                              ? 'Unable to connect to the server. Please check your internet connection.'
+                              ? 'The backend is still starting. Keep this page open and try again in a few seconds.'
                               : error}
                       </p>
                     </div>
@@ -314,7 +316,7 @@ const Login = () => {
               Hello Again
             </h2>
             <p className="text-xl lg:text-2xl text-white/95 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] leading-relaxed">
-              Your favourite kitenge pieces are waiting for you.
+              Your next favourite finds are waiting for you.
             </p>
           </div>
         </div>

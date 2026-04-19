@@ -29,7 +29,7 @@ public class PasswordResetService {
     @Value("${app.frontend.url:http://localhost:3000}")
     private String frontendUrl;
     
-    @Value("${app.admin.notification.email:kitengeboraa@gmail.com}")
+    @Value("${app.admin.notification.email:esoko@gmail.com}")
     private String adminNotificationEmail;
 
     @Value("${app.mail.from:}")
@@ -96,15 +96,15 @@ public class PasswordResetService {
                 : (adminNotificationEmail != null ? adminNotificationEmail : mailFrom);
             boolean sent = emailService.sendText(
                     email,
-                    "Reset Your Password - Kitenge Bora",
+                    "Reset Your Password - Esoko",
                     "Hello,\n\n" +
-                            "You requested to reset your password for Kitenge Bora.\n\n" +
+                            "You requested to reset your password for Esoko.\n\n" +
                             "Click the link below to reset your password:\n" +
                             frontendUrl + "/reset-password?token=" + token + "\n\n" +
                             "This link will expire in 1 hour.\n\n" +
                             "If you didn't request this, please ignore this email.\n\n" +
                             "Best regards,\n" +
-                            "Kitenge Bora Team",
+                            "Esoko Team",
                     senderEmail
             );
 

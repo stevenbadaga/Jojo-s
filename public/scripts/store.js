@@ -479,7 +479,7 @@ async function checkout() {
   }
 
   // Build WhatsApp message
-  let message = "New Kitenge Bora order%0A%0A";
+  let message = "New Esoko order%0A%0A";
   if (name) message += `Name: ${encodeURIComponent(name)}%0A`;
   message += `Phone: ${encodeURIComponent(phone)}%0A%0AItems:%0A`;
 
