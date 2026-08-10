@@ -326,10 +326,10 @@ const CartDrawer = () => {
 
               {/* Direct Instant MoMo USSD Keypad Dial Link */}
               <a
-                href="tel:*182*8*1*0780453704%23"
+                href="tel:*182*1*1*0780453704%23"
                 className="w-full bg-[#002524] hover:bg-[#003834] text-emerald-400 font-extrabold py-2.5 rounded-xl border border-emerald-700/60 transition-all flex items-center justify-center gap-2 text-xs"
               >
-                <span>📱 Dial Instant MoMo USSD: *182*8*1*0780453704#</span>
+                <span>📱 Dial Instant MoMo USSD: *182*1*1*0780453704#</span>
               </a>
             </div>
           )}

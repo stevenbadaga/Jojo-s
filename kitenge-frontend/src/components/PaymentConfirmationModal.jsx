@@ -21,7 +21,7 @@ const PaymentConfirmationModal = ({ isOpen, onClose, orderData }) => {
   const totalAmount = orderData?.total || orderData?.amount || 0
 
   const copyMoMoCode = () => {
-    navigator.clipboard.writeText('*182*8*1*0780453704#')
+    navigator.clipboard.writeText('*182*1*1*0780453704#')
     setCopiedCode(true)
     toast.success('MoMo Merchant code copied to clipboard!')
     setTimeout(() => setCopiedCode(false), 3000)
@@ -187,13 +187,13 @@ const PaymentConfirmationModal = ({ isOpen, onClose, orderData }) => {
                   </div>
 
                   <div className="bg-black/40 border border-emerald-600/40 p-3.5 rounded-xl flex items-center justify-between font-mono font-black text-base text-emerald-400">
-                    <span>*182*8*1*0780453704#</span>
+                    <span>*182*1*1*0780453704#</span>
                     <span className="text-xs text-white font-sans font-bold bg-[#108910] px-2.5 py-0.5 rounded-md">JOJO Groceries</span>
                   </div>
 
                   <div className="flex items-center gap-2 pt-1">
                     <a
-                      href="tel:*182*8*1*0780453704%23"
+                      href="tel:*182*1*1*0780453704%23"
                       className="w-full bg-[#108910] hover:bg-[#007000] active:scale-95 text-white font-black py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition-all"
                     >
                       <Phone className="w-4 h-4" />
