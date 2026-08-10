@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Mail, Phone, MapPin, Send, Clock, MessageCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Clock, MessageCircle, Sparkles } from 'lucide-react'
 import { useToast } from '../contexts/ToastContext'
 import { contactAPI } from '../services/api'
 
@@ -76,133 +76,123 @@ const Contact = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-12">
+    <div className="min-h-screen bg-[#F6F7F8] dark:bg-gray-950 py-8 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Header Section */}
-        <div className="text-center mb-6 sm:mb-12">
-          <div className="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl mb-3 sm:mb-6 shadow-lg">
-            <MessageCircle className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950 text-[#108910] dark:text-emerald-400 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider border border-emerald-200 dark:border-emerald-800">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Instacart Express Support Desk</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            Contact Us
+
+          <h1 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+            We're here to help with your fresh groceries
           </h1>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Have questions about JOJO Groceries? We'd love to hear from you!
+
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 font-medium">
+            Have questions about your 30-minute delivery, store fulfillment, or fresh organic items? Contact our Kigali support team 7 days a week.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
-          {/* Contact Information */}
-          <div className="space-y-6">
-            {/* Get in Touch Card */}
-            <div className="card p-6 sm:p-8 hover:shadow-xl transition-shadow duration-300">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl">
-                  <Phone className="w-6 h-6 text-white" />
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-                  Get in Touch
-                </h2>
+        <div className="grid lg:grid-cols-12 gap-8">
+          
+          {/* Contact Details & Direct WhatsApp */}
+          <div className="lg:col-span-5 space-y-6">
+            
+            {/* Direct WhatsApp Express Support Card */}
+            <div className="bg-gradient-to-br from-[#002524] to-[#003834] text-white p-6 sm:p-8 rounded-3xl shadow-xl space-y-4 border border-emerald-800">
+              <div className="flex items-center justify-between">
+                <span className="bg-[#25D366] text-white font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider">
+                  Instant Support
+                </span>
+                <span className="text-xs text-emerald-300 font-bold">Live 7am - 9pm</span>
               </div>
-              <div className="space-y-4">
-                <a
-                  href="mailto:jojogroceries@gmail.com"
-                  className="flex items-start gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-emerald-50 hover:to-emerald-100 dark:hover:from-emerald-900/20 dark:hover:to-emerald-800/20 border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300 group"
-                >
-                  <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg group-hover:bg-emerald-200 dark:group-hover:bg-emerald-900/50 transition-colors flex-shrink-0">
-                    <Mail className="w-6 h-6 text-accent group-hover:scale-110 transition-transform" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1 text-base sm:text-lg">
-                      Email
-                    </h3>
-                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 group-hover:text-accent transition-colors break-all">
-                      jojogroceries@gmail.com
-                    </p>
-                  </div>
-                </a>
-                <a
-                  href="tel:+250788883986"
-                  className="flex items-start gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-emerald-50 hover:to-emerald-100 dark:hover:from-emerald-900/20 dark:hover:to-emerald-800/20 border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300 group"
-                >
-                  <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg group-hover:bg-emerald-200 dark:group-hover:bg-emerald-900/50 transition-colors flex-shrink-0">
-                    <Phone className="w-6 h-6 text-accent group-hover:scale-110 transition-transform" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1 text-base sm:text-lg">
-                      Phone
-                    </h3>
-                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 group-hover:text-accent transition-colors">
-                      +250 788 883 986
-                    </p>
-                  </div>
-                </a>
-                <a
-                  href="https://www.google.com/maps/search/?api=1&query=Kigali,Rwanda"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-emerald-50 hover:to-emerald-100 dark:hover:from-emerald-900/20 dark:hover:to-emerald-800/20 border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300 group"
-                >
-                  <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg group-hover:bg-emerald-200 dark:group-hover:bg-emerald-900/50 transition-colors flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-accent group-hover:scale-110 transition-transform" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1 text-base sm:text-lg">
-                      Address
-                    </h3>
-                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 group-hover:text-accent transition-colors">
-                      Kigali, Rwanda
-                    </p>
-                  </div>
-                </a>
-              </div>
+
+              <h3 className="text-2xl font-black text-white">Need 1-on-1 assistance?</h3>
+
+              <p className="text-gray-300 text-sm font-medium">
+                Chat directly with our Kigali customer care team on WhatsApp for order changes or delivery tracking.
+              </p>
+
+              <a
+                href="https://wa.me/250788883986?text=Hi%20JOJO%20Groceries,%20I%20need%20help%20with%20my%20order"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-[#25D366] hover:bg-[#20BA5A] text-white font-black py-3.5 px-6 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm"
+              >
+                <MessageCircle className="w-5 h-5 fill-current" />
+                <span>Chat on WhatsApp Now</span>
+              </a>
             </div>
 
-            {/* Business Hours Card */}
-            <div className="card p-6 sm:p-8 hover:shadow-xl transition-shadow duration-300">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-gradient-to-br from-emerald-600 to-green-600 rounded-xl">
-                  <Clock className="w-6 h-6 text-white" />
+            {/* Contact Details Card */}
+            <div className="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-5">
+              <h3 className="text-xl font-extrabold text-gray-900 dark:text-white mb-2">
+                Kigali Fulfillment Hub
+              </h3>
+
+              <a
+                href="mailto:jojogroceries@gmail.com"
+                className="flex items-start gap-4 p-3 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group"
+              >
+                <div className="p-3 bg-emerald-50 dark:bg-emerald-950 text-[#108910] rounded-xl group-hover:scale-105 transition-transform">
+                  <Mail className="w-5 h-5" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
-                  Store Hours
-                </h3>
+                <div>
+                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Email Us</h4>
+                  <p className="font-bold text-sm text-gray-900 dark:text-white">jojogroceries@gmail.com</p>
+                </div>
+              </a>
+
+              <a
+                href="tel:+250788883986"
+                className="flex items-start gap-4 p-3 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group"
+              >
+                <div className="p-3 bg-emerald-50 dark:bg-emerald-950 text-[#108910] rounded-xl group-hover:scale-105 transition-transform">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Call Helpline</h4>
+                  <p className="font-bold text-sm text-gray-900 dark:text-white">+250 788 883 986</p>
+                </div>
+              </a>
+
+              <div className="flex items-start gap-4 p-3 rounded-2xl">
+                <div className="p-3 bg-emerald-50 dark:bg-emerald-950 text-[#108910] rounded-xl">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Main Hub Location</h4>
+                  <p className="font-bold text-sm text-gray-900 dark:text-white">Central Kigali • Rwanda</p>
+                </div>
               </div>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                  <span className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300">
-                    Monday - Saturday
-                  </span>
-                  <span className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-                    7:00 AM - 8:00 PM
-                  </span>
+
+              <div className="flex items-start gap-4 p-3 rounded-2xl">
+                <div className="p-3 bg-emerald-50 dark:bg-emerald-950 text-[#108910] rounded-xl">
+                  <Clock className="w-5 h-5" />
                 </div>
-                <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                  <span className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300">
-                    Sunday
-                  </span>
-                  <span className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-                    8:00 AM - 6:00 PM
-                  </span>
+                <div>
+                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Operating Hours</h4>
+                  <p className="font-bold text-sm text-gray-900 dark:text-white">Mon - Sun: 7:00 AM - 9:00 PM</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="card p-6 sm:p-8 hover:shadow-xl transition-shadow duration-300">
-            <div className="flex items-center gap-3 mb-6 sm:mb-8">
-              <div className="p-3 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl">
-                <Send className="w-6 h-6 text-white" />
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-                Send us a Message
+          {/* Contact Message Form */}
+          <div className="lg:col-span-7 bg-white dark:bg-gray-900 p-6 sm:p-10 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-xl space-y-6">
+            <div className="space-y-1">
+              <h2 className="text-2xl font-black text-gray-900 dark:text-white">
+                Send Us a Message
               </h2>
+              <p className="text-xs text-gray-500 font-medium">Fill out the form below and our team will respond within 15 minutes.</p>
             </div>
-            <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  Name <span className="text-red-500">*</span>
+                <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1.5 uppercase tracking-wider">
+                  Full Name *
                 </label>
                 <input
                   type="text"
@@ -212,16 +202,14 @@ const Contact = () => {
                     setFormData({ ...formData, name: e.target.value })
                     if (errors.name) setErrors({ ...errors, name: '' })
                   }}
-                  className={`input-field h-12 text-base ${errors.name ? 'border-red-500 focus:ring-red-500' : ''}`}
+                  className={`w-full p-3 rounded-xl border ${errors.name ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'} text-sm font-semibold outline-none focus:border-[#108910] bg-[#F6F7F8] dark:bg-gray-800`}
                   placeholder="Your full name"
                 />
-                {errors.name && (
-                  <p className="mt-1 text-sm text-red-500">{errors.name}</p>
-                )}
               </div>
+
               <div>
-                <label className="block text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  Email <span className="text-red-500">*</span>
+                <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1.5 uppercase tracking-wider">
+                  Email Address *
                 </label>
                 <input
                   type="email"
@@ -231,16 +219,14 @@ const Contact = () => {
                     setFormData({ ...formData, email: e.target.value })
                     if (errors.email) setErrors({ ...errors, email: '' })
                   }}
-                  className={`input-field h-12 text-base ${errors.email ? 'border-red-500 focus:ring-red-500' : ''}`}
+                  className={`w-full p-3 rounded-xl border ${errors.email ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'} text-sm font-semibold outline-none focus:border-[#108910] bg-[#F6F7F8] dark:bg-gray-800`}
                   placeholder="your@email.com"
                 />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-                )}
               </div>
+
               <div>
-                <label className="block text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  Subject <span className="text-red-500">*</span>
+                <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1.5 uppercase tracking-wider">
+                  Subject *
                 </label>
                 <input
                   type="text"
@@ -250,16 +236,14 @@ const Contact = () => {
                     setFormData({ ...formData, subject: e.target.value })
                     if (errors.subject) setErrors({ ...errors, subject: '' })
                   }}
-                  className={`input-field h-12 text-base ${errors.subject ? 'border-red-500 focus:ring-red-500' : ''}`}
-                  placeholder="What's this about?"
+                  className={`w-full p-3 rounded-xl border ${errors.subject ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'} text-sm font-semibold outline-none focus:border-[#108910] bg-[#F6F7F8] dark:bg-gray-800`}
+                  placeholder="Order question, delivery inquiry, feedback..."
                 />
-                {errors.subject && (
-                  <p className="mt-1 text-sm text-red-500">{errors.subject}</p>
-                )}
               </div>
+
               <div>
-                <label className="block text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  Message <span className="text-red-500">*</span>
+                <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1.5 uppercase tracking-wider">
+                  Message Details *
                 </label>
                 <textarea
                   required
@@ -268,33 +252,29 @@ const Contact = () => {
                     setFormData({ ...formData, message: e.target.value })
                     if (errors.message) setErrors({ ...errors, message: '' })
                   }}
-                  className={`input-field text-base resize-none ${errors.message ? 'border-red-500 focus:ring-red-500' : ''}`}
-                  rows={6}
-                  placeholder="Tell us what's on your mind..."
+                  className={`w-full p-3 rounded-xl border ${errors.message ? 'border-red-500' : 'border-gray-200 dark:border-gray-700'} text-sm font-semibold outline-none focus:border-[#108910] bg-[#F6F7F8] dark:bg-gray-800 resize-none`}
+                  rows={5}
+                  placeholder="How can we help with your JOJO Groceries order?"
                 />
-                {errors.message && (
-                  <p className="mt-1 text-sm text-red-500">{errors.message}</p>
-                )}
               </div>
+
               <button
                 type="submit"
                 disabled={loading}
-                className="btn-primary w-full h-12 sm:h-14 text-base sm:text-lg font-semibold flex items-center justify-center gap-2 disabled:opacity-50 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 touch-manipulation min-h-[52px]"
+                className="w-full bg-[#108910] hover:bg-[#007000] active:scale-95 text-white font-extrabold py-3.5 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm disabled:opacity-50"
               >
                 {loading ? (
-                  <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                    <span>Sending...</span>
-                  </>
+                  <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
                 ) : (
                   <>
-                    <Send className="w-5 h-5" />
-                    <span>Send Message</span>
+                    <Send className="w-4 h-4" />
+                    <span>Send Message to JOJO Team</span>
                   </>
                 )}
               </button>
             </form>
           </div>
+
         </div>
       </div>
     </div>
