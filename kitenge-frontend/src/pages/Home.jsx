@@ -536,6 +536,53 @@ const Home = () => {
           </>
         )}
 
+        {/* Cinematic Video Showcase Banner Section */}
+        <section className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-emerald-900/30 group">
+          <div className="relative h-80 sm:h-96 w-full overflow-hidden bg-black">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+              poster="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80"
+            >
+              <source
+                src="https://assets.mixkit.co/videos/preview/mixkit-fresh-vegetables-and-fruits-in-a-market-42939-large.mp4"
+                type="video/mp4"
+              />
+            </video>
+
+            {/* Gradient Overlay for Cinematic Contrast */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#002524] via-[#002524]/60 to-transparent flex flex-col justify-end p-6 sm:p-12 text-white">
+              <div className="max-w-2xl space-y-4">
+                <div className="inline-flex items-center gap-2 bg-[#108910] text-white px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider shadow-lg">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Cinematic Market Experience</span>
+                </div>
+
+                <h3 className="text-2xl sm:text-4xl font-black leading-tight tracking-tight">
+                  Handpicked daily from local organic harvests
+                </h3>
+
+                <p className="text-gray-200 text-xs sm:text-base font-medium">
+                  Watch our local Kigali shoppers select peak-ripeness organic produce, cold dairy, and fresh artisan breads for your 30-minute delivery.
+                </p>
+
+                <div className="pt-2 flex items-center gap-4">
+                  <button
+                    onClick={() => navigate('/products')}
+                    className="bg-[#108910] hover:bg-[#007000] active:scale-95 text-white font-black px-6 py-3 rounded-full text-xs sm:text-sm shadow-xl transition-all flex items-center gap-2"
+                  >
+                    <span>Shop Fresh Harvest</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Instacart How It Works Banner */}
         <section className="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-10 border border-gray-200 dark:border-gray-800 shadow-sm">
           <div className="text-center max-w-2xl mx-auto mb-8">
