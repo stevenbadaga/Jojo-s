@@ -38,7 +38,7 @@ const ReturnsRefunds = () => {
           </p>
 
           <a
-            href="https://wa.me/250788883986?text=Hi%20JOJO%20Groceries,%20I'd%20like%20to%20request%20a%20freshness%20refund"
+            href="https://wa.me/250780453704?text=Hi%20JOJO%20Groceries,%20I'd%20like%20to%20request%20a%20freshness%20refund"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white font-extrabold px-6 py-3 rounded-2xl shadow-md transition-all text-xs sm:text-sm"
@@ -66,7 +66,7 @@ const ReturnsRefunds = () => {
             </div>
             <h4 className="font-extrabold text-gray-900 dark:text-white text-base">Send via WhatsApp</h4>
             <p className="text-xs text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
-              Send the photo to +250 788 883 986 with your order number.
+              Send the photo to +250 780 453 704 with your order number.
             </p>
           </div>
 

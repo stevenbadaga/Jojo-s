@@ -116,7 +116,7 @@ const Contact = () => {
               </p>
 
               <a
-                href="https://wa.me/250788883986?text=Hi%20JOJO%20Groceries,%20I%20need%20help%20with%20my%20order"
+                href="https://wa.me/250780453704?text=Hi%20JOJO%20Groceries,%20I%20need%20help%20with%20my%20order"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-[#25D366] hover:bg-[#20BA5A] text-white font-black py-3.5 px-6 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm"
@@ -146,7 +146,7 @@ const Contact = () => {
               </a>
 
               <a
-                href="tel:+250788883986"
+                href="tel:+250780453704"
                 className="flex items-start gap-4 p-3 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group"
               >
                 <div className="p-3 bg-emerald-50 dark:bg-emerald-950 text-[#108910] rounded-xl group-hover:scale-105 transition-transform">
@@ -154,7 +154,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Call Helpline</h4>
-                  <p className="font-bold text-sm text-gray-900 dark:text-white">+250 788 883 986</p>
+                  <p className="font-bold text-sm text-gray-900 dark:text-white">+250 780 453 704</p>
                 </div>
               </a>
 

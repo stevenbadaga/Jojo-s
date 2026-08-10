@@ -62,7 +62,7 @@ const Footer = () => {
                   <X className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://wa.me/250788883986"
+                  href="https://wa.me/250780453704"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full bg-[#25D366] text-white flex items-center justify-center transition-all duration-300"
@@ -145,7 +145,7 @@ const Footer = () => {
                 <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-[#05A42E]">
                   <Phone className="w-4 h-4" />
                 </div>
-                <span>+250 788 883 986</span>
+                <span>+250 780 453 704</span>
               </li>
               <li className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-[#05A42E]">

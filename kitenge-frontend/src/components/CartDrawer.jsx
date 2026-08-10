@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { EmptyCart } from '../components/EmptyState'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api'
-const ADMIN_WHATSAPP_NUMBER = '250788883986'
+const ADMIN_WHATSAPP_NUMBER = '250780453704'
 
 const CartDrawer = () => {
   const {

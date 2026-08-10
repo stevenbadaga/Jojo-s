@@ -40,7 +40,7 @@ public class OrderService {
     @Value("${app.admin.notification.email:jojogroceries@gmail.com}")
     private String adminNotificationEmail;
     
-    @Value("${app.admin.whatsapp:250788883986}")
+    @Value("${app.admin.whatsapp:250780453704}")
     private String adminWhatsApp;
 
     @Value("${app.frontend.url:http://localhost:3000}")

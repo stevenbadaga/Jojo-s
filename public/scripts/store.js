@@ -495,7 +495,7 @@ async function checkout() {
   )}`;
   message += `%0ATotal: ${encodeURIComponent(formatPrice(grandTotal))}`;
 
-  const waPhone = "250788883986";
+  const waPhone = "250780453704";
   window.open(`https://wa.me/${waPhone}?text=${message}`, "_blank");
 
   clearCart();
