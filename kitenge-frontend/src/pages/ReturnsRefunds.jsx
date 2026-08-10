@@ -1,153 +1,89 @@
-import { RotateCcw, Shield, Clock, AlertCircle } from 'lucide-react'
+import { ShieldCheck, RotateCcw, Sparkles, MessageCircle, AlertCircle, Heart } from 'lucide-react'
 
 const ReturnsRefunds = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Returns & Refunds Policy
+    <div className="min-h-screen bg-[#F6F7F8] dark:bg-gray-950 py-8 sm:py-16">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950 text-[#108910] dark:text-emerald-400 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider border border-emerald-200 dark:border-emerald-800">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>Instacart 100% Freshness Guarantee</span>
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight leading-tight">
+            100% Fresh Produce or Instant Refund
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
-            Our commitment to your satisfaction
+
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 font-medium">
+            Your satisfaction is our priority. If any item delivered by JOJO Groceries doesn't meet your standards, we'll replace or refund it immediately.
           </p>
         </div>
 
-        <div className="space-y-8">
-          {/* Return Policy */}
-          <div className="card p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <RotateCcw className="w-8 h-8 text-accent" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Return Policy
-              </h2>
+        {/* Freshness Banner */}
+        <div className="bg-gradient-to-r from-[#002524] to-[#003834] text-white p-8 rounded-3xl shadow-xl space-y-4 border border-emerald-800">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-2xl bg-[#108910] text-white flex items-center justify-center font-black shadow-md">
+              <Heart className="w-6 h-6" />
             </div>
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">
-                  Return Window
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  You have <strong>7 days</strong> from the date of delivery to return items for a full refund or exchange.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">
-                  Return Conditions
-                </h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
-                  <li>Items must be unused, unwashed, and in original condition</li>
-                  <li>Original tags and packaging must be intact</li>
-                  <li>Items must not be damaged or altered in any way</li>
-                  <li>Proof of purchase (order number or receipt) is required</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">
-                  Items Not Eligible for Return
-                </h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
-                  <li>Custom-made or personalized items</li>
-                  <li>Items that have been worn, washed, or damaged</li>
-                  <li>Items without original tags or packaging</li>
-                  <li>Sale or clearance items (unless defective)</li>
-                </ul>
-              </div>
+            <div>
+              <h3 className="text-2xl font-black text-white">100% Quality & Ripeness Promise</h3>
+              <p className="text-xs text-gray-300 font-medium">Hand-checked by personal shoppers in Kigali</p>
             </div>
           </div>
 
-          {/* Refund Process */}
-          <div className="card p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <Shield className="w-8 h-8 text-accent" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Refund Process
-              </h2>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  How to Return
-                </h3>
-                <ol className="list-decimal list-inside space-y-2 text-gray-600 dark:text-gray-400">
-                  <li>Contact us via WhatsApp (+250 788 883 986) or email (jojogroceries@gmail.com) to initiate a return</li>
-                  <li>Provide your order number and reason for return</li>
-                  <li>We'll provide return instructions and authorization</li>
-                  <li>Package the item securely in its original packaging</li>
-                  <li>Return the item to our store or arrange for pickup</li>
-                </ol>
-              </div>
+          <p className="text-sm text-gray-200 leading-relaxed font-medium">
+            Not happy with your organic berries, avocados, or fresh milk? Simply send a photo of the item on WhatsApp within 24 hours of delivery, and we will issue an instant replacement or Mobile Money refund—no questions asked!
+          </p>
 
-              <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  Refund Timeline
-                </h3>
-                <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Once we receive and inspect your returned item, we'll process your refund within <strong>5-7 business days</strong>.
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
-                      Refunds will be issued to the original payment method used for the purchase.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <a
+            href="https://wa.me/250788883986?text=Hi%20JOJO%20Groceries,%20I'd%20like%20to%20request%20a%20freshness%20refund"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BA5A] text-white font-extrabold px-6 py-3 rounded-2xl shadow-md transition-all text-xs sm:text-sm"
+          >
+            <MessageCircle className="w-4 h-4 fill-current" />
+            <span>Request WhatsApp Refund</span>
+          </a>
+        </div>
 
-          {/* Exchanges */}
-          <div className="card p-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Exchanges
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              We're happy to exchange items for a different size or color, subject to availability.
-            </p>
-            <p className="text-gray-600 dark:text-gray-400">
-              Exchanges must be initiated within 7 days of delivery. 
-              If the new item has a different price, we'll process the difference accordingly.
+        {/* Guarantee Steps Grid */}
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-[#108910] font-black text-lg flex items-center justify-center">
+              1
+            </div>
+            <h4 className="font-extrabold text-gray-900 dark:text-white text-base">Snap a quick photo</h4>
+            <p className="text-xs text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
+              If an item is bruised or damaged, take a quick photo of the produce or label.
             </p>
           </div>
 
-          {/* Defective Items */}
-          <div className="card p-6 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-            <div className="flex items-center gap-3 mb-4">
-              <AlertCircle className="w-6 h-6 text-red-600 dark:text-red-400" />
-              <h3 className="font-semibold text-lg text-gray-900 dark:text-white">
-                Defective or Damaged Items
-              </h3>
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-[#108910] font-black text-lg flex items-center justify-center">
+              2
             </div>
-            <p className="text-gray-700 dark:text-gray-300 mb-2">
-              If you receive a defective or damaged item, please contact us immediately. 
-              We'll arrange for a replacement or full refund at no cost to you.
-            </p>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Please include photos of the defect or damage when contacting us.
+            <h4 className="font-extrabold text-gray-900 dark:text-white text-base">Send via WhatsApp</h4>
+            <p className="text-xs text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
+              Send the photo to +250 788 883 986 with your order number.
             </p>
           </div>
 
-          {/* Contact */}
-          <div className="card p-6 bg-gray-100 dark:bg-gray-800">
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-              Need Help?
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              If you have any questions about returns or refunds, please don't hesitate to contact us:
-            </p>
-            <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-              <p>📱 WhatsApp: +250 788 883 986</p>
-              <p>📧 Email: jojogroceries@gmail.com</p>
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-[#108910] font-black text-lg flex items-center justify-center">
+              3
             </div>
+            <h4 className="font-extrabold text-gray-900 dark:text-white text-base">Instant Mobile Refund</h4>
+            <p className="text-xs text-gray-600 dark:text-gray-400 font-medium leading-relaxed">
+              Receive an instant MoMo refund or replacement item delivered on the next driver run.
+            </p>
           </div>
         </div>
+
       </div>
     </div>
   )
 }
 
 export default ReturnsRefunds
-
