@@ -1,67 +1,31 @@
 import { Heart, Users, Award, ShoppingBag } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const About = () => {
   const [imageError, setImageError] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
-  const [imageSrc, setImageSrc] = useState('/kitenge-fabrics-display.jpeg')
-  
-  // Try multiple image paths
-  useEffect(() => {
-    const imagePaths = [
-      '/kitenge-fabrics-display.jpeg',
-      './kitenge-fabrics-display.jpeg',
-      'kitenge-fabrics-display.jpeg',
-      `${window.location.origin}/kitenge-fabrics-display.jpeg`
-    ]
-    
-    let currentIndex = 0
-    
-    const tryNextPath = () => {
-      if (currentIndex >= imagePaths.length) {
-        console.error('All image paths failed')
-        setImageError(true)
-        return
-      }
-      
-      const img = new Image()
-      img.src = imagePaths[currentIndex]
-      
-      img.onload = () => {
-        console.log('âœ… Image loaded from:', imagePaths[currentIndex])
-        setImageSrc(imagePaths[currentIndex])
-        setImageLoaded(true)
-      }
-      
-      img.onerror = () => {
-        console.warn('âš ï¸ Failed to load from:', imagePaths[currentIndex])
-        currentIndex++
-        tryNextPath()
-      }
-    }
-    
-    tryNextPath()
-  }, [])
+  const imageSrc = 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80'
+
   const features = [
     {
       icon: ShoppingBag,
-      title: 'Wide Product Range',
-      description: 'Fashion, home, beauty, accessories, and everyday essentials',
+      title: 'Wide Grocery Range',
+      description: 'Fresh fruits, crisp vegetables, dairy, pantry staples, beverages, and daily market finds',
     },
     {
       icon: Award,
-      title: 'Quality Guaranteed',
-      description: 'Reliable products chosen for value, quality, and everyday use',
+      title: 'Freshness Guaranteed',
+      description: 'Hand-picked quality food items sourced daily for peak freshness and taste',
     },
     {
       icon: Users,
       title: 'Customer Focused',
-      description: 'Built around smooth shopping, clear pricing, and dependable support',
+      description: 'Built around smooth order fulfillment, transparent pricing, and responsive support',
     },
     {
       icon: Heart,
-      title: 'Easy Shopping',
-      description: 'Simple browsing, secure checkout, and delivery you can trust',
+      title: 'Reliable Home Delivery',
+      description: 'Fast and careful delivery straight from our market to your doorstep',
     },
   ]
 
@@ -73,15 +37,15 @@ const About = () => {
             <span className="text-accent font-bold text-sm uppercase tracking-widest">About Us</span>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 dark:text-white mb-4 sm:mb-6 leading-tight">
-            About Esoko
+            About JOJO Groceries
           </h1>
           <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 font-medium max-w-3xl mx-auto">
-            Your trusted online store for fashion, home, beauty, accessories, and everyday essentials
+            Your trusted online grocery store for fresh produce, fruits, vegetables, dairy, and daily household essentials
           </p>
         </div>
 
         {/* Our Story Section - Featured First */}
-        <div className="card p-8 sm:p-10 lg:p-12 mb-12 bg-gradient-to-br from-white via-orange-50/50 to-white dark:from-gray-800 dark:via-orange-900/30 dark:to-gray-800 border-2 border-orange-200 dark:border-orange-700 shadow-xl">
+        <div className="card p-8 sm:p-10 lg:p-12 mb-12 bg-gradient-to-br from-white via-emerald-50/50 to-white dark:from-gray-800 dark:via-emerald-900/30 dark:to-gray-800 border-2 border-emerald-200 dark:border-emerald-700 shadow-xl">
           <div className="text-center mb-8">
             <div className="inline-block mb-4">
               <span className="text-accent font-bold text-sm uppercase tracking-widest">Our Journey</span>
@@ -89,56 +53,44 @@ const About = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4 leading-tight">
               Our Story
             </h2>
-            <div className="w-24 h-1.5 bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 mx-auto rounded-full"></div>
+            <div className="w-24 h-1.5 bg-gradient-to-r from-emerald-500 via-green-600 to-emerald-500 mx-auto rounded-full"></div>
           </div>
           <div className="grid md:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] gap-8 sm:gap-12 items-center mb-6">
             <div className="order-2 md:order-1 space-y-6">
               <p className="text-gray-800 dark:text-gray-200 mb-5 text-lg sm:text-xl leading-relaxed font-medium">
-                Esoko was created to make online shopping more convenient, reliable,
-                and accessible for everyday customers. We carefully select products
-                that combine value, quality, and style for modern living.
+                JOJO Groceries was created to bring fresh, wholesome food and everyday household supplies directly to your doorstep with maximum convenience and reliability.
               </p>
               <p className="text-gray-800 dark:text-gray-200 mb-5 text-lg sm:text-xl leading-relaxed font-medium">
-                Today, Esoko is growing into a versatile ecommerce destination
-                where shoppers can discover fashion, home goods, beauty items,
-                accessories, and other everyday finds in one place.
+                We partner with local farms and trusted suppliers across Rwanda to ensure that every fruit, vegetable, dairy item, and pantry item meets the highest standards of quality.
               </p>
               <p className="text-gray-800 dark:text-gray-200 text-lg sm:text-xl leading-relaxed font-medium">
-                Our mission is simple: make it easier to shop with confidence by
-                offering dependable products, clear pricing, secure checkout, and
-                customer support that stays close to the people we serve.
+                Our mission is simple: simplify fresh grocery shopping by providing affordable prices, swift delivery, easy online checkout, and exceptional service every day.
               </p>
             </div>
-            <div className="w-full max-w-md lg:max-w-lg md:ml-auto rounded-3xl overflow-hidden shadow-2xl hover:shadow-accent-lg transition-all duration-500 order-1 md:order-2 group relative bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40 min-h-[224px] sm:min-h-[288px] md:min-h-[340px]">
+            <div className="w-full max-w-md lg:max-w-lg md:ml-auto rounded-3xl overflow-hidden shadow-2xl hover:shadow-accent-lg transition-all duration-500 order-1 md:order-2 group relative bg-gradient-to-br from-emerald-100 to-green-200 dark:from-emerald-900/40 dark:to-green-800/40 min-h-[224px] sm:min-h-[288px] md:min-h-[340px]">
               {!imageError ? (
                 <div className="relative w-full h-56 sm:h-72 md:h-[340px] lg:h-[380px]">
                   <img
                     src={imageSrc}
-                    alt="Featured Esoko products arranged on display shelves"
+                    alt="Fresh JOJO Groceries market products on display"
                     className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
                     style={{ display: 'block', opacity: 1 }}
                     loading="eager"
-                    onError={(e) => {
-                      console.error('âŒ Image failed to load:', e.target.src)
-                      setImageError(true)
-                    }}
-                    onLoad={(e) => {
-                      console.log('âœ… Image loaded successfully:', e.target.src)
-                      setImageLoaded(true)
-                    }}
+                    onError={() => setImageError(true)}
+                    onLoad={() => setImageLoaded(true)}
                   />
                   {!imageLoaded && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-200/60 to-orange-300/60 dark:from-orange-800/40 dark:to-orange-900/40 pointer-events-none">
-                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-600"></div>
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-emerald-200/60 to-green-300/60 dark:from-emerald-800/40 dark:to-green-900/40 pointer-events-none">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
                     </div>
                   )}
                 </div>
               ) : (
-                <div className="w-full h-56 sm:h-72 md:h-[340px] lg:h-[380px] flex items-center justify-center bg-gradient-to-br from-orange-400 to-orange-600 text-white">
+                <div className="w-full h-56 sm:h-72 md:h-[340px] lg:h-[380px] flex items-center justify-center bg-gradient-to-br from-emerald-500 to-green-700 text-white">
                   <div className="text-center p-8">
                     <ShoppingBag className="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-4" />
-                    <div className="text-2xl sm:text-3xl font-black mb-2">Esoko</div>
-                    <div className="text-base sm:text-lg font-medium opacity-90">Marketplace and everyday finds</div>
+                    <div className="text-2xl sm:text-3xl font-black mb-2">JOJO Groceries</div>
+                    <div className="text-base sm:text-lg font-medium opacity-90">Fresh produce & everyday groceries</div>
                   </div>
                 </div>
               )}
@@ -166,4 +118,3 @@ const About = () => {
 }
 
 export default About
-

@@ -15,7 +15,7 @@ const FAQ = () => {
         },
         {
           q: 'Do you handle special requests or bulk orders?',
-          a: 'Yes. If you need help with bulk purchases, business orders, or sourcing a specific item, contact us via WhatsApp (+250 788 883 986) or email (esoko@gmail.com).'
+          a: 'Yes. If you need help with bulk purchases, business orders, or sourcing a specific item, contact us via WhatsApp (+250 788 883 986) or email (jojogroceries@gmail.com).'
         },
         {
           q: 'What payment methods do you accept?',
@@ -181,7 +181,7 @@ const FAQ = () => {
         </div>
 
         {/* Still Have Questions */}
-        <div className="mt-12 card p-6 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 border border-orange-200 dark:border-orange-800">
+        <div className="mt-12 card p-6 bg-gradient-to-br from-emerald-50 to-green-100 dark:from-emerald-900/20 dark:to-green-800/20 border border-emerald-200 dark:border-emerald-800">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
             Still Have Questions?
           </h3>
@@ -190,7 +190,7 @@ const FAQ = () => {
           </p>
           <div className="space-y-2 text-gray-700 dark:text-gray-300">
             <p>📱 WhatsApp: +250 788 883 986</p>
-            <p>📧 Email: esoko@gmail.com</p>
+            <p>📧 Email: jojogroceries@gmail.com</p>
             <p>📍 Visit us: Kigali, Rwanda</p>
           </div>
         </div>

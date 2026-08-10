@@ -430,7 +430,7 @@ const Profile = () => {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `esoko-data-${Date.now()}.json`
+    a.download = `jojo-groceries-data-${Date.now()}.json`
     a.click()
     URL.revokeObjectURL(url)
     toast.success('Data downloaded successfully!')
@@ -467,7 +467,7 @@ const Profile = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-orange-200 border-t-orange-500 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-orange-200 border-t-emerald-600 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400">Loading your profile...</p>
         </div>
       </div>
@@ -491,11 +491,11 @@ const Profile = () => {
           <div className="card p-4 sm:p-6">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Profile Completion</span>
-              <span className="text-lg font-bold text-orange-500">{getProfileCompletion()}%</span>
+              <span className="text-lg font-bold text-emerald-600">{getProfileCompletion()}%</span>
             </div>
             <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
               <div 
-                className="bg-gradient-to-r from-orange-500 to-red-500 h-2 rounded-full transition-all duration-500"
+                className="bg-gradient-to-r from-emerald-600 to-red-500 h-2 rounded-full transition-all duration-500"
                 style={{ width: `${getProfileCompletion()}%` }}
               ></div>
             </div>
@@ -531,7 +531,7 @@ const Profile = () => {
           <div className="card p-6 sm:p-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-3 bg-gradient-to-br from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 rounded-xl">
-                <User className="w-6 h-6 text-orange-500" />
+                <User className="w-6 h-6 text-emerald-600" />
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -547,14 +547,14 @@ const Profile = () => {
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                 <div className="sm:col-span-2">
                   <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-orange-500" />
+                    <Mail className="w-4 h-4 text-emerald-600" />
                     Email Address
                 </label>
                 <input
                   type="email"
                   value={profile.email}
                   onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent transition-all"
                   required
                     placeholder="your.email@example.com"
                 />
@@ -562,42 +562,42 @@ const Profile = () => {
 
                 <div className="sm:col-span-2">
                   <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
-                    <User className="w-4 h-4 text-orange-500" />
+                    <User className="w-4 h-4 text-emerald-600" />
                   Full Name
                 </label>
                 <input
                   type="text"
                   value={profile.name}
                   onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent transition-all"
                   placeholder="Your full name"
                 />
               </div>
 
               <div>
                   <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-orange-500" />
+                    <Phone className="w-4 h-4 text-emerald-600" />
                   Phone Number
                 </label>
                 <input
                   type="tel"
                   value={profile.phone}
                   onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent transition-all"
                   placeholder="+250 788 123 456"
                 />
               </div>
 
               <div>
                   <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-orange-500" />
+                    <MapPin className="w-4 h-4 text-emerald-600" />
                   Address
                 </label>
                 <input
                   type="text"
                   value={profile.address}
                   onChange={(e) => setProfile({ ...profile, address: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent transition-all"
                   placeholder="Street address"
                 />
               </div>
@@ -610,7 +610,7 @@ const Profile = () => {
                     type="text"
                     value={profile.city}
                     onChange={(e) => setProfile({ ...profile, city: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent transition-all"
                     placeholder="City"
                   />
                 </div>
@@ -623,7 +623,7 @@ const Profile = () => {
                     type="text"
                     value={profile.country}
                     onChange={(e) => setProfile({ ...profile, country: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent transition-all"
                     placeholder="Country"
                   />
                 </div>
@@ -633,7 +633,7 @@ const Profile = () => {
               <button
                 type="submit"
                 disabled={saving}
-                  className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-red-600 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-emerald-600 to-red-500 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-red-600 transition-all shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
                 >
                   {saving ? (
                     <>
@@ -668,7 +668,7 @@ const Profile = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-orange-500" />
+                  <Mail className="w-5 h-5 text-emerald-600" />
                   Email Notifications
                 </h3>
                 <div className="space-y-4">
@@ -681,7 +681,7 @@ const Profile = () => {
                       type="checkbox"
                       checked={notifications.emailOrderUpdates}
                       onChange={(e) => setNotifications({ ...notifications, emailOrderUpdates: e.target.checked })}
-                      className="w-5 h-5 text-orange-500 rounded focus:ring-orange-500"
+                      className="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-600"
                     />
                   </label>
                   <label className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
@@ -693,7 +693,7 @@ const Profile = () => {
                       type="checkbox"
                       checked={notifications.emailPromotions}
                       onChange={(e) => setNotifications({ ...notifications, emailPromotions: e.target.checked })}
-                      className="w-5 h-5 text-orange-500 rounded focus:ring-orange-500"
+                      className="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-600"
                     />
                   </label>
                   <label className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
@@ -705,7 +705,7 @@ const Profile = () => {
                       type="checkbox"
                       checked={notifications.emailNewsletters}
                       onChange={(e) => setNotifications({ ...notifications, emailNewsletters: e.target.checked })}
-                      className="w-5 h-5 text-orange-500 rounded focus:ring-orange-500"
+                      className="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-600"
                     />
                   </label>
                 </div>
@@ -713,7 +713,7 @@ const Profile = () => {
 
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                  <Smartphone className="w-5 h-5 text-orange-500" />
+                  <Smartphone className="w-5 h-5 text-emerald-600" />
                   SMS Notifications
                 </h3>
                 <div className="space-y-4">
@@ -726,7 +726,7 @@ const Profile = () => {
                       type="checkbox"
                       checked={notifications.smsOrderUpdates}
                       onChange={(e) => setNotifications({ ...notifications, smsOrderUpdates: e.target.checked })}
-                      className="w-5 h-5 text-orange-500 rounded focus:ring-orange-500"
+                      className="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-600"
                     />
                   </label>
                   <label className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
@@ -738,7 +738,7 @@ const Profile = () => {
                       type="checkbox"
                       checked={notifications.smsPromotions}
                       onChange={(e) => setNotifications({ ...notifications, smsPromotions: e.target.checked })}
-                      className="w-5 h-5 text-orange-500 rounded focus:ring-orange-500"
+                      className="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-600"
                     />
                   </label>
                 </div>
@@ -780,7 +780,7 @@ const Profile = () => {
                       type={showCurrentPassword ? 'text' : 'password'}
                       value={passwordData.currentPassword}
                       onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all pr-12"
+                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent transition-all pr-12"
                       required
                       placeholder="Enter your current password"
                     />
@@ -801,7 +801,7 @@ const Profile = () => {
                       type={showNewPassword ? 'text' : 'password'}
                       value={passwordData.newPassword}
                       onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all pr-12"
+                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent transition-all pr-12"
                       minLength={6}
                       required
                       placeholder="Enter your new password (min. 6 characters)"
@@ -826,7 +826,7 @@ const Profile = () => {
                       type={showConfirmPassword ? 'text' : 'password'}
                       value={passwordData.confirmPassword}
                       onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all pr-12"
+                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent transition-all pr-12"
                       minLength={6}
                       required
                       placeholder="Confirm your new password"
@@ -895,7 +895,7 @@ const Profile = () => {
                     disabled={updatingTwoFactor}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-orange-500 peer-disabled:opacity-60"></div>
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-orange-300 dark:peer-focus:ring-orange-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-emerald-600 peer-disabled:opacity-60"></div>
                 </label>
               </div>
               {twoFactorEnabled && (

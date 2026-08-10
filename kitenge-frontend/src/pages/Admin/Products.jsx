@@ -321,7 +321,7 @@ const Products = () => {
               resetForm()
               setShowForm(true)
             }}
-            className="sm:hidden fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-2xl hover:shadow-orange-500/50 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 touch-manipulation"
+            className="sm:hidden fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-gradient-to-br from-emerald-600 to-teal-600 text-white shadow-2xl hover:shadow-emerald-600/50 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 touch-manipulation"
             aria-label="Add Product"
           >
             <Plus className="w-7 h-7" strokeWidth={2.5} />
@@ -542,22 +542,22 @@ const Products = () => {
 
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-                        Product Image
+                        Product Image (URL Link or Upload) *
                       </label>
                       <div className="space-y-3">
                         <div className="flex flex-col sm:flex-row gap-2">
                           <input
-                            type="text"
+                            type="url"
                             value={formData.image}
                             onChange={(e) =>
                               setFormData({ ...formData, image: e.target.value })
                             }
-                            className="input-field flex-1"
-                            placeholder="Enter image URL or upload file"
+                            className="input-field flex-1 text-sm"
+                            placeholder="Paste image link URL (e.g. https://images.unsplash.com/...)"
                           />
-                          <label className="btn-outline cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto">
+                          <label className="btn-outline cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto px-4 py-2.5">
                             <Upload className="w-4 h-4" />
-                            Upload
+                            Upload File
                             <input
                               type="file"
                               accept="image/*"
@@ -566,18 +566,47 @@ const Products = () => {
                             />
                           </label>
                         </div>
+
+                        {/* Quick Preset Image Links for Admins */}
+                        <div>
+                          <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">Quick Grocery Image Link Presets:</p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {[
+                              { label: '🥑 Avocado', url: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=800&q=80' },
+                              { label: '🍓 Strawberry', url: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=800&q=80' },
+                              { label: '🫑 Bell Peppers', url: 'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=800&q=80' },
+                              { label: '🥛 Fresh Milk', url: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=800&q=80' },
+                              { label: '🍞 Sourdough', url: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80' },
+                              { label: '🫒 Olive Oil', url: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=800&q=80' },
+                              { label: '🥚 Eggs', url: 'https://images.unsplash.com/photo-1516448620398-c5f44bf9f441?auto=format&fit=crop&w=800&q=80' },
+                              { label: '🥬 Spinach', url: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=800&q=80' }
+                            ].map((preset) => (
+                              <button
+                                key={preset.label}
+                                type="button"
+                                onClick={() => setFormData({ ...formData, image: preset.url })}
+                                className="text-xs px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 transition-colors"
+                              >
+                                {preset.label}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
                         {formData.image && (
-                          <div className="mt-2">
-                            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Preview:</p>
+                          <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700 flex items-center gap-4">
                             <img
                               src={getImageUrl(formData.image)}
                               alt="Product preview"
-                              className="w-32 h-32 object-cover rounded-lg border border-gray-200 dark:border-gray-700"
+                              className="w-20 h-20 object-cover rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 flex-shrink-0"
                               onError={(e) => {
-                                e.target.src = '/placeholder.png'
-                                console.error('Failed to load image:', formData.image)
+                                e.target.src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80'
                               }}
                             />
+                            <div className="flex-1 min-w-0">
+                              <p className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-1">Image Link Preview Active</p>
+                              <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{formData.image}</p>
+                            </div>
                           </div>
                         )}
                       </div>
@@ -717,7 +746,7 @@ const Products = () => {
                         </span>
                       )}
                       {product.is_promo && (
-                        <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">
+                        <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">
                           Promo
                         </span>
                       )}
@@ -824,7 +853,7 @@ const Products = () => {
                             </span>
                           )}
                           {product.is_promo && (
-                            <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">
+                            <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">
                               Promo
                             </span>
                           )}

@@ -69,7 +69,7 @@ class ErrorBoundary extends React.Component {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   onClick={this.handleReset}
-                  className="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-lg hover:from-orange-600 hover:to-red-600 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                  className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold rounded-lg hover:from-emerald-700 hover:to-teal-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
                 >
                   <RefreshCw className="w-5 h-5" />
                   Try Again

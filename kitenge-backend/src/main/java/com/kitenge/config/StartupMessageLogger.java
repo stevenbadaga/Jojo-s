@@ -32,7 +32,7 @@ public class StartupMessageLogger {
 
         logger.info("");
         logger.info("========================================");
-        logger.info("Esoko backend is running");
+        logger.info("JOJO Groceries backend is running");
         logger.info("Base URL : http://localhost:{}", port);
         logger.info("Health   : http://localhost:{}/api/health", port);
         logger.info("Profile  : {}", profile);

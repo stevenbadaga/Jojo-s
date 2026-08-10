@@ -508,9 +508,9 @@ const Orders = () => {
               Current month
             </p>
           </div>
-          <div className="card p-4 sm:p-6 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 border border-orange-200 dark:border-orange-800">
+          <div className="card p-4 sm:p-6 bg-gradient-to-br from-emerald-50 to-green-100 dark:from-emerald-900/20 dark:to-green-800/20 border border-emerald-200 dark:border-emerald-800">
             <div className="flex items-center justify-between mb-2">
-              <Calendar className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+              <Calendar className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-1 font-medium">
               Orders This Year

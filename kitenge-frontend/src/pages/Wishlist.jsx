@@ -137,13 +137,13 @@ const Wishlist = () => {
     const shareUrl = window.location.href
     const shareText =
       wishlistProducts.length > 0
-        ? `Check out my wishlist with ${wishlistProducts.length} item${wishlistProducts.length === 1 ? '' : 's'} at Esoko!`
-        : 'Check out my wishlist at Esoko!'
+        ? `Check out my wishlist with ${wishlistProducts.length} item${wishlistProducts.length === 1 ? '' : 's'} at JOJO Groceries!`
+        : 'Check out my wishlist at JOJO Groceries!'
 
     if (navigator.share) {
       navigator
         .share({
-          title: 'My Wishlist - Esoko',
+          title: 'My Wishlist - JOJO Groceries',
           text: shareText,
           url: shareUrl,
         })

@@ -1,4 +1,4 @@
-import { Heart, ShoppingCart, Eye } from 'lucide-react'
+import { Heart, Plus, Minus, Eye, Check } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useCart } from '../contexts/CartContext'
 import { useAuth } from '../contexts/AuthContext'
@@ -7,13 +7,16 @@ import { wishlistAPI } from '../services/api'
 import LazyImage from './LazyImage'
 
 const ProductCard = ({ product, onView }) => {
-  const { addToCart } = useCart()
+  const { cart, addToCart, updateQuantity } = useCart()
   const { isAuthenticated } = useAuth()
   const toast = useToast()
   const [isWishlisted, setIsWishlisted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  // Check if product is in wishlist on mount
+  // Find if this item is in cart and get quantity
+  const cartItem = cart.find((item) => item.id === product.id)
+  const cartQuantity = cartItem ? cartItem.quantity : 0
+
   useEffect(() => {
     const checkWishlistStatus = async () => {
       if (!isAuthenticated) {
@@ -27,7 +30,6 @@ const ProductCard = ({ product, onView }) => {
           const wishlistIds = wishlistRes.data || []
           setIsWishlisted(wishlistIds.includes(product.id))
         } catch (error) {
-          // Fallback to local storage
           const localWishlist = JSON.parse(
             localStorage.getItem('kb_wishlist') || '[]'
           )
@@ -38,7 +40,6 @@ const ProductCard = ({ product, onView }) => {
     checkWishlistStatus()
   }, [product.id, isAuthenticated])
 
-  // Listen for wishlist changes
   useEffect(() => {
     const handleWishlistChange = () => {
       if (!isAuthenticated) {
@@ -67,9 +68,9 @@ const ProductCard = ({ product, onView }) => {
     }
   }, [product.id, isAuthenticated])
 
-  const handleWishlist = async () => {
+  const handleWishlist = async (e) => {
+    e.stopPropagation()
     if (!isAuthenticated) {
-      // Store locally for guests
       const localWishlist = JSON.parse(
         localStorage.getItem('kb_wishlist') || '[]'
       )
@@ -85,7 +86,6 @@ const ProductCard = ({ product, onView }) => {
         toast.success(`${product.name} added to wishlist`)
       }
       setIsWishlisted(!isWishlisted)
-      // Dispatch event for wishlist page to refresh
       window.dispatchEvent(new Event('wishlist:changed'))
       return
     }
@@ -102,7 +102,6 @@ const ProductCard = ({ product, onView }) => {
           ? `${product.name} removed from wishlist`
           : `${product.name} added to wishlist`
       )
-      // Dispatch event for wishlist page to refresh
       window.dispatchEvent(new Event('wishlist:changed'))
     } catch (error) {
       console.error('Wishlist toggle failed:', error)
@@ -115,149 +114,149 @@ const ProductCard = ({ product, onView }) => {
     }
   }
 
-  const handleAddToCart = () => {
-    console.log('Adding to cart:', product)
+  const handleAddToCart = (e) => {
+    e.stopPropagation()
     if (product.in_stock === false) {
       toast.warning('This product is out of stock')
       return
     }
     addToCart(product)
-    toast.success(product.name, 4000, {
+    toast.success(`${product.name} added to cart`, 3000, {
       image: product.image,
       productName: product.name,
     })
   }
 
-  // Calculate discount percentage - Check multiple sources
+  const handleIncrement = (e) => {
+    e.stopPropagation()
+    updateQuantity(product.id, cartQuantity + 1)
+  }
+
+  const handleDecrement = (e) => {
+    e.stopPropagation()
+    updateQuantity(product.id, cartQuantity - 1)
+  }
+
   const calculateDiscount = () => {
-    // Priority 1: Use discount field directly if available
-    if (product.discount && product.discount > 0) {
-      return product.discount
-    }
-    
-    // Priority 2: Calculate from original_price and price
+    if (product.discount && product.discount > 0) return product.discount
     if (product.original_price && product.price && product.original_price > product.price) {
       const calculated = Math.round(((product.original_price - product.price) / product.original_price) * 100)
-      if (calculated > 0) {
-        return calculated
-      }
+      if (calculated > 0) return calculated
     }
-    
     return 0
   }
 
   const discountPercent = product.is_promo ? calculateDiscount() : 0
-  
-  // Debug logging in development
-  if (import.meta.env.DEV && product.is_promo) {
-    console.log('Product promo:', {
-      name: product.name,
-      is_promo: product.is_promo,
-      discount: product.discount,
-      original_price: product.original_price,
-      price: product.price,
-      calculated: discountPercent
-    })
-  }
 
   return (
-    <article className="card-hover group h-full flex flex-col relative" role="article" aria-label={`Product: ${product.name}`}>
-      <div className="relative overflow-hidden rounded-t-2xl bg-gray-100 dark:bg-gray-800">
-        <LazyImage
-          src={product.image}
-          alt={product.name}
-          className="w-full h-40 sm:h-44 md:h-48 object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-          loading="lazy"
-        />
-        {/* Enhanced gradient overlay with shimmer effect */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        {/* Shimmer effect on hover */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
-        </div>
-        <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex flex-col gap-2 sm:gap-2.5 z-10">
-          {product.is_promo && discountPercent > 0 && (
-            <span className="bg-gradient-to-r from-red-500 via-red-600 to-red-700 text-white text-[11px] sm:text-xs md:text-sm font-black px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 rounded-full shadow-xl shadow-red-500/50 animate-pulse-slow border-2 border-white/30 transform group-hover:scale-110 transition-transform duration-300">
-              -{discountPercent}% OFF
-            </span>
-          )}
-          {!product.in_stock && (
-            <span className="bg-gradient-to-r from-gray-600 to-gray-700 text-white text-[10px] sm:text-xs font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-lg">
-              Out of stock
-            </span>
-          )}
-        </div>
-        <button
-          onClick={handleWishlist}
-          disabled={isLoading}
-          aria-label={isWishlisted ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
-          className={`absolute top-3 sm:top-4 left-3 sm:left-4 p-2.5 sm:p-2.5 rounded-full backdrop-blur-md transition-all duration-300 shadow-lg z-10 min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation ${
-            isWishlisted
-              ? 'bg-gradient-to-br from-red-500 to-red-600 text-white shadow-red-500/50 active:scale-110'
-              : 'bg-white/95 dark:bg-gray-900/95 text-gray-700 dark:text-gray-300 active:bg-gradient-to-br active:from-red-500 active:to-red-600 active:text-white active:shadow-red-500/50 active:scale-110'
-          }`}
-        >
-          <Heart
-            className={`w-5 h-5 sm:w-5 sm:h-5 transition-all duration-300 ${isWishlisted ? 'fill-current scale-110' : ''}`}
+    <article 
+      onClick={() => onView && onView(product)}
+      className="group bg-white dark:bg-gray-900 rounded-2xl border border-gray-200/90 dark:border-gray-800 hover:border-emerald-500/50 shadow-sm hover:shadow-xl transition-all duration-300 p-3 sm:p-4 flex flex-col justify-between relative cursor-pointer h-full"
+    >
+      <div>
+        {/* Instacart Product Image Container */}
+        <div className="relative aspect-square overflow-hidden rounded-xl bg-gray-50 dark:bg-gray-800/80 flex items-center justify-center mb-3 group-hover:scale-[1.02] transition-transform duration-300">
+          <LazyImage
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover rounded-xl"
+            loading="lazy"
           />
-        </button>
-      </div>
 
-      <div className="p-3 sm:p-4 md:p-5 flex-1 flex flex-col bg-white dark:bg-gray-900">
-        <div className="flex items-start justify-between mb-2 sm:mb-3">
-          <div className="flex-1 min-w-0">
-            <h3 className="font-bold text-base sm:text-lg md:text-xl text-gray-900 dark:text-white mb-1 sm:mb-1.5 truncate group-hover:text-accent transition-colors duration-300">
-              {product.name}
-            </h3>
-            {product.category && (
-              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 truncate font-semibold uppercase tracking-wide">
-                {product.category}
-              </p>
+          {/* Badges Overlay */}
+          <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">
+            {product.is_promo && discountPercent > 0 && (
+              <span className="bg-[#FF6B00] text-white text-[10px] sm:text-xs font-black px-2 py-0.5 rounded-full shadow-md">
+                -{discountPercent}%
+              </span>
             )}
+            {!product.in_stock && (
+              <span className="bg-gray-800 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                Sold out
+              </span>
+            )}
+          </div>
+
+          {/* Top Right Wishlist & Quick View */}
+          <div className="absolute top-2 right-2 flex items-center gap-1 z-10">
+            <button
+              onClick={handleWishlist}
+              disabled={isLoading}
+              className={`p-2 rounded-full backdrop-blur-md transition-all shadow-sm ${
+                isWishlisted
+                  ? 'bg-red-500 text-white'
+                  : 'bg-white/90 text-gray-600 hover:text-red-500 hover:bg-white dark:bg-gray-900/90 dark:text-gray-300'
+              }`}
+            >
+              <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
+            </button>
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-            <span className={`text-lg sm:text-xl md:text-2xl font-black ${product.is_promo ? 'text-red-600 dark:text-red-400' : 'text-gray-900 dark:text-white'} transition-colors duration-300`}>
+        {/* Instacart Price & Details */}
+        <div className="space-y-1">
+          {/* Price */}
+          <div className="flex items-baseline gap-2 flex-wrap">
+            <span className="text-lg sm:text-xl font-extrabold text-gray-900 dark:text-white">
               {product.price.toLocaleString()} RWF
             </span>
             {product.original_price && product.original_price > product.price && (
-              <span className="text-xs sm:text-sm md:text-base text-gray-400 dark:text-gray-500 line-through font-semibold">
+              <span className="text-xs sm:text-sm text-gray-400 line-through font-semibold">
                 {product.original_price.toLocaleString()} RWF
               </span>
             )}
           </div>
-          {product.is_promo && discountPercent > 0 && product.original_price && product.original_price > product.price && (
-            <span className="text-xs sm:text-sm font-bold text-green-700 dark:text-green-400 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/40 dark:to-emerald-900/40 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg inline-block w-fit border-2 border-green-200 dark:border-green-800 shadow-sm group-hover:shadow-md transition-shadow duration-300">
-              Save {Math.max(0, product.original_price - product.price).toLocaleString()} RWF
-            </span>
-          )}
-        </div>
 
-        <div className="flex gap-2 sm:gap-3 mt-auto">
+          {/* Product Title */}
+          <h3 className="font-bold text-sm sm:text-base text-gray-900 dark:text-white line-clamp-2 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
+            {product.name}
+          </h3>
+
+          {/* Unit Weight / Brand Subtitle */}
+          <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">
+            {product.category ? `${product.category} • Fresh Produce` : 'Fresh Daily Produce'}
+          </p>
+        </div>
+      </div>
+
+      {/* Instacart Iconic Floating Bottom Add / Stepper Button */}
+      <div className="mt-4 pt-2 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+        <span className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
+          <Check className="w-3 h-3" /> In stock
+        </span>
+
+        {cartQuantity === 0 ? (
           <button
             onClick={handleAddToCart}
             disabled={product.in_stock === false}
-            aria-label={`Add ${product.name} to cart`}
-            className="btn-primary flex-1 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-sm py-3.5 sm:py-3 min-h-[48px] group-hover:shadow-accent-lg transition-all duration-300 touch-manipulation"
+            className="bg-[#108910] hover:bg-[#007000] active:scale-95 text-white px-3 sm:px-4 py-1.5 rounded-full font-bold text-xs sm:text-sm flex items-center gap-1.5 shadow-sm hover:shadow-md transition-all disabled:opacity-50"
           >
-            <ShoppingCart className="w-5 h-5 sm:w-5 sm:h-5 transition-transform group-hover:scale-110" aria-hidden="true" />
-            <span className="hidden sm:inline font-bold">Add to cart</span>
-            <span className="sm:hidden font-bold">Add</span>
+            <Plus className="w-4 h-4 stroke-[3]" />
+            <span>Add</span>
           </button>
-          <button
-            onClick={() => onView && onView(product)}
-            aria-label={`View details for ${product.name}`}
-            className="btn-outline px-4 sm:px-4 py-3.5 sm:py-3 min-w-[48px] min-h-[48px] active:bg-accent active:text-white active:border-accent transition-all duration-300 group-hover:scale-105 touch-manipulation flex items-center justify-center"
+        ) : (
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="bg-[#108910] text-white rounded-full px-2 py-1 flex items-center gap-2 font-bold text-xs sm:text-sm shadow-md animate-fade-in"
           >
-            <Eye className="w-5 h-5 sm:w-5 sm:h-5 transition-transform group-hover:scale-110" aria-hidden="true" />
-          </button>
-        </div>
+            <button
+              onClick={handleDecrement}
+              className="w-6 h-6 rounded-full hover:bg-white/20 flex items-center justify-center transition-colors"
+            >
+              <Minus className="w-3.5 h-3.5 stroke-[3]" />
+            </button>
+            <span className="px-1 text-sm">{cartQuantity}</span>
+            <button
+              onClick={handleIncrement}
+              className="w-6 h-6 rounded-full hover:bg-white/20 flex items-center justify-center transition-colors"
+            >
+              <Plus className="w-3.5 h-3.5 stroke-[3]" />
+            </button>
+          </div>
+        )}
       </div>
     </article>
   )
 }
 
 export default ProductCard
-

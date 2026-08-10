@@ -101,31 +101,79 @@ public class DataInitializer implements CommandLineRunner {
             return;
         }
 
-        Product first = new Product();
-        first.setName("Wireless Earbuds Pro");
-        first.setDescription("Compact everyday audio with clear sound and long battery life.");
-        first.setCategory("Electronics");
-        first.setPrice(45000);
-        first.setImage("https://placehold.co/400x300/f97316/ffffff?text=Earbuds");
-        first.setInStock(true);
-        first.setIsPromo(true);
-        first.setOriginalPrice(20000);
-        first.setDiscount(25);
-        first.setActive(true);
+        Product p1 = new Product();
+        p1.setName("Organic Hass Avocados");
+        p1.setDescription("Ripe, creamy organic Hass avocados sourced directly from local organic farms.");
+        p1.setCategory("Fruits");
+        p1.setPrice(3500);
+        p1.setImage("https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=800&q=80");
+        p1.setInStock(true);
+        p1.setIsPromo(true);
+        p1.setOriginalPrice(4500);
+        p1.setDiscount(22);
+        p1.setActive(true);
 
-        Product second = new Product();
-        second.setName("Minimal Desk Lamp");
-        second.setDescription("Warm ambient lighting for study spaces, desks, and bedside tables.");
-        second.setCategory("Home");
-        second.setPrice(28000);
-        second.setImage("https://placehold.co/400x300/1d4ed8/ffffff?text=Lamp");
-        second.setInStock(true);
-        second.setIsPromo(false);
-        second.setActive(true);
+        Product p2 = new Product();
+        p2.setName("Farm Fresh Strawberries 500g");
+        p2.setDescription("Sweet, juicy hand-picked red strawberries packed with natural vitamin C.");
+        p2.setCategory("Fruits");
+        p2.setPrice(5000);
+        p2.setImage("https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=800&q=80");
+        p2.setInStock(true);
+        p2.setIsPromo(true);
+        p2.setOriginalPrice(6500);
+        p2.setDiscount(23);
+        p2.setActive(true);
 
-        productRepository.save(first);
-        productRepository.save(second);
-        logger.info("Seeded sample products.");
+        Product p3 = new Product();
+        p3.setName("Crisp Farm Bell Peppers Mix");
+        p3.setDescription("Vibrant red, yellow, and green bell peppers full of crunch and freshness.");
+        p3.setCategory("Vegetables");
+        p3.setPrice(2800);
+        p3.setImage("https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=800&q=80");
+        p3.setInStock(true);
+        p3.setIsPromo(false);
+        p3.setActive(true);
+
+        Product p4 = new Product();
+        p4.setName("Fresh Organic Milk 1L");
+        p4.setDescription("Pure pasteurized whole milk from grass-fed dairy farms.");
+        p4.setCategory("Dairy");
+        p4.setPrice(1800);
+        p4.setImage("https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=800&q=80");
+        p4.setInStock(true);
+        p4.setIsPromo(false);
+        p4.setActive(true);
+
+        Product p5 = new Product();
+        p5.setName("Artisan Sourdough Loaf");
+        p5.setDescription("Freshly baked crusty sourdough bread crafted with traditional fermentation.");
+        p5.setCategory("Bakery");
+        p5.setPrice(4000);
+        p5.setImage("https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80");
+        p5.setInStock(true);
+        p5.setIsPromo(true);
+        p5.setOriginalPrice(5000);
+        p5.setDiscount(20);
+        p5.setActive(true);
+
+        Product p6 = new Product();
+        p6.setName("Extra Virgin Olive Oil 500ml");
+        p6.setDescription("Cold-pressed premium extra virgin olive oil perfect for salads and gourmet cooking.");
+        p6.setCategory("Pantry");
+        p6.setPrice(12500);
+        p6.setImage("https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=800&q=80");
+        p6.setInStock(true);
+        p6.setIsPromo(false);
+        p6.setActive(true);
+
+        productRepository.save(p1);
+        productRepository.save(p2);
+        productRepository.save(p3);
+        productRepository.save(p4);
+        productRepository.save(p5);
+        productRepository.save(p6);
+        logger.info("Seeded fresh organic grocery sample products.");
     }
 }
 

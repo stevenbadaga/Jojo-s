@@ -21,7 +21,7 @@ const ProfileTabs = ({ activeTab, setActiveTab }) => (
             onClick={() => setActiveTab(tab.id)}
             className={`px-3 sm:px-6 py-3 sm:py-4 font-medium text-xs sm:text-sm transition-all whitespace-nowrap flex items-center gap-2 ${
               isActive
-                ? 'text-orange-500 border-b-2 border-orange-500 bg-orange-50 dark:bg-orange-900/20'
+                ? 'text-emerald-600 border-b-2 border-emerald-600 bg-emerald-50 dark:bg-emerald-900/20'
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
             }`}
           >

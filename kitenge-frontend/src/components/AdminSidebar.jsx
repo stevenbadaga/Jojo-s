@@ -42,8 +42,8 @@ const AdminSidebar = () => {
       name: 'Analytics',
       icon: BarChart3,
       path: '/admin/analytics',
-      color: 'text-orange-600 dark:text-orange-400',
-      bgColor: 'bg-orange-100 dark:bg-orange-900/30'
+      color: 'text-emerald-600 dark:text-emerald-400',
+      bgColor: 'bg-emerald-100 dark:bg-emerald-900/30'
     },
     {
       name: 'Customers',
@@ -97,7 +97,7 @@ const AdminSidebar = () => {
         {/* Sidebar Header */}
         <div className="p-6 border-b border-gray-200 dark:border-gray-800">
           <Link to="/admin" className="flex items-center gap-3 group">
-            <div className="p-2 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg group-hover:scale-110 transition-transform">
+            <div className="p-2 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg group-hover:scale-110 transition-transform">
               <LayoutDashboard className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -105,7 +105,7 @@ const AdminSidebar = () => {
                 Admin Panel
               </h2>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                Esoko
+                JOJO Groceries
               </p>
             </div>
           </Link>
@@ -171,4 +171,3 @@ const AdminSidebar = () => {
 }
 
 export default AdminSidebar
-

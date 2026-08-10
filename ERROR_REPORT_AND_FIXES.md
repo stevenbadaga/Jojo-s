@@ -1,4 +1,4 @@
-# Esoko Project - Error Report and Fixes
+cd# Kitenge Bora Project - Error Report and Fixes
 
 ## Summary
 Your project had **52 diagnostic errors** across the backend and frontend. I've identified and fixed the critical issues. Below is a detailed breakdown.

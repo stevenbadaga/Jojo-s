@@ -105,12 +105,12 @@ const ShippingInfo = () => {
               You can use this to track your package's journey to your doorstep.
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-500">
-              For tracking inquiries, please contact us at +250 788 883 986 or email us at esoko@gmail.com
+              For tracking inquiries, please contact us at +250 788 883 986 or email us at jojogroceries@gmail.com
             </p>
           </div>
 
           {/* Important Notes */}
-          <div className="card p-6 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800">
+          <div className="card p-6 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800">
             <h3 className="font-semibold text-gray-900 dark:text-white mb-3">
               Important Notes
             </h3>

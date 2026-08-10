@@ -9,7 +9,7 @@ const ProfileHeader = ({
   formatDate,
   onImageUpload,
 }) => (
-  <div className="relative overflow-hidden bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 py-10 sm:py-16 lg:py-20">
+  <div className="relative overflow-hidden bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 py-10 sm:py-16 lg:py-20">
     <div className="absolute inset-0 bg-black/10"></div>
     <div className="absolute inset-0">
       <div className="absolute top-0 left-0 w-72 h-72 bg-white/10 rounded-full blur-3xl"></div>
@@ -34,7 +34,7 @@ const ProfileHeader = ({
             )}
           </div>
           <label className="absolute bottom-0 right-0 sm:bottom-2 sm:right-2 p-2 bg-white rounded-full shadow-lg cursor-pointer hover:bg-gray-100 transition-colors">
-            <Edit3 className="w-4 h-4 text-orange-500" />
+            <Edit3 className="w-4 h-4 text-emerald-600" />
             <input
               type="file"
               accept="image/*"

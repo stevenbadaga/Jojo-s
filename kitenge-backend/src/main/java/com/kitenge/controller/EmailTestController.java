@@ -34,12 +34,12 @@ public class EmailTestController {
 
         boolean sent = emailService.sendText(
                 toEmail,
-                "Test Email - Esoko",
+                "Test Email - JOJO Groceries",
                 "Hello,\n\n" +
-                        "This is a test email from Esoko.\n\n" +
+                        "This is a test email from JOJO Groceries.\n\n" +
                         "If you received this email, your email configuration is working correctly!\n\n" +
                         "Best regards,\n" +
-                        "Esoko Team"
+                        "JOJO Groceries Team"
         );
 
         if (!sent) {

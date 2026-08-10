@@ -283,7 +283,7 @@ const Login = () => {
       </div>
 
       {/* Desktop Product Carousel */}
-      <div className="hidden lg:flex flex-1 relative overflow-hidden bg-gradient-to-br from-orange-500 to-orange-700">
+      <div className="hidden lg:flex flex-1 relative overflow-hidden bg-gradient-to-br from-emerald-700 via-green-800 to-teal-900">
         {products.length > 0 ? (
           <>
             {products.map((product, index) => (
@@ -307,7 +307,7 @@ const Login = () => {
             ))}
           </>
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-orange-700" />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-700 via-green-800 to-teal-900" />
         )}
 
         <div className="relative z-10 flex items-center justify-center p-12 text-white">

@@ -44,7 +44,7 @@ const Newsletter = () => {
   }
 
   return (
-    <section className="py-10 sm:py-14 md:py-16 bg-gradient-to-br from-orange-50 via-orange-100 to-yellow-50 dark:from-orange-900/20 dark:via-orange-800/20 dark:to-yellow-900/20">
+    <section className="py-10 sm:py-14 md:py-16 bg-gradient-to-br from-emerald-50 via-green-100 to-emerald-50 dark:from-emerald-950/20 dark:via-green-900/20 dark:to-emerald-900/20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="card p-6 sm:p-8 md:p-12 text-center">
           <div className="mb-5 sm:mb-6 md:mb-8">

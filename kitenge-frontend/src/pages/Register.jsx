@@ -349,16 +349,16 @@ const Register = () => {
             ))}
           </>
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-orange-700" />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 to-green-700" />
         )}
 
         <div className="relative z-10 flex items-center justify-center p-12 text-white">
           <div className="bg-black/50 backdrop-blur-md rounded-3xl px-10 py-12 border border-white/30 shadow-2xl max-w-lg text-center">
             <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
-              Welcome to Esoko
+              Welcome to JOJO Groceries
             </h2>
             <p className="text-xl lg:text-2xl text-white/95 drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] leading-relaxed">
-              Create an account to save favourites, track orders, and shop faster across every category.
+              Create an account to save items, track orders, and shop fresh produce & groceries with ease.
             </p>
           </div>
         </div>

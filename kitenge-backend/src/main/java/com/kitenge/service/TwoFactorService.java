@@ -85,14 +85,14 @@ public class TwoFactorService {
 
             emailService.sendText(
                     email,
-                    "Your Two-Factor Authentication Code - Esoko",
+                    "Your Two-Factor Authentication Code - JOJO Groceries",
                     "Hello,\n\n" +
                             "Your two-factor authentication code is:\n\n" +
                             code + "\n\n" +
                             "This code will expire in 10 minutes.\n\n" +
                             "If you didn't request this code, please ignore this email.\n\n" +
                             "Best regards,\n" +
-                            "Esoko Team"
+                            "JOJO Groceries Team"
             );
         } catch (Exception e) {
             logger.warn("Failed to send 2FA code", e);

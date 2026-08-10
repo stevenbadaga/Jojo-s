@@ -37,7 +37,7 @@ public class OrderService {
     private final SmsService smsService;
     private final UserNotificationsRepository userNotificationsRepository;
     
-    @Value("${app.admin.notification.email:esoko@gmail.com}")
+    @Value("${app.admin.notification.email:jojogroceries@gmail.com}")
     private String adminNotificationEmail;
     
     @Value("${app.admin.whatsapp:250788883986}")
@@ -311,7 +311,7 @@ public class OrderService {
             String monthYear = order.getCreatedAt() != null
                     ? order.getCreatedAt().getMonth().toString().substring(0, 3) + " " + order.getCreatedAt().getYear()
                     : LocalDateTime.now().getMonth().toString().substring(0, 3) + " " + LocalDateTime.now().getYear();
-            String subject = "Order Received - Esoko #" + orderNumber;
+            String subject = "Order Received - JOJO Groceries #" + orderNumber;
 
             String customerName = order.getCustomerName() != null && !order.getCustomerName().trim().isEmpty()
                     ? order.getCustomerName().trim()
@@ -330,7 +330,7 @@ public class OrderService {
                             (order.getDeliveryFee() != null ? order.getDeliveryFee() : 0)).append(" RWF\n\n");
             emailBody.append("Track your order: ").append(frontendUrl).append("/track-order\n\n");
             emailBody.append("Best regards,\n");
-            emailBody.append("Esoko Team");
+            emailBody.append("JOJO Groceries Team");
             boolean sent = emailService.sendText(customerEmail, subject, emailBody.toString());
             if (sent) {
                 logger.info("Order confirmation email sent for order {}", order.getId());
@@ -362,7 +362,7 @@ public class OrderService {
             String monthYear = order.getCreatedAt() != null
                     ? order.getCreatedAt().getMonth().toString().substring(0, 3) + " " + order.getCreatedAt().getYear()
                     : LocalDateTime.now().getMonth().toString().substring(0, 3) + " " + LocalDateTime.now().getYear();
-            String subject = "Order Shipped - Esoko #" + orderNumber;
+            String subject = "Order Shipped - JOJO Groceries #" + orderNumber;
 
             StringBuilder body = new StringBuilder();
             body.append("Hello ").append(customerName).append(",\n\n");
@@ -372,7 +372,7 @@ public class OrderService {
             }
             body.append("Track your order: ").append(frontendUrl).append("/track-order\n\n");
             body.append("Best regards,\n");
-            body.append("Esoko Team");
+            body.append("JOJO Groceries Team");
             boolean sent = emailService.sendText(customerEmail, subject, body.toString());
             if (sent) {
                 logger.info("Shipping notification sent for order {}", order.getId());
@@ -404,14 +404,14 @@ public class OrderService {
             String monthYear = order.getCreatedAt() != null
                     ? order.getCreatedAt().getMonth().toString().substring(0, 3) + " " + order.getCreatedAt().getYear()
                     : LocalDateTime.now().getMonth().toString().substring(0, 3) + " " + LocalDateTime.now().getYear();
-            String subject = "Order Delivered - Esoko #" + orderNumber;
+            String subject = "Order Delivered - JOJO Groceries #" + orderNumber;
 
             StringBuilder body = new StringBuilder();
             body.append("Hello ").append(customerName).append(",\n\n");
             body.append("Your order #").append(orderNumber).append(" (").append(monthYear).append(") has been delivered.\n\n");
-            body.append("Thank you for shopping with Esoko.\n\n");
+            body.append("Thank you for shopping with JOJO Groceries.\n\n");
             body.append("Best regards,\n");
-            body.append("Esoko Team");
+            body.append("JOJO Groceries Team");
             boolean sent = emailService.sendText(customerEmail, subject, body.toString());
             if (sent) {
                 logger.info("Delivery notification sent for order {}", order.getId());
@@ -451,7 +451,7 @@ public class OrderService {
                 + (order.getDeliveryFee() != null ? order.getDeliveryFee() : 0);
 
         StringBuilder message = new StringBuilder();
-        message.append("Esoko\n");
+        message.append("JOJO Groceries\n");
 
         if ("PENDING".equals(normalized)) {
             message.append("We have received your order #").append(orderNumber).append(".\n");
@@ -473,20 +473,7 @@ public class OrderService {
     private void sendOrderStatusEmail(Order order, String status) {
         try {
             if (!emailService.isConfigured()) {
-                return;
-            }
-
-            if (order == null || status == null || status.trim().isEmpty()) {
-                return;
-            }
-
-            String normalizedStatus = status.trim().toUpperCase();
-            if ("SHIPPED".equals(normalizedStatus) || "DELIVERED".equals(normalizedStatus)) {
-                // Dedicated emails are sent via sendShippingNotification/sendDeliveryNotification
-                return;
-            }
-
-            if (!"CONFIRMED".equals(normalizedStatus) && !"PROCESSING".equals(normalizedStatus) && !"CANCELLED".equals(normalizedStatus)) {
+                logger.warn("Email not configured; order status email not sent for order {}", order != null ? order.getId() : null);
                 return;
             }
 
@@ -500,17 +487,23 @@ public class OrderService {
                     ? order.getCreatedAt().getMonth().toString().substring(0, 3) + " " + order.getCreatedAt().getYear()
                     : LocalDateTime.now().getMonth().toString().substring(0, 3) + " " + LocalDateTime.now().getYear();
 
+            String normalizedStatus = status != null ? status.trim().toUpperCase() : "PENDING";
             String subjectPrefix;
+
             if ("CONFIRMED".equals(normalizedStatus)) {
                 subjectPrefix = "Order Confirmed";
             } else if ("PROCESSING".equals(normalizedStatus)) {
                 subjectPrefix = "Order Processing";
+            } else if ("SHIPPED".equals(normalizedStatus)) {
+                subjectPrefix = "Order Shipped";
+            } else if ("DELIVERED".equals(normalizedStatus)) {
+                subjectPrefix = "Order Delivered";
             } else if ("CANCELLED".equals(normalizedStatus)) {
                 subjectPrefix = "Order Cancelled";
             } else {
                 subjectPrefix = "Order Update";
             }
-            String subject = subjectPrefix + " - Esoko #" + orderNumber;
+            String subject = subjectPrefix + " - JOJO Groceries #" + orderNumber;
 
             String customerName = order.getCustomerName() != null && !order.getCustomerName().trim().isEmpty()
                     ? order.getCustomerName().trim()
@@ -531,7 +524,7 @@ public class OrderService {
 
             body.append("Track your order: ").append(frontendUrl).append("/track-order\n\n");
             body.append("Best regards,\n");
-            body.append("Esoko Team");
+            body.append("JOJO Groceries Team");
             boolean sent = emailService.sendText(customerEmail.trim(), subject, body.toString());
             if (!sent) {
                 logger.warn("Order status email failed for order {} ({})", orderNumber, normalizedStatus);

@@ -72,7 +72,7 @@ const ReturnsRefunds = () => {
                   How to Return
                 </h3>
                 <ol className="list-decimal list-inside space-y-2 text-gray-600 dark:text-gray-400">
-                  <li>Contact us via WhatsApp (+250 788 883 986) or email (esoko@gmail.com) to initiate a return</li>
+                  <li>Contact us via WhatsApp (+250 788 883 986) or email (jojogroceries@gmail.com) to initiate a return</li>
                   <li>Provide your order number and reason for return</li>
                   <li>We'll provide return instructions and authorization</li>
                   <li>Package the item securely in its original packaging</li>
@@ -140,7 +140,7 @@ const ReturnsRefunds = () => {
             </p>
             <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
               <p>📱 WhatsApp: +250 788 883 986</p>
-              <p>📧 Email: esoko@gmail.com</p>
+              <p>📧 Email: jojogroceries@gmail.com</p>
             </div>
           </div>
         </div>

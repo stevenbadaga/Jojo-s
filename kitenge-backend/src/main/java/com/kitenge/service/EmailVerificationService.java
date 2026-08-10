@@ -82,15 +82,15 @@ public class EmailVerificationService {
 
             emailService.sendText(
                     email,
-                    "Verify Your Email - Esoko",
+                    "Verify Your Email - JOJO Groceries",
                     "Hello,\n\n" +
-                            "Thank you for registering with Esoko!\n\n" +
+                            "Thank you for registering with JOJO Groceries!\n\n" +
                             "Please verify your email address by clicking the link below:\n" +
                             frontendUrl + "/verify-email?token=" + token + "\n\n" +
                             "This link will expire in 7 days.\n\n" +
                             "If you didn't create an account, please ignore this email.\n\n" +
                             "Best regards,\n" +
-                            "Esoko Team"
+                            "JOJO Groceries Team"
             );
         } catch (Exception e) {
             logger.warn("Failed to send verification email", e);

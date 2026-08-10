@@ -67,7 +67,6 @@ const Contact = () => {
                           'Failed to send message. Please try again later.'
       toast.error(errorMessage)
       
-      // Set field-specific errors if available
       if (error.response?.data?.details) {
         setErrors(error.response.data.details)
       }
@@ -79,16 +78,16 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-6 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      {/* Header Section */}
+        {/* Header Section */}
         <div className="text-center mb-6 sm:mb-12">
-          <div className="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl mb-3 sm:mb-6 shadow-lg">
+          <div className="inline-flex items-center justify-center w-14 h-14 sm:w-20 sm:h-20 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl mb-3 sm:mb-6 shadow-lg">
             <MessageCircle className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
             Contact Us
           </h1>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            We'd love to hear from you. Get in touch with us!
+            Have questions about JOJO Groceries? We'd love to hear from you!
           </p>
         </div>
 
@@ -98,7 +97,7 @@ const Contact = () => {
             {/* Get in Touch Card */}
             <div className="card p-6 sm:p-8 hover:shadow-xl transition-shadow duration-300">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl">
+                <div className="p-3 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl">
                   <Phone className="w-6 h-6 text-white" />
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
@@ -107,10 +106,10 @@ const Contact = () => {
               </div>
               <div className="space-y-4">
                 <a
-                  href="mailto:esoko@gmail.com"
-                  className="flex items-start gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-100 dark:hover:from-orange-900/20 dark:hover:to-orange-800/20 border border-transparent hover:border-orange-200 dark:hover:border-orange-800 transition-all duration-300 group"
+                  href="mailto:jojogroceries@gmail.com"
+                  className="flex items-start gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-emerald-50 hover:to-emerald-100 dark:hover:from-emerald-900/20 dark:hover:to-emerald-800/20 border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300 group"
                 >
-                  <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg group-hover:bg-orange-200 dark:group-hover:bg-orange-900/50 transition-colors flex-shrink-0">
+                  <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg group-hover:bg-emerald-200 dark:group-hover:bg-emerald-900/50 transition-colors flex-shrink-0">
                     <Mail className="w-6 h-6 text-accent group-hover:scale-110 transition-transform" />
                   </div>
                   <div className="flex-1">
@@ -118,15 +117,15 @@ const Contact = () => {
                       Email
                     </h3>
                     <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 group-hover:text-accent transition-colors break-all">
-                      esoko@gmail.com
+                      jojogroceries@gmail.com
                     </p>
                   </div>
                 </a>
                 <a
                   href="tel:+250788883986"
-                  className="flex items-start gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-100 dark:hover:from-orange-900/20 dark:hover:to-orange-800/20 border border-transparent hover:border-orange-200 dark:hover:border-orange-800 transition-all duration-300 group"
+                  className="flex items-start gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-emerald-50 hover:to-emerald-100 dark:hover:from-emerald-900/20 dark:hover:to-emerald-800/20 border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300 group"
                 >
-                  <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg group-hover:bg-orange-200 dark:group-hover:bg-orange-900/50 transition-colors flex-shrink-0">
+                  <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg group-hover:bg-emerald-200 dark:group-hover:bg-emerald-900/50 transition-colors flex-shrink-0">
                     <Phone className="w-6 h-6 text-accent group-hover:scale-110 transition-transform" />
                   </div>
                   <div className="flex-1">
@@ -142,9 +141,9 @@ const Contact = () => {
                   href="https://www.google.com/maps/search/?api=1&query=Kigali,Rwanda"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:to-orange-100 dark:hover:from-orange-900/20 dark:hover:to-orange-800/20 border border-transparent hover:border-orange-200 dark:hover:border-orange-800 transition-all duration-300 group"
+                  className="flex items-start gap-4 p-4 rounded-xl hover:bg-gradient-to-r hover:from-emerald-50 hover:to-emerald-100 dark:hover:from-emerald-900/20 dark:hover:to-emerald-800/20 border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800 transition-all duration-300 group"
                 >
-                  <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg group-hover:bg-orange-200 dark:group-hover:bg-orange-900/50 transition-colors flex-shrink-0">
+                  <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg group-hover:bg-emerald-200 dark:group-hover:bg-emerald-900/50 transition-colors flex-shrink-0">
                     <MapPin className="w-6 h-6 text-accent group-hover:scale-110 transition-transform" />
                   </div>
                   <div className="flex-1">
@@ -162,36 +161,28 @@ const Contact = () => {
             {/* Business Hours Card */}
             <div className="card p-6 sm:p-8 hover:shadow-xl transition-shadow duration-300">
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl">
+                <div className="p-3 bg-gradient-to-br from-emerald-600 to-green-600 rounded-xl">
                   <Clock className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
-                  Business Hours
+                  Store Hours
                 </h3>
               </div>
               <div className="space-y-3">
                 <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
                   <span className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300">
-                    Monday - Friday
+                    Monday - Saturday
                   </span>
                   <span className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-                    9:00 AM - 6:00 PM
-                  </span>
-                </div>
-                <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
-                  <span className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300">
-                    Saturday
-                  </span>
-                  <span className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-                    10:00 AM - 4:00 PM
+                    7:00 AM - 8:00 PM
                   </span>
                 </div>
                 <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50">
                   <span className="text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300">
                     Sunday
                   </span>
-                  <span className="text-sm sm:text-base text-red-500 dark:text-red-400 font-medium">
-                    Closed
+                  <span className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                    8:00 AM - 6:00 PM
                   </span>
                 </div>
               </div>
@@ -201,7 +192,7 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="card p-6 sm:p-8 hover:shadow-xl transition-shadow duration-300">
             <div className="flex items-center gap-3 mb-6 sm:mb-8">
-              <div className="p-3 bg-gradient-to-br from-green-500 to-green-600 rounded-xl">
+              <div className="p-3 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl">
                 <Send className="w-6 h-6 text-white" />
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
@@ -311,4 +302,3 @@ const Contact = () => {
 }
 
 export default Contact
-

@@ -5,7 +5,7 @@ const LazyImage = ({
   src, 
   alt, 
   className = '', 
-  placeholder = '/placeholder.png',
+  placeholder = 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80',
   onError,
   loading = 'lazy',
   ...props 

@@ -9,6 +9,7 @@ import { useToast } from '../contexts/ToastContext'
 import { ProductGridSkeleton, LoadingSpinner } from '../components/SkeletonLoader'
 import { EmptyProducts, EmptySearch } from '../components/EmptyState'
 import useBackendStatus from '../hooks/useBackendStatus'
+import { DEFAULT_GROCERY_PRODUCTS } from '../data/groceryData'
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -40,13 +41,16 @@ const Products = () => {
   const loadProducts = async () => {
     try {
       const response = await productsAPI.getPublicProducts()
-      setProducts(response.data || [])
-      setFilteredProducts(response.data || [])
-    } catch (error) {
-      if (!isBackendConnectionIssue(error)) {
-        console.error('Failed to load products:', error)
-        toast.error('Failed to load products')
+      if (response.data && response.data.length > 0) {
+        setProducts(response.data)
+        setFilteredProducts(response.data)
+      } else {
+        setProducts(DEFAULT_GROCERY_PRODUCTS)
+        setFilteredProducts(DEFAULT_GROCERY_PRODUCTS)
       }
+    } catch (error) {
+      setProducts(DEFAULT_GROCERY_PRODUCTS)
+      setFilteredProducts(DEFAULT_GROCERY_PRODUCTS)
     } finally {
       setLoading(false)
     }

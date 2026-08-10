@@ -1,6 +1,6 @@
 @echo off
 echo ========================================
-echo Starting Esoko Frontend
+echo Starting JOJO Groceries Frontend
 echo ========================================
 echo.
 cd /d "%~dp0"
