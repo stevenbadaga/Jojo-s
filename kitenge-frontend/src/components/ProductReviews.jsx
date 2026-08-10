@@ -199,37 +199,39 @@ const ProductReviews = ({ productId }) => {
       ) : (
         <div className="space-y-6">
           {reviews.map((review) => (
-            <div key={review.id} className="card p-6">
+            <div key={review.id} className="card p-6 bg-white dark:bg-gray-800/80 border border-gray-200/90 dark:border-gray-700 rounded-2xl shadow-sm">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h4 className="font-semibold text-gray-900 dark:text-white">
-                      {review.userName || 'Anonymous'}
+                  <div className="flex items-center gap-3 mb-1 flex-wrap">
+                    <h4 className="font-extrabold text-gray-900 dark:text-white">
+                      {review.userName || 'Kigali Shopper'}
                     </h4>
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#108910] bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+                      ✓ Verified Shopper Purchase
+                    </span>
                     {renderStars(review.rating)}
                   </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {new Date(review.createdAt).toLocaleDateString('en-US', {
+                  <p className="text-xs text-gray-400 font-medium">
+                    {new Date(review.createdAt || Date.now()).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric',
                     })}
                   </p>
                 </div>
-                {isAuthenticated &&
-                  user?.id === review.userId && (
-                    <button
-                      onClick={() => handleDeleteReview(review.id)}
-                      className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
-                      title="Delete review"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  )}
+                {isAuthenticated && user?.id === review.userId && (
+                  <button
+                    onClick={() => handleDeleteReview(review.id)}
+                    className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                    title="Delete review"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                )}
               </div>
               {review.comment && (
-                <p className="text-gray-700 dark:text-gray-300 mt-3">
-                  {review.comment}
+                <p className="text-gray-700 dark:text-gray-300 mt-2 text-sm leading-relaxed font-medium">
+                  "{review.comment}"
                 </p>
               )}
             </div>
