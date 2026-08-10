@@ -5,6 +5,8 @@ import { useCart } from '../contexts/CartContext'
 import { useState, useEffect, useRef } from 'react'
 import { isBackendConnectionIssue, productsAPI } from '../services/api'
 import { getImageUrl } from '../utils/imageUtils'
+import NotificationCenter from './NotificationCenter'
+import PaymentConfirmationModal from './PaymentConfirmationModal'
 
 const Header = () => {
   const { isAuthenticated, isAdmin, user, logout } = useAuth()
@@ -12,6 +14,7 @@ const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [showSearch, setShowSearch] = useState(false)
   const [showProfileMenu, setShowProfileMenu] = useState(false)
+  const [showPaymentModal, setShowPaymentModal] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [searchLoading, setSearchLoading] = useState(false)
@@ -290,6 +293,9 @@ const Header = () => {
 
             <div className="h-5 w-px bg-gray-200 dark:bg-gray-800"></div>
 
+            {/* Notification Center */}
+            <NotificationCenter onOpenPaymentModal={() => setShowPaymentModal(true)} />
+
             {/* Admin Badge */}
             {isAdmin && (
               <Link
@@ -444,6 +450,13 @@ const Header = () => {
         </div>
 
       </div>
+
+      {/* Payment Confirmation Modal */}
+      <PaymentConfirmationModal
+        isOpen={showPaymentModal}
+        onClose={() => setShowPaymentModal(false)}
+        orderData={{ total: cartTotal }}
+      />
     </header>
   )
 }
