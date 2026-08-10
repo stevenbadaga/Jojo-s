@@ -178,7 +178,7 @@ const QuickViewModal = ({ product, isOpen, onClose }) => {
                 loading="eager"
               />
               {product.is_promo && discountPercent > 0 && (
-                <span className="absolute top-3 left-3 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs sm:text-sm font-bold px-2.5 py-1 rounded-full shadow-lg">
+                <span className="absolute top-3 left-3 bg-[#FF6B00] text-white text-xs sm:text-sm font-extrabold px-3 py-1 rounded-full shadow-lg">
                   -{discountPercent}% OFF
                 </span>
               )}
@@ -192,12 +192,12 @@ const QuickViewModal = ({ product, isOpen, onClose }) => {
             {/* Product Info */}
             <div className="flex flex-col">
               {product.category && (
-                <span className="inline-flex items-center px-3 py-1 bg-accent/10 text-accent rounded-full text-xs sm:text-sm font-medium w-fit mb-3">
+                <span className="inline-flex items-center px-3 py-1 bg-emerald-50 dark:bg-emerald-950 text-[#108910] dark:text-emerald-400 rounded-full text-xs sm:text-sm font-extrabold w-fit mb-3 border border-emerald-200 dark:border-emerald-800">
                   {product.category}
                 </span>
               )}
 
-              <h2 id="quick-view-title" className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2 leading-tight line-clamp-2">
+              <h2 id="quick-view-title" className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mb-2 leading-tight line-clamp-2">
                 {product.name}
               </h2>
 
@@ -209,7 +209,7 @@ const QuickViewModal = ({ product, isOpen, onClose }) => {
 
               <div className="mb-3">
                 <div className="flex items-center gap-3 flex-wrap">
-                  <span className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+                  <span className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">
                     {product.price.toLocaleString()} RWF
                   </span>
                   {product.original_price && product.original_price > product.price && (
@@ -219,7 +219,7 @@ const QuickViewModal = ({ product, isOpen, onClose }) => {
                   )}
                 </div>
                 {product.is_promo && discountPercent > 0 && product.original_price && product.original_price > product.price && (
-                  <p className="text-green-600 dark:text-green-400 font-medium text-sm mt-1">
+                  <p className="text-[#108910] dark:text-emerald-400 font-bold text-sm mt-1">
                     You save {Math.max(0, product.original_price - product.price).toLocaleString()} RWF
                   </p>
                 )}
@@ -227,11 +227,11 @@ const QuickViewModal = ({ product, isOpen, onClose }) => {
 
               <div className="mb-4">
                 {product.in_stock ? (
-                  <span className="inline-flex items-center px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full text-sm font-medium">
-                    In Stock
+                  <span className="inline-flex items-center px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-[#108910] dark:text-emerald-300 rounded-full text-xs font-extrabold">
+                    ✓ In Stock • Fresh Delivery
                   </span>
                 ) : (
-                  <span className="inline-flex items-center px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 rounded-full text-sm font-medium">
+                  <span className="inline-flex items-center px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 rounded-full text-xs font-extrabold">
                     Out of Stock
                   </span>
                 )}
@@ -242,10 +242,10 @@ const QuickViewModal = ({ product, isOpen, onClose }) => {
                 <button
                   onClick={handleAddToCart}
                   disabled={product.in_stock === false}
-                  className="btn-primary flex-1 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base py-3 sm:py-2.5"
+                  className="bg-[#108910] hover:bg-[#007000] active:scale-95 text-white font-extrabold flex-1 flex items-center justify-center gap-2 rounded-2xl shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base py-3.5"
                 >
                   <ShoppingCart className="w-5 h-5 sm:w-5 sm:h-5" />
-                  <span>Add to Cart</span>
+                  <span>Add to Express Cart</span>
                 </button>
                 <button
                   onClick={handleWishlist}

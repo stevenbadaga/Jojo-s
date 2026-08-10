@@ -224,10 +224,10 @@ const ProductDetail = () => {
 
                   <button
                     onClick={handleAddToCart}
-                    className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3.5 px-6 rounded-full shadow-lg hover:shadow-emerald-600/30 active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 text-base"
+                    className="flex-1 bg-[#108910] hover:bg-[#007000] active:scale-95 text-white font-extrabold py-3.5 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 text-base"
                   >
                     <ShoppingCart className="w-5 h-5" />
-                    Add to Cart
+                    Add to Express Cart
                   </button>
                 </div>
               </div>

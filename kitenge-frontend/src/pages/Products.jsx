@@ -140,11 +140,11 @@ const Products = () => {
         
         {/* Header Section */}
         <div className="mb-4 sm:mb-8">
-          <h1 className="text-2xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-1.5 sm:mb-2">
-            All Products
+          <h1 className="text-2xl sm:text-4xl font-black text-gray-900 dark:text-white mb-1.5 sm:mb-2 tracking-tight">
+            Instacart Grocery Aisles
           </h1>
           <p className="text-sm sm:text-lg text-gray-600 dark:text-gray-400 leading-snug">
-            Explore products across fashion, home, beauty, accessories, and everyday essentials
+            Shop fresh organic produce, fruits, vegetables, cold dairy, artisan bakery, and everyday market groceries.
           </p>
         </div>
 
