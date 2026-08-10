@@ -170,24 +170,39 @@ const PaymentConfirmationModal = ({ isOpen, onClose, orderData }) => {
 
               {/* MoMo Merchant Code Helper Box */}
               {(paymentMethod === 'momo' || paymentMethod === 'airtel') && (
-                <div className="bg-[#002524] text-white p-4 rounded-2xl space-y-3">
+                <div className="bg-gradient-to-br from-[#002524] to-[#003834] border border-emerald-700 text-white p-5 rounded-2xl space-y-3.5 shadow-lg">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-gray-300 font-bold">Quick MoMo Merchant Code:</span>
+                    <span className="text-gray-300 font-extrabold flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#25D366] animate-ping"></span>
+                      Instant MoMo Merchant USSD Code:
+                    </span>
                     <button
                       type="button"
                       onClick={copyMoMoCode}
-                      className="text-[#FF6B00] hover:underline font-extrabold flex items-center gap-1"
+                      className="bg-[#FF6B00] hover:bg-[#E05E00] text-white text-[11px] font-black px-3 py-1 rounded-full flex items-center gap-1 shadow-sm transition-all"
                     >
-                      <Copy className="w-3.5 h-3.5" />
-                      <span>{copiedCode ? 'Copied!' : 'Copy USSD Code'}</span>
+                      <Copy className="w-3 h-3" />
+                      <span>{copiedCode ? '✓ Copied!' : 'Copy Code'}</span>
                     </button>
                   </div>
-                  <div className="bg-black/30 p-3 rounded-xl flex items-center justify-between font-mono font-bold text-sm text-emerald-400">
+
+                  <div className="bg-black/40 border border-emerald-600/40 p-3.5 rounded-xl flex items-center justify-between font-mono font-black text-base text-emerald-400">
                     <span>*182*8*1*0780453704#</span>
-                    <span className="text-xs text-white font-sans">JOJO Groceries</span>
+                    <span className="text-xs text-white font-sans font-bold bg-[#108910] px-2.5 py-0.5 rounded-md">JOJO Groceries</span>
                   </div>
-                  <p className="text-[11px] text-gray-300">
-                    Dial the USSD code on your phone, complete payment, then enter your transaction reference below.
+
+                  <div className="flex items-center gap-2 pt-1">
+                    <a
+                      href="tel:*182*8*1*0780453704%23"
+                      className="w-full bg-[#108910] hover:bg-[#007000] active:scale-95 text-white font-black py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition-all"
+                    >
+                      <Phone className="w-4 h-4" />
+                      <span>Dial USSD Code on Phone Now</span>
+                    </a>
+                  </div>
+
+                  <p className="text-[11px] text-gray-300 font-medium">
+                    Dial the USSD code directly on your mobile keypad or copy it, complete payment, then paste your MoMo reference below.
                   </p>
                 </div>
               )}
