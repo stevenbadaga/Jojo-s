@@ -17,7 +17,7 @@ async function checkAdminAccess() {
       return (window.location.href = "/login.html");
     }
 
-    if (data.user.email !== "jojogroceries@gmail.com" && data.user.role !== "ADMIN") {
+    if (data.user.email !== "marketmet@gmail.com" && data.user.role !== "ADMIN") {
       await fetch("/api/logout", { method: "POST" });
       return (window.location.href = "/login.html");
     }

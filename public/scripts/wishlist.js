@@ -1,4 +1,4 @@
-// Esoko - Wishlist page
+// MarketMet - Wishlist page
 
 const formatPrice = (num) =>
   "RWF " + (num || 0).toLocaleString("en-RW");
