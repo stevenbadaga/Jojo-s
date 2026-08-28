@@ -10,10 +10,10 @@ public class ContactService {
     
     private final EmailService emailService;
     
-    @Value("${app.admin.email:marketmet@gmail.com}")
+    @Value("${app.admin.email:marketmate77@gmail.com}")
     private String adminEmail;
     
-    @Value("${app.admin.notification.email:marketmet@gmail.com}")
+    @Value("${app.admin.notification.email:marketmate77@gmail.com}")
     private String adminNotificationEmail;
     
     public void sendContactMessage(String name, String email, String subject, String message) {

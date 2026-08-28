@@ -37,7 +37,7 @@ public class OrderService {
     private final SmsService smsService;
     private final UserNotificationsRepository userNotificationsRepository;
     
-    @Value("${app.admin.notification.email:marketmet@gmail.com}")
+    @Value("${app.admin.notification.email:marketmate77@gmail.com}")
     private String adminNotificationEmail;
     
     @Value("${app.admin.whatsapp:250780453704}")

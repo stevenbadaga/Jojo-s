@@ -29,7 +29,7 @@ public class PasswordResetService {
     @Value("${app.frontend.url:http://localhost:3000}")
     private String frontendUrl;
     
-    @Value("${app.admin.notification.email:marketmet@gmail.com}")
+    @Value("${app.admin.notification.email:marketmate77@gmail.com}")
     private String adminNotificationEmail;
 
     @Value("${app.mail.from:}")
