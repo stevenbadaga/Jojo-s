@@ -1,0 +1,248 @@
+/* Compact, premium product browsing. Scoped to /products so other pages are untouched. */
+
+html[data-route="/products"] [class~="min-h-screen"][class~="bg-gray-50"] {
+  padding-top: 1.4rem !important;
+  padding-bottom: 2.5rem !important;
+}
+
+html.dark[data-route="/products"] [class~="min-h-screen"][class~="bg-gray-50"] {
+  background: #0d1421 !important;
+}
+
+html[data-route="/products"] [class~="min-h-screen"][class~="bg-gray-50"] > [class~="max-w-7xl"] {
+  max-width: 90rem !important;
+}
+
+/* Breadcrumb + hero copy */
+html[data-route="/products"] nav[aria-label="Breadcrumb"] {
+  margin-bottom: 0.85rem !important;
+}
+
+html[data-route="/products"] nav[aria-label="Breadcrumb"] ol {
+  font-size: 0.78rem !important;
+}
+
+html[data-route="/products"] h1 {
+  margin-bottom: 0.3rem !important;
+  font-size: clamp(2rem, 2.4vw, 2.65rem) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.035em !important;
+}
+
+html[data-route="/products"] h1 + p {
+  max-width: 54rem !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+}
+
+html[data-route="/products"] nav[aria-label="Breadcrumb"] + div {
+  margin-bottom: 1.25rem !important;
+}
+
+/* Search/actions becomes a slim command bar. */
+html[data-route="/products"] .card:has(input[placeholder^="Search products"]) {
+  margin-bottom: 0.9rem !important;
+  padding: 0.7rem !important;
+  border-radius: 1.25rem !important;
+  box-shadow: none !important;
+}
+
+html.dark[data-route="/products"] .card:has(input[placeholder^="Search products"]) {
+  border-color: rgba(255, 255, 255, 0.09) !important;
+  background: #111827 !important;
+}
+
+html[data-route="/products"] .card:has(input[placeholder^="Search products"]) input {
+  min-height: 42px !important;
+  height: 42px !important;
+  border-width: 1px !important;
+  border-radius: 999px !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  box-shadow: none !important;
+}
+
+html.dark[data-route="/products"] .card:has(input[placeholder^="Search products"]) input {
+  border-color: rgba(148, 163, 184, 0.35) !important;
+  background: #111827 !important;
+}
+
+html[data-route="/products"] .card:has(input[placeholder^="Search products"]) button {
+  min-height: 40px !important;
+}
+
+/* Desktop filters: one compact row rather than a large card. */
+@media (min-width: 1024px) {
+  html[data-route="/products"] .card:has(select) {
+    margin-bottom: 1rem !important;
+    padding: 0.75rem 0.9rem !important;
+    border-radius: 1.15rem !important;
+    box-shadow: none !important;
+  }
+
+  html.dark[data-route="/products"] .card:has(select) {
+    border-color: rgba(255, 255, 255, 0.09) !important;
+    background: #111827 !important;
+  }
+
+  html[data-route="/products"] .card:has(select) > div:first-child {
+    position: static !important;
+    margin-bottom: 0.6rem !important;
+    padding-bottom: 0.55rem !important;
+    background: transparent !important;
+  }
+
+  html[data-route="/products"] .card:has(select) > div:first-child h3 {
+    font-size: 0.82rem !important;
+    font-weight: 800 !important;
+  }
+
+  html[data-route="/products"] .card:has(select) > div:last-child {
+    gap: 0.75rem !important;
+  }
+
+  html[data-route="/products"] .card:has(select) label {
+    margin-bottom: 0.35rem !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    color: #94a3b8 !important;
+  }
+
+  html[data-route="/products"] .card:has(select) select,
+  html[data-route="/products"] .card:has(select) input[type="number"] {
+    min-height: 40px !important;
+    height: 40px !important;
+    border-width: 1px !important;
+    border-radius: 0.85rem !important;
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+    box-shadow: none !important;
+  }
+
+  html.dark[data-route="/products"] .card:has(select) select,
+  html.dark[data-route="/products"] .card:has(select) input[type="number"] {
+    border-color: rgba(148, 163, 184, 0.32) !important;
+    background: #111827 !important;
+  }
+}
+
+/* Results count should not create another large visual gap. */
+html[data-route="/products"] .card:has(select) + div {
+  margin-bottom: 1rem !important;
+}
+
+/* Mobile: get users to the products quickly while preserving touch comfort. */
+@media (max-width: 639px) {
+  html[data-route="/products"] [class~="min-h-screen"][class~="bg-gray-50"] {
+    padding-top: 0.8rem !important;
+    padding-bottom: 5.5rem !important;
+  }
+
+  html[data-route="/products"] [class~="min-h-screen"][class~="bg-gray-50"] > [class~="max-w-7xl"] {
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
+  }
+
+  html[data-route="/products"] nav[aria-label="Breadcrumb"] {
+    display: none !important;
+  }
+
+  html[data-route="/products"] nav[aria-label="Breadcrumb"] + div {
+    margin-bottom: 0.85rem !important;
+  }
+
+  html[data-route="/products"] h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.08 !important;
+  }
+
+  html[data-route="/products"] h1 + p {
+    font-size: 0.8rem !important;
+    line-height: 1.35 !important;
+  }
+
+  html[data-route="/products"] .card:has(input[placeholder^="Search products"]) {
+    padding: 0.55rem !important;
+    border-radius: 1rem !important;
+  }
+
+  html[data-route="/products"] .card:has(input[placeholder^="Search products"]) > div {
+    gap: 0.55rem !important;
+  }
+
+  html[data-route="/products"] .card:has(input[placeholder^="Search products"]) input {
+    height: 44px !important;
+    min-height: 44px !important;
+    font-size: 0.9rem !important;
+  }
+
+  html[data-route="/products"] .card:has(input[placeholder^="Search products"]) > div > div:last-child {
+    display: grid !important;
+    grid-template-columns: 1fr auto auto !important;
+    width: 100% !important;
+    gap: 0.5rem !important;
+  }
+
+  html[data-route="/products"] .card:has(input[placeholder^="Search products"]) > div > div:last-child > button:first-child {
+    justify-content: center !important;
+    padding-left: 0.8rem !important;
+    padding-right: 0.8rem !important;
+  }
+
+  /* Filter drawer remains full-height, but is cleaner and denser. */
+  html[data-route="/products"] .fixed.card:has(select) {
+    width: min(92vw, 360px) !important;
+    padding: 1rem !important;
+    border-radius: 1.25rem 0 0 1.25rem !important;
+    background: #fff !important;
+  }
+
+  html.dark[data-route="/products"] .fixed.card:has(select) {
+    background: #0d1421 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  html[data-route="/products"] .fixed.card:has(select) > div:first-child {
+    margin-bottom: 0.85rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  html[data-route="/products"] .fixed.card:has(select) > div:last-child {
+    gap: 0.8rem !important;
+  }
+
+  html[data-route="/products"] .fixed.card:has(select) label {
+    margin-bottom: 0.35rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  html[data-route="/products"] .fixed.card:has(select) select,
+  html[data-route="/products"] .fixed.card:has(select) input[type="number"] {
+    min-height: 44px !important;
+    border-width: 1px !important;
+    border-radius: 0.85rem !important;
+  }
+
+  html[data-route="/products"] .card:has(select) + div {
+    margin-bottom: 0.75rem !important;
+    gap: 0.5rem !important;
+  }
+
+  html[data-route="/products"] .card:has(select) + div p {
+    font-size: 0.78rem !important;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  html[data-route="/products"] [class~="min-h-screen"][class~="bg-gray-50"] {
+    padding-top: 1.1rem !important;
+  }
+
+  html[data-route="/products"] h1 {
+    font-size: 2.15rem !important;
+  }
+
+  html[data-route="/products"] nav[aria-label="Breadcrumb"] + div {
+    margin-bottom: 1rem !important;
+  }
+}
