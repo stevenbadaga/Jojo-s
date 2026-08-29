@@ -1,0 +1,34 @@
+{
+  "name": "MarketMet – Fresh Groceries",
+  "short_name": "MarketMet",
+  "description": "Fresh groceries, essentials and MarketMet order tracking in one fast shopping experience.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#071d1a",
+  "theme_color": "#108910",
+  "orientation": "portrait-primary",
+  "categories": ["shopping", "food", "lifestyle"],
+  "icons": [
+    {
+      "src": "/marketmet-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop groceries",
+      "short_name": "Shop",
+      "url": "/products",
+      "icons": [{ "src": "/marketmet-icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Track an order",
+      "short_name": "Track",
+      "url": "/track-order",
+      "icons": [{ "src": "/marketmet-icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    }
+  ]
+}
