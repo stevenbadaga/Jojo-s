@@ -21,14 +21,8 @@ const emitBackendStatus = () => {
 
 const setBackendStatus = (nextState) => {
   const now = Date.now()
-  const mergedState = {
-    ...backendStatus,
-    ...nextState,
-  }
-
-  if (mergedState.state !== backendStatus.state) {
-    mergedState.lastChangeAt = now
-  }
+  const mergedState = { ...backendStatus, ...nextState }
+  if (mergedState.state !== backendStatus.state) mergedState.lastChangeAt = now
 
   const changed =
     mergedState.state !== backendStatus.state ||
@@ -37,52 +31,33 @@ const setBackendStatus = (nextState) => {
     mergedState.lastErrorAt !== backendStatus.lastErrorAt
 
   if (!changed) return
-
   backendStatus = mergedState
   emitBackendStatus()
 }
 
-const markBackendReady = () => {
-  setBackendStatus({ state: 'ready', lastSuccessAt: Date.now() })
-}
+const markBackendReady = () => setBackendStatus({ state: 'ready', lastSuccessAt: Date.now() })
+const markBackendConnecting = () => setBackendStatus({ state: 'connecting' })
+const markBackendOffline = () => setBackendStatus({ state: 'offline', lastErrorAt: Date.now() })
 
-const markBackendConnecting = () => {
-  setBackendStatus({ state: 'connecting' })
-}
-
-const markBackendOffline = () => {
-  setBackendStatus({ state: 'offline', lastErrorAt: Date.now() })
-}
-
-const wait = (delayMs) =>
-  new Promise((resolve) => {
-    window.setTimeout(resolve, delayMs)
-  })
+const wait = (delayMs) => new Promise((resolve) => window.setTimeout(resolve, delayMs))
 
 const logBackendWarningOnce = () => {
   if (!import.meta.env.DEV) return
-
   const now = Date.now()
   if (now - lastBackendWarningAt < BACKEND_WARNING_COOLDOWN_MS) return
-
   lastBackendWarningAt = now
-  console.warn(
-    `Backend unavailable at ${API_BASE_URL}. The frontend will keep waiting and retry safe requests automatically.`
-  )
+  console.warn(`Backend unavailable at ${API_BASE_URL}. The frontend will keep waiting and retry safe requests automatically.`)
 }
 
 export const getBackendStatusSnapshot = () => backendStatus
 
 export const subscribeToBackendStatus = (listener) => {
   backendStatusListeners.add(listener)
-  return () => {
-    backendStatusListeners.delete(listener)
-  }
+  return () => backendStatusListeners.delete(listener)
 }
 
 export const isBackendConnectionIssue = (error) => {
   if (!error || error.code === 'ERR_CANCELED') return false
-
   return (
     error.code === 'ERR_NETWORK' ||
     error.code === 'ECONNABORTED' ||
@@ -95,29 +70,21 @@ export const getApiErrorMessage = (error, fallbackMessage) => {
   if (isBackendConnectionIssue(error)) {
     return 'Backend is starting or temporarily unavailable. Please wait a few seconds and try again.'
   }
-
   return error?.response?.data?.error || fallbackMessage
 }
 
-if (import.meta.env.DEV) {
-  console.log('API Base URL:', API_BASE_URL)
-}
+if (import.meta.env.DEV) console.log('API Base URL:', API_BASE_URL)
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  headers: { 'Content-Type': 'application/json' },
   timeout: 10000,
 })
 
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('kb_jwt_token')
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
-
+    if (token) config.headers.Authorization = `Bearer ${token}`
     config.__backendRetryCount = config.__backendRetryCount || 0
     return config
   },
@@ -130,9 +97,7 @@ api.interceptors.response.use(
     return response
   },
   async (error) => {
-    if (error?.response) {
-      markBackendReady()
-    }
+    if (error?.response) markBackendReady()
 
     if (isBackendConnectionIssue(error)) {
       const config = error.config
@@ -152,9 +117,7 @@ api.interceptors.response.use(
 
     if (error?.response?.status === 401 || error?.response?.status === 403) {
       localStorage.removeItem('kb_jwt_token')
-      if (window.location.pathname !== '/login') {
-        window.location.href = '/login'
-      }
+      if (window.location.pathname !== '/login') window.location.href = '/login'
     }
 
     if (import.meta.env.DEV && error?.response && error.response.status >= 500) {
@@ -169,10 +132,7 @@ const uploadImageViaCloudinary = async (file, fallbackPath) => {
   try {
     const signatureResponse = await api.post('/upload-signature')
     const { cloudName, apiKey, timestamp, folder, signature } = signatureResponse.data || {}
-
-    if (!cloudName || !apiKey || !timestamp || !folder || !signature) {
-      throw new Error('Cloudinary upload signature is incomplete')
-    }
+    if (!cloudName || !apiKey || !timestamp || !folder || !signature) throw new Error('Cloudinary upload signature is incomplete')
 
     const formData = new FormData()
     formData.append('file', file)
@@ -184,10 +144,7 @@ const uploadImageViaCloudinary = async (file, fallbackPath) => {
     const response = await axios.post(
       `https://api.cloudinary.com/v1_1/${encodeURIComponent(cloudName)}/image/upload`,
       formData,
-      {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        timeout: 120000,
-      }
+      { headers: { 'Content-Type': 'multipart/form-data' }, timeout: 120000 }
     )
 
     return {
@@ -201,9 +158,7 @@ const uploadImageViaCloudinary = async (file, fallbackPath) => {
     }
   } catch (signatureError) {
     const status = signatureError?.response?.status
-    if (status !== 404 && status !== 405) {
-      throw signatureError
-    }
+    if (status !== 404 && status !== 405) throw signatureError
 
     const fallbackForm = new FormData()
     fallbackForm.append('image', file)
@@ -232,6 +187,8 @@ export const productsAPI = {
   createProduct: (data) => api.post('/products', data),
   updateProduct: (id, data) => api.put(`/products/${id}`, data),
   toggleActive: (id, active) => api.patch(`/products/${id}/active`, { active }),
+  adjustStock: (id, data) => api.post(`/products/${id}/stock`, data),
+  getStockHistory: (id) => api.get(`/products/${id}/stock-history`),
   deleteProduct: (id) => api.delete(`/products/${id}`),
   uploadImage: (file) => uploadImageViaCloudinary(file, '/upload-image'),
 }
@@ -243,21 +200,35 @@ export const ordersAPI = {
   getOrder: (id) => api.get(`/orders/${id}`),
   deleteOrder: (id) => api.delete(`/orders/${id}`),
   trackOrder: (id) => api.get(`/orders/${id}/track`),
-  trackOrderByNumber: (orderNumber, phone) =>
-    api.post('/orders/track', { orderNumber, phone }),
-  updateOrderStatus: (id, status, trackingNumber) =>
-    api.put(`/orders/${id}/status`, { status, trackingNumber }),
+  trackOrderByNumber: (orderNumber, phone) => api.post('/orders/track', { orderNumber, phone }),
+  updateOrderStatus: (id, status, trackingNumber) => api.put(`/orders/${id}/status`, { status, trackingNumber }),
+  updatePayment: (id, data) => api.put(`/orders/${id}/payment`, data),
 }
 
 export const statsAPI = {
   getBusinessStats: () => api.get('/stats/business'),
 }
 
+export const insightsAPI = {
+  getPublic: () => api.get('/insights'),
+  getAdmin: () => api.get('/insights?admin=true'),
+  getBySlug: (slug) => api.get(`/insights/slug/${encodeURIComponent(slug)}`),
+  getById: (id) => api.get(`/insights/${id}`),
+  create: (data) => api.post('/insights', data),
+  update: (id, data) => api.put(`/insights/${id}`, data),
+  delete: (id) => api.delete(`/insights/${id}`),
+}
+
+export const notificationAPI = {
+  getAll: () => api.get('/notifications'),
+  markRead: (id) => api.put(`/notifications/${id}/read`),
+  markAllRead: () => api.put('/notifications/read-all'),
+}
+
 export const userAPI = {
   getProfile: () => api.get('/users/profile'),
   updateProfile: (data) => api.put('/users/profile', data),
-  changePassword: (currentPassword, newPassword) =>
-    api.post('/users/change-password', { currentPassword, newPassword }),
+  changePassword: (currentPassword, newPassword) => api.post('/users/change-password', { currentPassword, newPassword }),
   updateTwoFactor: (enabled) => api.put('/users/two-factor', { enabled }),
   uploadProfileImage: (file) => uploadImageViaCloudinary(file, '/users/profile-image'),
   deactivateAccount: () => api.post('/users/deactivate'),
