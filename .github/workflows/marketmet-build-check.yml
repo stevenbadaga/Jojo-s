@@ -1,0 +1,64 @@
+name: MarketMet Build Check
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frontend:
+    name: Frontend production build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Frontend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: Frontend/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Build frontend
+        run: npm run build
+        env:
+          VITE_API_URL: https://marketmet-api.badagasteven6.workers.dev/api
+
+  backend:
+    name: Backend compile check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: BackendNext
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: BackendNext/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Generate Prisma client
+        run: npx prisma generate
+        env:
+          DATABASE_URL: postgresql://marketmet:marketmet@localhost:5432/marketmet
+      - name: Validate Prisma schema
+        run: npx prisma validate
+        env:
+          DATABASE_URL: postgresql://marketmet:marketmet@localhost:5432/marketmet
+      - name: Compile Next.js backend
+        run: npx next build
+        env:
+          DATABASE_URL: postgresql://marketmet:marketmet@localhost:5432/marketmet
+          JWT_SECRET: build-check-only-secret
+          NODE_ENV: production
