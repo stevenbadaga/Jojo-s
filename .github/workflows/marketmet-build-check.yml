@@ -30,11 +30,29 @@ jobs:
           VITE_API_URL: https://marketmet-api.badagasteven6.workers.dev/api
 
   backend:
-    name: Backend compile check
+    name: Backend compile and migration check
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: marketmet
+          POSTGRES_PASSWORD: marketmet
+          POSTGRES_DB: marketmet
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U marketmet -d marketmet"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     defaults:
       run:
         working-directory: BackendNext
+    env:
+      DATABASE_URL: postgresql://marketmet:marketmet@localhost:5432/marketmet
+      JWT_SECRET: build-check-only-secret
+      NODE_ENV: production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,15 +64,11 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Generate Prisma client
         run: npx prisma generate
-        env:
-          DATABASE_URL: postgresql://marketmet:marketmet@localhost:5432/marketmet
       - name: Validate Prisma schema
         run: npx prisma validate
-        env:
-          DATABASE_URL: postgresql://marketmet:marketmet@localhost:5432/marketmet
+      - name: Apply full migration chain
+        run: npx prisma migrate deploy
+      - name: Smoke-test migrated database
+        run: node -e 'const { PrismaClient } = require("@prisma/client"); const p = new PrismaClient(); Promise.all([p.product.count(), p.insightPost.count()]).then(([products, insights]) => { console.log(`products=${products} insights=${insights}`); if (insights < 3) throw new Error("Seeded Insights were not created"); }).finally(() => p.$disconnect());'
       - name: Compile Next.js backend
         run: npx next build
-        env:
-          DATABASE_URL: postgresql://marketmet:marketmet@localhost:5432/marketmet
-          JWT_SECRET: build-check-only-secret
-          NODE_ENV: production
