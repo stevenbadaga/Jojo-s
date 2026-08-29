@@ -3,6 +3,7 @@ import { useCart } from '../contexts/CartContext'
 import { useToast } from '../contexts/ToastContext'
 import { useAuth } from '../contexts/AuthContext'
 import { ordersAPI } from '../services/api'
+import { getImageUrl } from '../utils/imageUtils'
 import { useState, useEffect } from 'react'
 import { EmptyCart } from '../components/EmptyState'
 
@@ -147,39 +148,71 @@ const CartDrawer = () => {
       const checkoutCustomerName = customerName.trim() || 'Guest'
       const checkoutDeliveryLabel =
         deliveryOption === 'pickup'
-          ? 'Store Pickup (Free)'
+          ? 'Store pickup'
           : deliveryOption === 'kigali'
-            ? 'Kigali Delivery (2,000 RWF)'
-            : 'Upcountry Delivery (3,500 RWF)'
+            ? 'Kigali delivery'
+            : 'Upcountry delivery'
 
       const number = createdOrder?.order_number ?? createdOrder?.orderNumber ?? createdOrder?.id
+      const placedAt = new Intl.DateTimeFormat('en-RW', {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+      }).format(new Date())
+
       const checkoutMessageLines = [
-        '🛒 *MARKETMET GROCERY ORDER*',
+        '🛒 *MARKETMET*',
+        '*NEW ORDER REQUEST*',
+        '━━━━━━━━━━━━━━━━━━━━',
         '',
-        ...(number ? [`🧾 *Order:* #${number}`] : []),
-        `👤 *Customer:* ${checkoutCustomerName}`,
-        `📱 *Phone:* ${customerPhone.trim()}`,
-        `🚚 *Delivery:* ${checkoutDeliveryLabel}`,
+        '*ORDER DETAILS*',
+        ...(number ? [`Order reference: *#${number}*`] : []),
+        `Placed: ${placedAt}`,
+        '',
+        '*CUSTOMER*',
+        `Name: ${checkoutCustomerName}`,
+        `WhatsApp: ${customerPhone.trim()}`,
+        '',
+        '*FULFILMENT*',
+        `Method: ${checkoutDeliveryLabel}`,
+        `Delivery fee: ${deliveryFee.toLocaleString()} RWF`,
       ]
 
       if (deliveryOption !== 'pickup' && deliveryLocation.trim()) {
-        checkoutMessageLines.push(`📍 *Location:* ${deliveryLocation.trim()}`)
+        checkoutMessageLines.push(`Address / landmark: ${deliveryLocation.trim()}`)
       }
 
-      checkoutMessageLines.push('', '📦 *ITEMS:*')
+      checkoutMessageLines.push('', '*ORDER ITEMS*', '')
+
       cart.forEach((item, index) => {
+        const quantity = Number(item.quantity) || 1
+        const unitPrice = Number(item.price) || 0
+        const lineTotal = quantity * unitPrice
+        const imageUrl = item.image ? getImageUrl(item.image) : null
+
         checkoutMessageLines.push(
-          `${index + 1}. ${item.name} - Qty: ${item.quantity} × ${Number(item.price).toLocaleString()} RWF`
+          `${index + 1}. *${item.name}*`,
+          `   ${quantity} × ${unitPrice.toLocaleString()} RWF = *${lineTotal.toLocaleString()} RWF*`,
         )
+
+        if (imageUrl && imageUrl.startsWith('http')) {
+          checkoutMessageLines.push(`   🖼️ View product image: ${imageUrl}`)
+        }
+
+        checkoutMessageLines.push('')
       })
 
       checkoutMessageLines.push(
+        '*ORDER SUMMARY*',
+        `Subtotal: ${subtotal.toLocaleString()} RWF`,
+        `Delivery: ${deliveryFee.toLocaleString()} RWF`,
+        `*TOTAL: ${grandTotal.toLocaleString()} RWF*`,
         '',
-        `💵 *Subtotal:* ${subtotal.toLocaleString()} RWF`,
-        `🚚 *Delivery Fee:* ${deliveryFee.toLocaleString()} RWF`,
-        `💰 *TOTAL AMOUNT:* ${grandTotal.toLocaleString()} RWF`,
+        '━━━━━━━━━━━━━━━━━━━━',
+        '*Confirmation requested*',
+        'Please confirm product availability, delivery timing, and payment instructions for this order.',
         '',
-        'Please confirm my MarketMet order.'
+        'Thank you for shopping with *MarketMet*.',
+        '_Fresh groceries. Delivered with care._'
       )
 
       const whatsappCheckoutUrl = `https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(checkoutMessageLines.join('\n'))}`
