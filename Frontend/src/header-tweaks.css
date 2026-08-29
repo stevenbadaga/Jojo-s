@@ -1,9 +1,47 @@
-/* Compact account + cart controls for the storefront header.
-   The profile dropdown stays fully functional, but the trigger is avatar-only. */
+/* Storefront header polish: balanced spacing, usable search, compact account control,
+   and a cart button that always remains visible. */
 
 @media (min-width: 1024px) {
-  /* The authenticated profile wrapper sits immediately before the cart button. */
-  header div.relative:has(+ button[aria-label="Open Instacart Express Cart"]) > button {
+  header > div {
+    max-width: 100rem !important;
+    padding-left: clamp(1rem, 2vw, 2rem) !important;
+    padding-right: clamp(1rem, 2vw, 2rem) !important;
+  }
+
+  header > div > div:first-child {
+    gap: 1rem !important;
+  }
+
+  header > div > div:first-child > div:first-child {
+    gap: 0.75rem !important;
+  }
+
+  /* Give search a real usable width instead of letting navigation squeeze it. */
+  header > div > div:first-child > div:nth-child(2) {
+    min-width: 220px !important;
+    width: clamp(220px, 20vw, 360px) !important;
+    max-width: 360px !important;
+    flex: 0 1 360px !important;
+  }
+
+  /* Keep the right-side actions tidy and consistent. */
+  header > div > div:first-child > div:nth-child(3) {
+    gap: 0.625rem !important;
+    min-width: 0 !important;
+  }
+
+  header > div > div:first-child > div:nth-child(3) nav {
+    gap: 0.125rem !important;
+  }
+
+  header > div > div:first-child > div:nth-child(3) nav a {
+    padding-left: 0.65rem !important;
+    padding-right: 0.65rem !important;
+    white-space: nowrap !important;
+  }
+
+  /* The authenticated account trigger is avatar-only. */
+  header div.relative:has(+ button[aria-label$="Cart"]) > button {
     width: 42px !important;
     height: 42px !important;
     min-width: 42px !important;
@@ -15,33 +53,50 @@
     background: transparent !important;
   }
 
-  header div.relative:has(+ button[aria-label="Open Instacart Express Cart"]) > button > span:first-of-type {
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 36px !important;
+  header div.relative:has(+ button[aria-label$="Cart"]) > button > span:first-of-type {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
     border-radius: 9999px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    box-shadow: 0 0 0 1px rgba(16, 137, 16, 0.35);
   }
 
-  /* Hide the account name/email label and dropdown chevron from the trigger. */
-  header div.relative:has(+ button[aria-label="Open Instacart Express Cart"]) > button > span:nth-of-type(2),
-  header div.relative:has(+ button[aria-label="Open Instacart Express Cart"]) > button > svg {
+  header div.relative:has(+ button[aria-label$="Cart"]) > button > span:nth-of-type(2),
+  header div.relative:has(+ button[aria-label$="Cart"]) > button > svg {
     display: none !important;
   }
 
-  /* Never allow the cart control to be squeezed out of the header. */
-  header button[aria-label="Open Instacart Express Cart"] {
+  header button[aria-label$="Cart"] {
     flex-shrink: 0 !important;
     white-space: nowrap !important;
+    min-height: 42px !important;
   }
 }
 
-/* On medium desktop widths use an icon-only cart with a count badge.
-   This keeps it visible even when navigation space is tight. */
+/* Hide the location pill before very wide desktop widths so search/navigation stay roomy. */
+@media (min-width: 1024px) and (max-width: 1535px) {
+  header > div > div:first-child > div:first-child > div:nth-child(2) {
+    display: none !important;
+  }
+}
+
+/* Compact the right side a little further on normal laptop widths. */
 @media (min-width: 1024px) and (max-width: 1279px) {
-  header button[aria-label="Open Instacart Express Cart"] {
+  header > div > div:first-child > div:nth-child(2) {
+    min-width: 190px !important;
+    width: 220px !important;
+    flex-basis: 220px !important;
+  }
+
+  header > div > div:first-child > div:nth-child(3) nav a {
+    padding-left: 0.45rem !important;
+    padding-right: 0.45rem !important;
+  }
+
+  header button[aria-label$="Cart"] {
     width: 42px !important;
     height: 42px !important;
     min-width: 42px !important;
@@ -50,11 +105,11 @@
     position: relative !important;
   }
 
-  header button[aria-label="Open Instacart Express Cart"] > span:first-of-type {
+  header button[aria-label$="Cart"] > span:first-of-type {
     display: none !important;
   }
 
-  header button[aria-label="Open Instacart Express Cart"] > span:nth-of-type(2) {
+  header button[aria-label$="Cart"] > span:nth-of-type(2) {
     position: absolute !important;
     top: -7px !important;
     right: -7px !important;
@@ -65,6 +120,11 @@
     align-items: center !important;
     justify-content: center !important;
     border-radius: 9999px !important;
-    box-shadow: 0 0 0 2px currentColor;
+  }
+}
+
+@media (min-width: 1536px) {
+  header > div > div:first-child > div:first-child > div:nth-child(2) {
+    display: flex !important;
   }
 }
