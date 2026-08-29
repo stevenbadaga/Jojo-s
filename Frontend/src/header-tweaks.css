@@ -1,0 +1,70 @@
+/* Compact account + cart controls for the storefront header.
+   The profile dropdown stays fully functional, but the trigger is avatar-only. */
+
+@media (min-width: 1024px) {
+  /* The authenticated profile wrapper sits immediately before the cart button. */
+  header div.relative:has(+ button[aria-label="Open Instacart Express Cart"]) > button {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    padding: 0 !important;
+    border-radius: 9999px !important;
+    display: grid !important;
+    place-items: center !important;
+    flex-shrink: 0 !important;
+    background: transparent !important;
+  }
+
+  header div.relative:has(+ button[aria-label="Open Instacart Express Cart"]) > button > span:first-of-type {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    border-radius: 9999px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Hide the account name/email label and dropdown chevron from the trigger. */
+  header div.relative:has(+ button[aria-label="Open Instacart Express Cart"]) > button > span:nth-of-type(2),
+  header div.relative:has(+ button[aria-label="Open Instacart Express Cart"]) > button > svg {
+    display: none !important;
+  }
+
+  /* Never allow the cart control to be squeezed out of the header. */
+  header button[aria-label="Open Instacart Express Cart"] {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* On medium desktop widths use an icon-only cart with a count badge.
+   This keeps it visible even when navigation space is tight. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  header button[aria-label="Open Instacart Express Cart"] {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    position: relative !important;
+  }
+
+  header button[aria-label="Open Instacart Express Cart"] > span:first-of-type {
+    display: none !important;
+  }
+
+  header button[aria-label="Open Instacart Express Cart"] > span:nth-of-type(2) {
+    position: absolute !important;
+    top: -7px !important;
+    right: -7px !important;
+    min-width: 20px !important;
+    height: 20px !important;
+    padding: 0 5px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 0 0 2px currentColor;
+  }
+}
