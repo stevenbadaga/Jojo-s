@@ -1,14 +1,14 @@
 import { Link, useLocation } from 'react-router-dom'
-import { 
-  LayoutDashboard, 
-  Package, 
-  ShoppingBag, 
-  BarChart3, 
-  Users, 
-  X, 
+import {
+  BarChart3,
+  Home,
+  LayoutDashboard,
   Menu,
+  Package,
   Settings,
-  Home
+  ShoppingBag,
+  Users,
+  X,
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -21,36 +21,26 @@ const AdminSidebar = () => {
       name: 'Dashboard',
       icon: LayoutDashboard,
       path: '/admin',
-      color: 'text-blue-600 dark:text-blue-400',
-      bgColor: 'bg-blue-100 dark:bg-blue-900/30'
     },
     {
       name: 'Products',
       icon: Package,
       path: '/admin/products',
-      color: 'text-purple-600 dark:text-purple-400',
-      bgColor: 'bg-purple-100 dark:bg-purple-900/30'
     },
     {
       name: 'Orders',
       icon: ShoppingBag,
       path: '/admin/orders',
-      color: 'text-green-600 dark:text-green-400',
-      bgColor: 'bg-green-100 dark:bg-green-900/30'
     },
     {
       name: 'Analytics',
       icon: BarChart3,
       path: '/admin/analytics',
-      color: 'text-emerald-600 dark:text-emerald-400',
-      bgColor: 'bg-emerald-100 dark:bg-emerald-900/30'
     },
     {
       name: 'Customers',
       icon: Users,
       path: '/admin/customers',
-      color: 'text-indigo-600 dark:text-indigo-400',
-      bgColor: 'bg-indigo-100 dark:bg-indigo-900/30'
     },
   ]
 
@@ -63,106 +53,116 @@ const AdminSidebar = () => {
 
   return (
     <>
-      {/* Mobile Menu Button */}
       <button
-        onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-lg"
-        aria-label="Toggle menu"
+        type="button"
+        onClick={() => setIsMobileOpen((open) => !open)}
+        className="lg:hidden fixed top-4 left-4 z-50 w-10 h-10 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm flex items-center justify-center text-gray-700 dark:text-gray-200"
+        aria-label="Toggle admin navigation"
+        aria-expanded={isMobileOpen}
       >
-        {isMobileOpen ? (
-          <X className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-        ) : (
-          <Menu className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-        )}
+        {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
 
-      {/* Mobile Overlay */}
       {isMobileOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+        <button
+          type="button"
+          className="lg:hidden fixed inset-0 bg-gray-950/40 backdrop-blur-[1px] z-40"
           onClick={() => setIsMobileOpen(false)}
+          aria-label="Close admin navigation"
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`
-          fixed lg:static top-0 left-0 h-screen lg:h-auto z-40
-          w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800
-          transform transition-transform duration-300 ease-in-out
+          fixed lg:sticky top-0 left-0 z-40 h-screen w-[272px] flex-shrink-0
+          bg-white dark:bg-gray-900 border-r border-gray-200/90 dark:border-gray-800
+          transform transition-transform duration-300 ease-out
           ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-          flex flex-col shadow-xl lg:shadow-none flex-shrink-0
+          flex flex-col
         `}
       >
-        {/* Sidebar Header */}
-        <div className="p-6 border-b border-gray-200 dark:border-gray-800">
-          <Link to="/admin" className="flex items-center gap-3 group">
-            <div className="p-2 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg group-hover:scale-110 transition-transform">
-              <LayoutDashboard className="w-6 h-6 text-white" />
+        <div className="px-5 py-5 border-b border-gray-100 dark:border-gray-800">
+          <Link
+            to="/admin"
+            onClick={() => setIsMobileOpen(false)}
+            className="flex items-center gap-3 group"
+          >
+            <div className="w-10 h-10 rounded-xl bg-[#108910] text-white flex items-center justify-center shadow-sm group-hover:bg-[#0b731b] transition-colors">
+              <ShoppingBag className="w-5 h-5" strokeWidth={1.9} />
             </div>
-            <div>
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-                Admin Panel
-              </h2>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                MarketMet
+            <div className="min-w-0">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#108910] leading-none mb-1.5">
+                Store console
               </p>
+              <h2 className="text-lg font-black tracking-tight text-gray-950 dark:text-white leading-none">
+                MarketMet
+              </h2>
             </div>
           </Link>
         </div>
 
-        {/* Navigation Links */}
-        <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+        <div className="px-4 pt-6 pb-2">
+          <p className="px-3 text-[10px] font-black uppercase tracking-[0.18em] text-gray-400 dark:text-gray-600">
+            Management
+          </p>
+        </div>
+
+        <nav className="flex-1 px-3 pb-4 space-y-1 overflow-y-auto" aria-label="Admin navigation">
           {menuItems.map((item) => {
             const active = isActive(item.path)
             const Icon = item.icon
-            
+
             return (
               <Link
                 key={item.path}
                 to={item.path}
                 onClick={() => setIsMobileOpen(false)}
                 className={`
-                  flex items-center gap-3 px-4 py-3 rounded-lg transition-all
+                  relative flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm font-bold transition-colors
                   ${active
-                    ? `${item.bgColor} ${item.color} font-semibold shadow-sm`
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    ? 'bg-[#EAF7ED] dark:bg-[#108910]/15 text-[#0B6B22] dark:text-[#5FE56F]'
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-950 dark:hover:text-white'
                   }
                 `}
               >
-                <Icon className={`w-5 h-5 ${active ? item.color : ''}`} />
-                <span className="text-sm">{item.name}</span>
                 {active && (
-                  <div className={`ml-auto w-1.5 h-1.5 rounded-full ${item.color.replace('text-', 'bg-')}`} />
+                  <span className="absolute left-0 w-1 h-6 rounded-r-full bg-[#108910]" aria-hidden="true" />
                 )}
+                <Icon className="w-[18px] h-[18px] flex-shrink-0" strokeWidth={1.8} />
+                <span>{item.name}</span>
               </Link>
             )
           })}
         </nav>
 
-        {/* Sidebar Footer */}
-        <div className="p-4 border-t border-gray-200 dark:border-gray-800 space-y-2">
+        <div className="px-4 pb-4">
+          <div className="rounded-2xl bg-[#F7F9F8] dark:bg-gray-800/70 border border-gray-100 dark:border-gray-800 p-4">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#108910]" />
+              <p className="text-xs font-black text-gray-800 dark:text-gray-200">Store management</p>
+            </div>
+            <p className="text-[11px] leading-5 text-gray-500 dark:text-gray-400">
+              Review sales, orders, products and customers from one place.
+            </p>
+          </div>
+        </div>
+
+        <div className="p-3 border-t border-gray-100 dark:border-gray-800 space-y-1">
           <Link
             to="/profile"
-            className={`
-              flex items-center gap-3 px-4 py-3 rounded-lg transition-all
-              ${location.pathname === '/profile'
-                ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-semibold'
-                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
-              }
-            `}
             onClick={() => setIsMobileOpen(false)}
+            className="flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-950 dark:hover:text-white transition-colors"
           >
-            <Settings className="w-5 h-5" />
-            <span className="text-sm">Settings</span>
+            <Settings className="w-[18px] h-[18px]" strokeWidth={1.8} />
+            <span>Settings</span>
           </Link>
           <Link
             to="/"
-            className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
             onClick={() => setIsMobileOpen(false)}
+            className="flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-950 dark:hover:text-white transition-colors"
           >
-            <Home className="w-5 h-5" />
-            <span className="text-sm">Back to Store</span>
+            <Home className="w-[18px] h-[18px]" strokeWidth={1.8} />
+            <span>View storefront</span>
           </Link>
         </div>
       </aside>
