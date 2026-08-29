@@ -36,32 +36,22 @@ const setBackendStatus = (nextState) => {
     mergedState.lastSuccessAt !== backendStatus.lastSuccessAt ||
     mergedState.lastErrorAt !== backendStatus.lastErrorAt
 
-  if (!changed) {
-    return
-  }
+  if (!changed) return
 
   backendStatus = mergedState
   emitBackendStatus()
 }
 
 const markBackendReady = () => {
-  setBackendStatus({
-    state: 'ready',
-    lastSuccessAt: Date.now(),
-  })
+  setBackendStatus({ state: 'ready', lastSuccessAt: Date.now() })
 }
 
 const markBackendConnecting = () => {
-  setBackendStatus({
-    state: 'connecting',
-  })
+  setBackendStatus({ state: 'connecting' })
 }
 
 const markBackendOffline = () => {
-  setBackendStatus({
-    state: 'offline',
-    lastErrorAt: Date.now(),
-  })
+  setBackendStatus({ state: 'offline', lastErrorAt: Date.now() })
 }
 
 const wait = (delayMs) =>
@@ -70,14 +60,10 @@ const wait = (delayMs) =>
   })
 
 const logBackendWarningOnce = () => {
-  if (!import.meta.env.DEV) {
-    return
-  }
+  if (!import.meta.env.DEV) return
 
   const now = Date.now()
-  if (now - lastBackendWarningAt < BACKEND_WARNING_COOLDOWN_MS) {
-    return
-  }
+  if (now - lastBackendWarningAt < BACKEND_WARNING_COOLDOWN_MS) return
 
   lastBackendWarningAt = now
   console.warn(
@@ -95,13 +81,7 @@ export const subscribeToBackendStatus = (listener) => {
 }
 
 export const isBackendConnectionIssue = (error) => {
-  if (!error) {
-    return false
-  }
-
-  if (error.code === 'ERR_CANCELED') {
-    return false
-  }
+  if (!error || error.code === 'ERR_CANCELED') return false
 
   return (
     error.code === 'ERR_NETWORK' ||
@@ -139,7 +119,6 @@ api.interceptors.request.use(
     }
 
     config.__backendRetryCount = config.__backendRetryCount || 0
-
     return config
   },
   (error) => Promise.reject(error)
@@ -186,6 +165,55 @@ api.interceptors.response.use(
   }
 )
 
+const uploadImageViaCloudinary = async (file, fallbackPath) => {
+  try {
+    const signatureResponse = await api.post('/upload-signature')
+    const { cloudName, apiKey, timestamp, folder, signature } = signatureResponse.data || {}
+
+    if (!cloudName || !apiKey || !timestamp || !folder || !signature) {
+      throw new Error('Cloudinary upload signature is incomplete')
+    }
+
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('api_key', apiKey)
+    formData.append('timestamp', String(timestamp))
+    formData.append('folder', folder)
+    formData.append('signature', signature)
+
+    const response = await axios.post(
+      `https://api.cloudinary.com/v1_1/${encodeURIComponent(cloudName)}/image/upload`,
+      formData,
+      {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        timeout: 120000,
+      }
+    )
+
+    return {
+      data: {
+        url: response.data.secure_url,
+        publicId: response.data.public_id,
+        width: response.data.width,
+        height: response.data.height,
+        bytes: response.data.bytes,
+      },
+    }
+  } catch (signatureError) {
+    const status = signatureError?.response?.status
+    if (status !== 404 && status !== 405) {
+      throw signatureError
+    }
+
+    const fallbackForm = new FormData()
+    fallbackForm.append('image', file)
+    return api.post(fallbackPath, fallbackForm, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      timeout: 120000,
+    })
+  }
+}
+
 export const authAPI = {
   register: (data) => api.post('/register', data),
   login: (data) => api.post('/login', data),
@@ -205,13 +233,7 @@ export const productsAPI = {
   updateProduct: (id, data) => api.put(`/products/${id}`, data),
   toggleActive: (id, active) => api.patch(`/products/${id}/active`, { active }),
   deleteProduct: (id) => api.delete(`/products/${id}`),
-  uploadImage: (file) => {
-    const formData = new FormData()
-    formData.append('image', file)
-    return api.post('/upload-image', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
-  },
+  uploadImage: (file) => uploadImageViaCloudinary(file, '/upload-image'),
 }
 
 export const ordersAPI = {
@@ -237,13 +259,7 @@ export const userAPI = {
   changePassword: (currentPassword, newPassword) =>
     api.post('/users/change-password', { currentPassword, newPassword }),
   updateTwoFactor: (enabled) => api.put('/users/two-factor', { enabled }),
-  uploadProfileImage: (file) => {
-    const formData = new FormData()
-    formData.append('image', file)
-    return api.post('/users/profile-image', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
-  },
+  uploadProfileImage: (file) => uploadImageViaCloudinary(file, '/users/profile-image'),
   deactivateAccount: () => api.post('/users/deactivate'),
   deleteAccount: () => api.delete('/users/me'),
   getAllUsers: () => api.get('/users/all'),
