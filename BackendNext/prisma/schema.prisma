@@ -30,6 +30,7 @@ model User {
   reviews          Review[]
   wishlist         Wishlist[]
   tokens           AuthToken[]
+  alerts           AppNotification[]
 
   @@map("users")
 }
@@ -77,47 +78,69 @@ model UserNotifications {
 }
 
 model Product {
-  id            Int         @id @default(autoincrement())
-  name          String
-  description   String?     @db.Text
-  category      String?
-  price         Int
-  image         String?
-  inStock       Boolean     @default(true) @map("in_stock")
-  isPromo       Boolean     @default(false) @map("is_promo")
-  originalPrice Int?        @map("original_price")
-  discount      Int?
-  active        Boolean     @default(true)
-  createdAt     DateTime    @default(now()) @map("created_at")
-  updatedAt     DateTime    @updatedAt @map("updated_at")
-  orderItems    OrderItem[]
-  reviews       Review[]
-  wishlistedBy  Wishlist[]
+  id                Int             @id @default(autoincrement())
+  name              String
+  description       String?         @db.Text
+  category          String?
+  sku               String?         @unique
+  unit              String          @default("item")
+  price             Int
+  image             String?
+  inStock           Boolean         @default(true) @map("in_stock")
+  stockQuantity     Int             @default(0) @map("stock_quantity")
+  lowStockThreshold Int             @default(5) @map("low_stock_threshold")
+  isPromo           Boolean         @default(false) @map("is_promo")
+  originalPrice     Int?            @map("original_price")
+  discount          Int?
+  active            Boolean         @default(true)
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
+  orderItems        OrderItem[]
+  reviews           Review[]
+  wishlistedBy      Wishlist[]
+  stockMovements    StockMovement[]
 
+  @@index([category])
+  @@index([active, stockQuantity])
   @@map("products")
 }
 
 model Order {
-  id               Int         @id @default(autoincrement())
-  orderNumber      Int?        @map("order_number")
-  customerName     String?     @map("customer_name")
-  customerPhone    String      @map("customer_phone")
-  channel          String?
-  subtotal         Int
-  deliveryOption   String?     @map("delivery_option")
-  deliveryFee      Int?        @map("delivery_fee")
-  deliveryLocation String?     @map("delivery_location") @db.Text
-  userId           Int?        @map("user_id")
-  status           String      @default("PENDING")
-  trackingNumber   String?     @map("tracking_number")
-  shippedAt        DateTime?   @map("shipped_at")
-  deliveredAt      DateTime?   @map("delivered_at")
-  createdAt        DateTime    @default(now()) @map("created_at")
-  user             User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
-  items            OrderItem[]
+  id                 Int               @id @default(autoincrement())
+  orderNumber        Int?              @map("order_number")
+  customerName       String?           @map("customer_name")
+  customerPhone      String            @map("customer_phone")
+  channel            String?
+  subtotal           Int
+  deliveryOption     String?           @map("delivery_option")
+  deliveryFee        Int?              @map("delivery_fee")
+  deliveryLocation   String?           @map("delivery_location") @db.Text
+  userId             Int?              @map("user_id")
+  status             String            @default("PENDING")
+  trackingNumber     String?           @map("tracking_number")
+  paymentStatus      String            @default("UNPAID") @map("payment_status")
+  paymentMethod      String?           @map("payment_method")
+  paymentReference   String?           @map("payment_reference")
+  paymentNotes       String?           @map("payment_notes") @db.Text
+  paidAt             DateTime?         @map("paid_at")
+  confirmedAt        DateTime?         @map("confirmed_at")
+  pickingAt          DateTime?         @map("picking_at")
+  packedAt           DateTime?         @map("packed_at")
+  outForDeliveryAt   DateTime?         @map("out_for_delivery_at")
+  shippedAt          DateTime?         @map("shipped_at")
+  deliveredAt        DateTime?         @map("delivered_at")
+  cancelledAt        DateTime?         @map("cancelled_at")
+  createdAt          DateTime          @default(now()) @map("created_at")
+  updatedAt          DateTime          @updatedAt @map("updated_at")
+  user               User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  items              OrderItem[]
+  stockMovements     StockMovement[]
+  alerts             AppNotification[]
 
   @@index([userId])
   @@index([createdAt])
+  @@index([status])
+  @@index([paymentStatus])
   @@map("orders")
 }
 
@@ -133,6 +156,61 @@ model OrderItem {
   @@index([orderId])
   @@index([productId])
   @@map("order_items")
+}
+
+model StockMovement {
+  id             Int      @id @default(autoincrement())
+  productId      Int      @map("product_id")
+  orderId        Int?     @map("order_id")
+  type           String
+  change         Int
+  quantityBefore Int      @map("quantity_before")
+  quantityAfter  Int      @map("quantity_after")
+  note           String?  @db.Text
+  createdAt      DateTime @default(now()) @map("created_at")
+  product        Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  order          Order?   @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@index([productId, createdAt])
+  @@index([orderId])
+  @@map("stock_movements")
+}
+
+model InsightPost {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  title       String
+  excerpt     String?   @db.Text
+  content     String    @db.Text
+  category    String?
+  image       String?
+  author      String?   @default("MarketMet Editorial")
+  featured    Boolean   @default(false)
+  published   Boolean   @default(true)
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  @@index([published, publishedAt])
+  @@index([featured])
+  @@map("insight_posts")
+}
+
+model AppNotification {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  orderId   Int?     @map("order_id")
+  type      String   @default("ORDER")
+  title     String
+  message   String   @db.Text
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order     Order?   @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt])
+  @@index([orderId])
+  @@map("app_notifications")
 }
 
 model Review {
