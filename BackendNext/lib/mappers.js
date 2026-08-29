@@ -20,14 +20,21 @@ export function userJson(user) {
 
 export function productJson(product) {
   if (!product) return null
+  const stockQuantity = Math.max(0, product.stockQuantity ?? 0)
+  const lowStockThreshold = Math.max(0, product.lowStockThreshold ?? 5)
   return {
     id: product.id,
     name: product.name,
     description: product.description,
     category: product.category,
+    sku: product.sku,
+    unit: product.unit || 'item',
     price: product.price,
     image: product.image,
-    in_stock: product.inStock,
+    in_stock: Boolean(product.inStock && stockQuantity > 0),
+    stock_quantity: stockQuantity,
+    low_stock_threshold: lowStockThreshold,
+    stock_status: stockQuantity <= 0 ? 'OUT_OF_STOCK' : stockQuantity <= lowStockThreshold ? 'LOW_STOCK' : 'HEALTHY',
     is_promo: product.isPromo,
     original_price: product.originalPrice,
     discount: product.discount,
@@ -58,6 +65,8 @@ export function orderItemJson(item) {
     productId: item.productId,
     quantity: item.quantity,
     unitPrice: item.unitPrice,
+    lineTotal: item.quantity * item.unitPrice,
+    product: item.product ? productJson(item.product) : undefined,
   }
 }
 
@@ -73,12 +82,24 @@ export function orderJson(order) {
     delivery_option: order.deliveryOption,
     delivery_fee: order.deliveryFee,
     delivery_location: order.deliveryLocation,
+    total: order.subtotal + (order.deliveryFee || 0),
     user_id: order.userId,
     status: order.status,
     tracking_number: order.trackingNumber,
+    payment_status: order.paymentStatus || 'UNPAID',
+    payment_method: order.paymentMethod,
+    payment_reference: order.paymentReference,
+    payment_notes: order.paymentNotes,
+    paid_at: order.paidAt,
+    confirmed_at: order.confirmedAt,
+    picking_at: order.pickingAt,
+    packed_at: order.packedAt,
+    out_for_delivery_at: order.outForDeliveryAt,
     shipped_at: order.shippedAt,
     delivered_at: order.deliveredAt,
+    cancelled_at: order.cancelledAt,
     created_at: order.createdAt,
+    updated_at: order.updatedAt,
     items: Array.isArray(order.items) ? order.items.map(orderItemJson) : undefined,
   }
 }
