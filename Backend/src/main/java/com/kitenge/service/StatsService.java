@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +34,9 @@ public class StatsService {
         // Orders
         List<Order> allOrders = orderRepository.findAll();
         long totalOrders = allOrders.size();
+        long completedOrders = allOrders.stream()
+                .filter(o -> "DELIVERED".equalsIgnoreCase(o.getStatus()))
+                .count();
         
         // Revenue calculations
         long totalRevenue = allOrders.stream()
@@ -69,12 +72,13 @@ public class StatsService {
         List<User> allUsers = userRepository.findAll();
         long totalCustomers = allUsers.size();
         
-        // Orders by status (if status field exists)
-        Map<String, Long> ordersByStatus = new HashMap<>();
-        ordersByStatus.put("all", (long) allOrders.size());
+        // Orders by status
+        Map<String, Long> ordersByStatus = new LinkedHashMap<>();
+        ordersByStatus.put("all", totalOrders);
+        ordersByStatus.put("completed", completedOrders);
         
-        // Revenue by month (last 6 months)
-        Map<String, Long> revenueByMonth = new HashMap<>();
+        // Revenue by month (last 6 months, oldest to newest)
+        Map<String, Long> revenueByMonth = new LinkedHashMap<>();
         for (int i = 5; i >= 0; i--) {
             LocalDateTime monthStart = now.minusMonths(i).withDayOfMonth(1)
                     .withHour(0).withMinute(0).withSecond(0);
@@ -96,6 +100,7 @@ public class StatsService {
         stats.setTotalProducts(totalProducts);
         stats.setActiveProducts(activeProducts);
         stats.setTotalOrders(totalOrders);
+        stats.setCompletedOrders(completedOrders);
         stats.setTotalRevenue(totalRevenue);
         stats.setMonthlyRevenue(monthlyRevenue);
         stats.setWeeklyRevenue(weeklyRevenue);
@@ -107,4 +112,3 @@ public class StatsService {
         return stats;
     }
 }
-
