@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import './header-tweaks.css'
 import './admin-premium.css'
+import './products-polish.css'
 import { installBrandCleanup } from './utils/brandCleanup.js'
 
 installBrandCleanup()
