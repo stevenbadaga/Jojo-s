@@ -6,6 +6,7 @@ import BackToTop from './BackToTop'
 import ErrorBoundary from './ErrorBoundary'
 import MobileBottomNav from './MobileBottomNav'
 import BackendStatusBanner from './BackendStatusBanner'
+import ThemeSwitcher from './ThemeSwitcher'
 
 const Layout = () => {
   const location = useLocation()
@@ -30,6 +31,9 @@ const Layout = () => {
           <Header />
         </ErrorBoundary>
       )}
+      <ErrorBoundary>
+        <ThemeSwitcher />
+      </ErrorBoundary>
       <ErrorBoundary>
         <BackendStatusBanner />
       </ErrorBoundary>
