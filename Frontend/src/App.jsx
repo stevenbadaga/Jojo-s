@@ -22,6 +22,7 @@ const Profile = lazy(() => import('./pages/Profile'))
 const Wishlist = lazy(() => import('./pages/Wishlist'))
 const Products = lazy(() => import('./pages/Products'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
+const Insights = lazy(() => import('./pages/Insights'))
 const About = lazy(() => import('./pages/About'))
 const Contact = lazy(() => import('./pages/Contact'))
 const TrackOrder = lazy(() => import('./pages/TrackOrder'))
@@ -34,7 +35,6 @@ const AdminOrders = lazy(() => import('./pages/Admin/Orders'))
 const AdminAnalytics = lazy(() => import('./pages/Admin/Analytics'))
 const AdminCustomers = lazy(() => import('./pages/Admin/Customers'))
 
-// Loading fallback component
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
     <LoadingSpinner />
@@ -66,6 +66,7 @@ function App() {
                       <Route path="resend-verification" element={<ResendVerification />} />
                       <Route path="products" element={<Products />} />
                       <Route path="products/:id" element={<ProductDetail />} />
+                      <Route path="insights" element={<Insights />} />
                       <Route path="about" element={<About />} />
                       <Route path="contact" element={<Contact />} />
                       <Route path="track-order" element={<TrackOrder />} />
@@ -142,4 +143,3 @@ function App() {
 }
 
 export default App
-
