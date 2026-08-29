@@ -1,0 +1,82 @@
+/* Premium produce-led hero treatment */
+.marketmet-produce-hero {
+  isolation: isolate;
+}
+
+.marketmet-produce-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 76% 26%, rgba(52, 211, 153, 0.12), transparent 28%),
+    radial-gradient(circle at 84% 70%, rgba(255, 107, 0, 0.08), transparent 24%);
+  z-index: 0;
+}
+
+.marketmet-featured-offer-card {
+  align-items: stretch !important;
+  gap: 1.1rem !important;
+}
+
+.marketmet-featured-offer-media {
+  min-width: 0;
+}
+
+.marketmet-featured-produce-image {
+  width: 11rem !important;
+  height: 8.5rem !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: 1.15rem !important;
+  border-width: 1px !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.24) !important;
+}
+
+.marketmet-produce-showcase > div:last-child {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.12)),
+    rgba(0, 0, 0, 0.18) !important;
+  border-color: rgba(255,255,255,0.16) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 24px 70px rgba(0,0,0,0.18) !important;
+}
+
+.marketmet-produce-showcase img {
+  filter: saturate(1.04) contrast(1.02);
+}
+
+.marketmet-produce-showcase .group:hover img {
+  filter: saturate(1.1) contrast(1.04);
+}
+
+@media (max-width: 1023px) {
+  .marketmet-produce-hero {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  .marketmet-produce-showcase {
+    padding-top: .5rem !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .marketmet-produce-hero {
+    padding-top: 1.75rem !important;
+    padding-bottom: 1.75rem !important;
+  }
+
+  .marketmet-produce-showcase > div:first-child > span:last-child {
+    display: none;
+  }
+
+  .marketmet-produce-showcase > div:last-child {
+    height: 13.5rem !important;
+    border-radius: 1.35rem !important;
+  }
+
+  .marketmet-produce-showcase .group {
+    border-radius: 1rem !important;
+    padding: .35rem !important;
+  }
+}
