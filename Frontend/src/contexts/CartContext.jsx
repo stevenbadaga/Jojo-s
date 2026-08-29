@@ -1,6 +1,22 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 const CartContext = createContext()
+const CART_STORAGE_KEY = 'kb_cart'
+
+const readStoredCart = () => {
+  if (typeof window === 'undefined') return []
+
+  try {
+    const saved = window.localStorage.getItem(CART_STORAGE_KEY)
+    if (!saved) return []
+
+    const parsed = JSON.parse(saved)
+    return Array.isArray(parsed) ? parsed : []
+  } catch (error) {
+    console.error('Failed to load cart:', error)
+    return []
+  }
+}
 
 export const useCart = () => {
   const context = useContext(CartContext)
@@ -11,51 +27,47 @@ export const useCart = () => {
 }
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([])
+  // Read localStorage during initialization so the first render never overwrites a saved cart.
+  const [cart, setCart] = useState(readStoredCart)
 
   useEffect(() => {
-    loadCart()
-  }, [])
-
-  useEffect(() => {
-    saveCart()
-  }, [cart])
-
-  const loadCart = () => {
     try {
-      const saved = localStorage.getItem('kb_cart')
-      if (saved) {
-        setCart(JSON.parse(saved))
-      }
-    } catch (error) {
-      console.error('Failed to load cart:', error)
-    }
-  }
-
-  const saveCart = () => {
-    try {
-      localStorage.setItem('kb_cart', JSON.stringify(cart))
+      window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart))
     } catch (error) {
       console.error('Failed to save cart:', error)
     }
-  }
+  }, [cart])
+
+  // Keep the cart synchronized when the store is open in more than one tab/window.
+  useEffect(() => {
+    const handleStorage = (event) => {
+      if (event.key !== CART_STORAGE_KEY) return
+
+      try {
+        const nextCart = event.newValue ? JSON.parse(event.newValue) : []
+        setCart(Array.isArray(nextCart) ? nextCart : [])
+      } catch (error) {
+        console.error('Failed to sync cart:', error)
+      }
+    }
+
+    window.addEventListener('storage', handleStorage)
+    return () => window.removeEventListener('storage', handleStorage)
+  }, [])
 
   const addToCart = (product) => {
-    console.log('addToCart called with:', product)
     setCart((prevCart) => {
       const existing = prevCart.find((item) => item.id === product.id)
+
       if (existing) {
-        const updated = prevCart.map((item) =>
+        return prevCart.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: Number(item.quantity || 0) + 1 }
             : item
         )
-        console.log('Updated cart (existing item):', updated)
-        return updated
       }
-      const newCart = [...prevCart, { ...product, quantity: 1 }]
-      console.log('Updated cart (new item):', newCart)
-      return newCart
+
+      return [...prevCart, { ...product, quantity: 1 }]
     })
   }
 
@@ -68,6 +80,7 @@ export const CartProvider = ({ children }) => {
       removeFromCart(productId)
       return
     }
+
     setCart((prevCart) =>
       prevCart.map((item) =>
         item.id === productId ? { ...item, quantity } : item
@@ -80,11 +93,14 @@ export const CartProvider = ({ children }) => {
   }
 
   const getCartTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0)
+    return cart.reduce(
+      (total, item) => total + Number(item.price || 0) * Number(item.quantity || 0),
+      0
+    )
   }
 
   const getCartCount = () => {
-    return cart.reduce((count, item) => count + item.quantity, 0)
+    return cart.reduce((count, item) => count + Number(item.quantity || 0), 0)
   }
 
   const value = {
