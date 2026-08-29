@@ -11,7 +11,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.9,
     reviewsCount: 48,
-    image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1751200270667-cb13feeac24c?auto=format&fit=crop&w=1200&q=85'
   },
   {
     id: 102,
@@ -25,7 +25,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.8,
     reviewsCount: 62,
-    image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=1000&q=85'
   },
   {
     id: 103,
@@ -37,7 +37,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.7,
     reviewsCount: 31,
-    image: 'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1709425463887-6978b26de609?auto=format&fit=crop&w=1200&q=85'
   },
   {
     id: 104,
@@ -49,7 +49,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.9,
     reviewsCount: 112,
-    image: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=900&q=85'
   },
   {
     id: 105,
@@ -63,7 +63,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 5.0,
     reviewsCount: 89,
-    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85'
   },
   {
     id: 106,
@@ -75,7 +75,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.9,
     reviewsCount: 74,
-    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=900&q=85'
   },
   {
     id: 107,
@@ -87,7 +87,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.9,
     reviewsCount: 95,
-    image: 'https://images.unsplash.com/photo-1516448620398-c5f44bf9f441?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1516448620398-c5f44bf9f441?auto=format&fit=crop&w=900&q=85'
   },
   {
     id: 108,
@@ -101,7 +101,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.8,
     reviewsCount: 42,
-    image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1739488447641-05abf21e933f?auto=format&fit=crop&w=1200&q=85'
   },
   {
     id: 109,
@@ -113,7 +113,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.7,
     reviewsCount: 56,
-    image: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=900&q=85'
   },
   {
     id: 110,
@@ -125,7 +125,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.8,
     reviewsCount: 39,
-    image: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1709425463887-6978b26de609?auto=format&fit=crop&w=1200&q=85'
   },
   {
     id: 111,
@@ -139,7 +139,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.9,
     reviewsCount: 83,
-    image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1764745223955-b87cd6c0fecf?auto=format&fit=crop&w=1000&q=85'
   },
   {
     id: 112,
@@ -151,7 +151,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.9,
     reviewsCount: 67,
-    image: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=800&q=80'
+    image: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=900&q=85'
   }
 ]
 
