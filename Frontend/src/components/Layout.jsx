@@ -7,58 +7,25 @@ import ErrorBoundary from './ErrorBoundary'
 import MobileBottomNav from './MobileBottomNav'
 import BackendStatusBanner from './BackendStatusBanner'
 import ThemeSwitcher from './ThemeSwitcher'
+import PWAInstallPrompt from './PWAInstallPrompt'
 
 const Layout = () => {
   const location = useLocation()
   const isAdminRoute = location.pathname.startsWith('/admin')
-  const authRoutes = [
-    '/login',
-    '/register',
-    '/forgot-password',
-    '/reset-password',
-    '/verify-email',
-    '/resend-verification',
-  ]
-  const isAuthRoute = authRoutes.some(
-    (route) => location.pathname === route || location.pathname.startsWith(`${route}/`)
-  )
+  const authRoutes = ['/login', '/register', '/forgot-password', '/reset-password', '/verify-email', '/resend-verification']
+  const isAuthRoute = authRoutes.some((route) => location.pathname === route || location.pathname.startsWith(`${route}/`))
   const showStoreChrome = !isAdminRoute
 
   return (
     <div className="min-h-screen bg-white dark:bg-black flex flex-col">
-      {showStoreChrome && (
-        <ErrorBoundary>
-          <Header />
-        </ErrorBoundary>
-      )}
-      <ErrorBoundary>
-        <ThemeSwitcher />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <BackendStatusBanner />
-      </ErrorBoundary>
-      <main className={`flex-grow ${showStoreChrome && !isAuthRoute ? 'pb-24 lg:pb-0' : ''}`}>
-        <ErrorBoundary>
-          <Outlet />
-        </ErrorBoundary>
-      </main>
-      {showStoreChrome && (
-        <>
-          <ErrorBoundary>
-            <Footer />
-          </ErrorBoundary>
-          <ErrorBoundary>
-            <CartDrawer />
-          </ErrorBoundary>
-          <ErrorBoundary>
-            <MobileBottomNav />
-          </ErrorBoundary>
-          <BackToTop />
-        </>
-      )}
+      {showStoreChrome && <ErrorBoundary><Header /></ErrorBoundary>}
+      <ErrorBoundary><ThemeSwitcher /></ErrorBoundary>
+      <ErrorBoundary><BackendStatusBanner /></ErrorBoundary>
+      <main className={`flex-grow ${showStoreChrome && !isAuthRoute ? 'pb-24 lg:pb-0' : ''}`}><ErrorBoundary><Outlet /></ErrorBoundary></main>
+      {showStoreChrome && <><ErrorBoundary><Footer /></ErrorBoundary><ErrorBoundary><CartDrawer /></ErrorBoundary><ErrorBoundary><MobileBottomNav /></ErrorBoundary><BackToTop /></>}
+      {!isAdminRoute && <ErrorBoundary><PWAInstallPrompt /></ErrorBoundary>}
     </div>
   )
 }
 
 export default Layout
-
