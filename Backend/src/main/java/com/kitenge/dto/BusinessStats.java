@@ -13,6 +13,7 @@ public class BusinessStats {
     private Long totalProducts;
     private Long activeProducts;
     private Long totalOrders;
+    private Long completedOrders;
     private Long totalRevenue;
     private Long monthlyRevenue;
     private Long weeklyRevenue;
@@ -21,4 +22,3 @@ public class BusinessStats {
     private Map<String, Long> ordersByStatus;
     private Map<String, Long> revenueByMonth;
 }
-
