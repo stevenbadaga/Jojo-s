@@ -1,0 +1,238 @@
+/* Shared MarketMet admin console visual system.
+   Keeps Products, Orders, Analytics and Customers aligned with the premium dashboard. */
+
+.admin-sidebar + * {
+  min-width: 0;
+  background: #f5f6f7;
+}
+
+.admin-sidebar + * h1 {
+  font-weight: 900 !important;
+  letter-spacing: -0.025em;
+}
+
+.admin-sidebar + * h2,
+.admin-sidebar + * h3 {
+  letter-spacing: -0.015em;
+}
+
+.admin-sidebar + * .card {
+  border-radius: 1rem !important;
+  border: 1px solid #e5e7eb !important;
+  background: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.04) !important;
+  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease !important;
+}
+
+.admin-sidebar + * .card:hover {
+  transform: translateY(-1px);
+  border-color: #d1d5db !important;
+  box-shadow: 0 16px 36px rgba(16, 24, 40, 0.07) !important;
+}
+
+.admin-sidebar + * .input-field,
+.admin-sidebar + * input:not([type='checkbox']):not([type='radio']),
+.admin-sidebar + * select,
+.admin-sidebar + * textarea {
+  border-radius: 0.75rem !important;
+  border-width: 1px !important;
+  box-shadow: none !important;
+}
+
+.admin-sidebar + * .btn-primary {
+  min-height: 42px;
+  border-radius: 0.75rem !important;
+  background: #108910 !important;
+  background-image: none !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  font-size: 0.8125rem !important;
+  font-weight: 800 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.admin-sidebar + * .btn-primary:hover {
+  background: #0b731b !important;
+  transform: none !important;
+}
+
+.admin-sidebar + * table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin-sidebar + * thead th {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.admin-sidebar + * tbody tr {
+  transition: background-color 160ms ease;
+}
+
+.admin-sidebar + * tbody td {
+  vertical-align: middle;
+}
+
+/* TRUE BLACK ADMIN THEME */
+.dark .admin-sidebar + * {
+  background: #000000 !important;
+  color: #ffffff;
+}
+
+.dark .admin-sidebar + * .card,
+.dark .admin-sidebar + * [class~='bg-white'],
+.dark .admin-sidebar + * [class*='dark:bg-gray-900'],
+.dark .admin-sidebar + * [class*='dark:bg-gray-800'] {
+  background-color: #080808 !important;
+  background-image: none !important;
+  border-color: rgba(255, 255, 255, 0.09) !important;
+  box-shadow: none !important;
+}
+
+.dark .admin-sidebar + * .card:hover,
+.dark .admin-sidebar + * [class~='bg-white']:hover {
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  box-shadow: none !important;
+}
+
+/* Strip old colorful metric gradients while retaining semantic badge colors elsewhere. */
+.dark .admin-sidebar + * .card[class*='bg-gradient'],
+.dark .admin-sidebar + * .card[class*='from-'],
+.dark .admin-sidebar + * .card[class*='to-'] {
+  background: #080808 !important;
+  background-image: none !important;
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+
+.dark .admin-sidebar + * .card > .flex > div[class*='bg-indigo-'],
+.dark .admin-sidebar + * .card > .flex > div[class*='bg-pink-'],
+.dark .admin-sidebar + * .card > .flex > div[class*='bg-purple-'],
+.dark .admin-sidebar + * .card > .flex > div[class*='bg-blue-'],
+.dark .admin-sidebar + * .card > .flex > div[class*='bg-green-'],
+.dark .admin-sidebar + * .card > .flex > div[class*='bg-accent'] {
+  background: rgba(49, 197, 72, 0.1) !important;
+  color: #5fe56f !important;
+  border: 1px solid rgba(49, 197, 72, 0.22) !important;
+}
+
+.dark .admin-sidebar + * [class*='text-gray-900'],
+.dark .admin-sidebar + * [class*='text-gray-950'],
+.dark .admin-sidebar + * [class*='dark:text-white'] {
+  color: #ffffff !important;
+}
+
+.dark .admin-sidebar + * [class*='text-gray-600'],
+.dark .admin-sidebar + * [class*='text-gray-500'],
+.dark .admin-sidebar + * [class*='dark:text-gray-400'] {
+  color: #a3a3a3 !important;
+}
+
+.dark .admin-sidebar + * [class*='border-gray-100'],
+.dark .admin-sidebar + * [class*='border-gray-200'],
+.dark .admin-sidebar + * [class*='border-gray-300'],
+.dark .admin-sidebar + * [class*='dark:border-gray-700'],
+.dark .admin-sidebar + * [class*='dark:border-gray-800'] {
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+
+.dark .admin-sidebar + * .input-field,
+.dark .admin-sidebar + * input:not([type='checkbox']):not([type='radio']),
+.dark .admin-sidebar + * select,
+.dark .admin-sidebar + * textarea {
+  background: #0d0d0d !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.dark .admin-sidebar + * input::placeholder,
+.dark .admin-sidebar + * textarea::placeholder {
+  color: #666666 !important;
+}
+
+.dark .admin-sidebar + * .input-field:hover,
+.dark .admin-sidebar + * input:not([type='checkbox']):not([type='radio']):hover,
+.dark .admin-sidebar + * select:hover,
+.dark .admin-sidebar + * textarea:hover {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark .admin-sidebar + * .input-field:focus,
+.dark .admin-sidebar + * input:not([type='checkbox']):not([type='radio']):focus,
+.dark .admin-sidebar + * select:focus,
+.dark .admin-sidebar + * textarea:focus {
+  border-color: #31c548 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(49, 197, 72, 0.1) !important;
+}
+
+.dark .admin-sidebar + * table {
+  color: #e5e5e5;
+}
+
+.dark .admin-sidebar + * thead {
+  background: #0d0d0d !important;
+}
+
+.dark .admin-sidebar + * thead th {
+  color: #737373 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .admin-sidebar + * tbody tr {
+  background: #080808 !important;
+}
+
+.dark .admin-sidebar + * tbody tr:hover {
+  background: #0d0d0d !important;
+}
+
+.dark .admin-sidebar + * tbody td {
+  border-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* Modals and detail drawers */
+.dark .admin-sidebar + * [class*='fixed'][class*='inset-0'] > [class*='bg-white'],
+.dark .admin-sidebar + * [class*='fixed'][class*='inset-0'] [class*='dark:bg-gray-900'] {
+  background: #080808 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Make toolbar pills/actions match Dashboard controls. */
+.dark .admin-sidebar + * a[class*='rounded-full'][class*='bg-white'],
+.dark .admin-sidebar + * button[class*='rounded-full'][class*='bg-white'] {
+  background: #080808 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #d4d4d4 !important;
+}
+
+/* Products: consistent catalog cards and image framing. */
+.dark .admin-sidebar + * img[class*='object-cover'] {
+  background: #111111;
+}
+
+/* Keep mobile admin surfaces premium too. */
+@media (max-width: 1023px) {
+  .admin-sidebar + * {
+    width: 100%;
+  }
+
+  .admin-sidebar + * > div {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .admin-sidebar + * > div:first-child {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
