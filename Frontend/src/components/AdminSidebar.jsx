@@ -52,7 +52,7 @@ const AdminSidebar = () => {
 
       <aside
         className={`
-          fixed left-0 top-0 z-40 flex h-screen w-[264px] flex-shrink-0 flex-col
+          admin-sidebar fixed left-0 top-0 z-40 flex h-screen w-[264px] flex-shrink-0 flex-col
           border-r border-gray-200 bg-white transition-transform duration-300 ease-out
           dark:border-white/10 dark:bg-black lg:sticky
           ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
