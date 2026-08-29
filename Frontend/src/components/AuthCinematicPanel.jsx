@@ -1,20 +1,19 @@
 import { Check, ShieldCheck, ShoppingBag, Sparkles } from 'lucide-react'
 
-const AUTH_VIDEO = 'https://cdn.coverr.co/videos/coverr-woman-shopping-for-fresh-produce/1080p.mp4'
-const AUTH_POSTER = 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1800&q=86'
+const AUTH_POSTER = 'https://images.pexels.com/photos/5951182/pexels-photo-5951182.jpeg?auto=compress&cs=tinysrgb&w=1920'
 
 const content = {
   login: {
     kicker: 'MarketMet member access',
-    title: 'Fresh shopping, right where you left it.',
-    body: 'Sign in to manage saved items, follow orders and move through checkout faster.',
+    title: 'Your groceries, ready when you are.',
+    body: 'Sign in to pick up where you left off with saved favourites, order updates and a faster checkout.',
     points: ['Saved favourites', 'Live order updates', 'Secure checkout'],
   },
   register: {
     kicker: 'Join MarketMet',
-    title: 'Your fresh-market account starts here.',
-    body: 'Create one account for favourites, order history, delivery updates and a faster shopping experience.',
-    points: ['Personalised shopping', 'Order tracking', 'Member convenience'],
+    title: 'A fresher way to shop starts here.',
+    body: 'Create one account for favourites, order history, delivery updates and a smoother checkout experience.',
+    points: ['Personalised shopping', 'Order tracking', 'Faster checkout'],
   },
 }
 
@@ -22,25 +21,17 @@ const AuthCinematicPanel = ({ mode = 'login' }) => {
   const copy = content[mode] || content.login
 
   return (
-    <aside className="marketmet-auth-visual" aria-label="MarketMet fresh grocery experience">
-      <img className="marketmet-auth-poster" src={AUTH_POSTER} alt="Fresh vegetables displayed in a supermarket" />
-      <video
-        className="marketmet-auth-video"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster={AUTH_POSTER}
-        aria-hidden="true"
-      >
-        <source src={AUTH_VIDEO} type="video/mp4" />
-      </video>
+    <aside className="marketmet-auth-visual" aria-label="MarketMet supermarket experience">
+      <img
+        className="marketmet-auth-poster"
+        src={AUTH_POSTER}
+        alt="Fully stocked supermarket aisle with organized grocery shelves"
+      />
       <div className="marketmet-auth-scrim" />
 
       <div className="marketmet-auth-visual-topline">
         <span><ShoppingBag className="w-4 h-4" /> MarketMet</span>
-        <span><ShieldCheck className="w-4 h-4" /> Secure access</span>
+        <span><ShieldCheck className="w-4 h-4" /> Private & secure</span>
       </div>
 
       <div className="marketmet-auth-visual-copy">
