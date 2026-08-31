@@ -102,18 +102,39 @@ const CartDrawer = () => {
       const serverDeliveryFee = Number(createdOrder?.delivery_fee ?? deliveryFee)
       const serverTotal = Number(createdOrder?.total ?? (serverSubtotal + serverDeliveryFee))
       const number = createdOrder?.order_number ?? createdOrder?.orderNumber ?? createdOrder?.id
-      const placedAt = new Intl.DateTimeFormat('en-RW', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
-      const deliveryLabel = deliveryOption === 'pickup' ? 'Store pickup' : deliveryOption === 'kigali' ? 'Kigali delivery' : 'Upcountry delivery'
-      const lines = ['🛒 *MARKETMET*', '*ORDER CONFIRMATION REQUEST*', '━━━━━━━━━━━━━━━━━━━━', '', '*ORDER DETAILS*', ...(number ? [`Reference: *#${number}*`] : []), `Placed: ${placedAt}`, '', '*CUSTOMER*', `Name: ${customerName.trim() || 'Guest customer'}`, `WhatsApp: ${customerPhone.trim()}`, '', '*FULFILMENT*', `Method: ${deliveryLabel}`, ...(deliveryOption !== 'pickup' ? [`Address / landmark: ${deliveryLocation.trim()}`] : []), '', '*ORDER ITEMS*', '']
+      const deliveryLabel = deliveryOption === 'pickup'
+        ? 'Store Pickup (Free)'
+        : deliveryOption === 'kigali'
+          ? 'Kigali Delivery (2,000 RWF)'
+          : 'Upcountry Delivery (3,500 RWF)'
+
+      const lines = [
+        '🛒 *MARKETMET GROCERY ORDER*',
+        '',
+        ...(number ? [`🧾 *Order:* #${number}`] : []),
+        `👤 *Customer:* ${customerName.trim() || 'Guest'}`,
+        `📱 *Phone:* ${customerPhone.trim()}`,
+        `🚚 *Delivery:* ${deliveryLabel}`,
+      ]
+
+      if (deliveryOption !== 'pickup' && deliveryLocation.trim()) {
+        lines.push(`📍 *Location:* ${deliveryLocation.trim()}`)
+      }
+
+      lines.push('', '📦 *ITEMS:*')
       cart.forEach((item, index) => {
-        const quantity = Number(item.quantity) || 1
-        const unitPrice = Number(item.price) || 0
-        const imageUrl = item.image ? getImageUrl(item.image) : null
-        lines.push(`${index + 1}. *${item.name}*`, `   ${quantity} × ${unitPrice.toLocaleString()} RWF = *${(unitPrice * quantity).toLocaleString()} RWF*`)
-        if (imageUrl?.startsWith('http')) lines.push(`   🖼️ Product image: ${imageUrl}`)
-        lines.push('')
+        lines.push(`${index + 1}. ${item.name} - Qty: ${Number(item.quantity) || 1} × ${Number(item.price || 0).toLocaleString()} RWF`)
       })
-      lines.push('*ORDER SUMMARY*', `Subtotal: ${serverSubtotal.toLocaleString()} RWF`, `Delivery: ${serverDeliveryFee.toLocaleString()} RWF`, `*TOTAL: ${serverTotal.toLocaleString()} RWF*`, '', '*PAYMENT*', 'Preferred method: MTN MoMo', 'Status: Awaiting payment confirmation', '', '━━━━━━━━━━━━━━━━━━━━', 'Please confirm availability, payment instructions and the expected delivery time.', '', 'Thank you for shopping with *MarketMet*.', '_Fresh groceries. Delivered with care._')
+
+      lines.push(
+        '',
+        `💵 *Subtotal:* ${serverSubtotal.toLocaleString()} RWF`,
+        `🚚 *Delivery Fee:* ${serverDeliveryFee.toLocaleString()} RWF`,
+        `💰 *TOTAL AMOUNT:* ${serverTotal.toLocaleString()} RWF`,
+        '',
+        'Please confirm my MarketMet order.'
+      )
+
       const whatsappCheckoutUrl = `https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`
       clearCart()
       closeCart()
