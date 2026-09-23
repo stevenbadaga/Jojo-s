@@ -11,7 +11,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.9,
     reviewsCount: 48,
-    image: 'https://images.unsplash.com/photo-1751200270667-cb13feeac24c?auto=format&fit=crop&w=1200&q=85'
+    image: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=1200&q=85'
   },
   {
     id: 102,
@@ -37,7 +37,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.7,
     reviewsCount: 31,
-    image: 'https://images.unsplash.com/photo-1709425463887-6978b26de609?auto=format&fit=crop&w=1200&q=85'
+    image: 'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=1200&q=85'
   },
   {
     id: 104,
@@ -101,7 +101,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.8,
     reviewsCount: 42,
-    image: 'https://images.unsplash.com/photo-1739488447641-05abf21e933f?auto=format&fit=crop&w=1200&q=85'
+    image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=1200&q=85'
   },
   {
     id: 109,
@@ -125,7 +125,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.8,
     reviewsCount: 39,
-    image: 'https://images.unsplash.com/photo-1709425463887-6978b26de609?auto=format&fit=crop&w=1200&q=85'
+    image: 'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=1200&q=85'
   },
   {
     id: 111,
@@ -139,7 +139,7 @@ export const DEFAULT_GROCERY_PRODUCTS = [
     in_stock: true,
     rating: 4.9,
     reviewsCount: 83,
-    image: 'https://images.unsplash.com/photo-1764745223955-b87cd6c0fecf?auto=format&fit=crop&w=1000&q=85'
+    image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=1000&q=85'
   },
   {
     id: 112,
@@ -156,11 +156,11 @@ export const DEFAULT_GROCERY_PRODUCTS = [
 ]
 
 export const GROCERY_CATEGORIES = [
-  { id: 'all', name: 'All Products', icon: '🛒', count: '100+' },
-  { id: 'Fruits', name: 'Fresh Fruits', icon: '🍎', count: '30+' },
-  { id: 'Vegetables', name: 'Organic Vegetables', icon: '🥦', count: '45+' },
-  { id: 'Dairy', name: 'Dairy & Eggs', icon: '🥛', count: '20+' },
-  { id: 'Bakery', name: 'Bakery & Bread', icon: '🍞', count: '15+' },
-  { id: 'Beverages', name: 'Fresh Juices & Drinks', icon: '🧃', count: '25+' },
-  { id: 'Pantry', name: 'Oils & Pantry', icon: '🫒', count: '40+' }
+  { id: 'all', name: 'All Products', icon: 'shopping', count: '100+' },
+  { id: 'Fruits', name: 'Fresh Fruits', icon: 'produce', count: '30+' },
+  { id: 'Vegetables', name: 'Organic Vegetables', icon: 'produce', count: '45+' },
+  { id: 'Dairy', name: 'Dairy & Eggs', icon: 'dairy', count: '20+' },
+  { id: 'Bakery', name: 'Bakery & Bread', icon: 'bakery', count: '15+' },
+  { id: 'Beverages', name: 'Fresh Juices & Drinks', icon: 'beverages', count: '25+' },
+  { id: 'Pantry', name: 'Oils & Pantry', icon: 'pantry', count: '40+' }
 ]
