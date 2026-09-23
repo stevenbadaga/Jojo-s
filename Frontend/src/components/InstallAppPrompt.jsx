@@ -1,14 +1,24 @@
 import { useEffect, useRef, useState } from 'react'
 import { Download, Share, X } from 'lucide-react'
 
-const isIOS = () =>
-  /iphone|ipad|ipod/i.test(window.navigator.userAgent) ||
-  (window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1)
+const isIOS = () => {
+  const userAgent = window.navigator.userAgent || ''
+  const platform = window.navigator.platform || ''
+  return (
+    /iphone|ipad|ipod/i.test(userAgent) ||
+    (platform === 'MacIntel' && window.navigator.maxTouchPoints > 1)
+  )
+}
 
+// Only return true when the page is actually running as an installed web app.
+// Do not use visibility/focus state to infer installation: opening Safari's
+// Share sheet can change page visibility without turning the site into standalone.
 const isStandalone = () => {
-  const standaloneMedia = window.matchMedia('(display-mode: standalone)').matches
-  const legacyStandalone = window.navigator.standalone === true
-  return standaloneMedia || legacyStandalone
+  const standaloneMedia =
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(display-mode: standalone)').matches
+  const legacyIOSStandalone = window.navigator.standalone === true
+  return standaloneMedia || legacyIOSStandalone
 }
 
 export default function InstallAppPrompt() {
@@ -22,15 +32,8 @@ export default function InstallAppPrompt() {
     const ios = isIOS()
     setMobileIOS(ios)
 
-    const hideIfInstalled = () => {
-      if (isStandalone()) {
-        setInstalled(true)
-        setVisible(false)
-      }
-    }
-
-    // iOS Safari does not expose beforeinstallprompt. The only reliable
-    // flow is to show one in-page guide for Safari's Share > Add to Home Screen.
+    // This is the only initial condition that should prevent the prompt.
+    // A normal iPhone Safari tab must continue to the prompt flow.
     if (isStandalone()) {
       setInstalled(true)
       return undefined
@@ -39,6 +42,7 @@ export default function InstallAppPrompt() {
     const showPrompt = () => {
       window.clearTimeout(timerRef.current)
       timerRef.current = window.setTimeout(() => {
+        // Re-check only for actual standalone mode immediately before showing.
         if (!isStandalone()) setVisible(true)
       }, 900)
     }
@@ -57,17 +61,17 @@ export default function InstallAppPrompt() {
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
     window.addEventListener('appinstalled', handleInstalled)
-    window.addEventListener('pageshow', hideIfInstalled)
-    document.addEventListener('visibilitychange', hideIfInstalled)
 
+    // Safari on iPhone does not fire beforeinstallprompt, so it uses the
+    // same single in-page card with Share > Add to Home Screen guidance.
+    // Do not use visibilitychange here because Safari's Share sheet can
+    // temporarily change document visibility.
     showPrompt()
 
     return () => {
       window.clearTimeout(timerRef.current)
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
       window.removeEventListener('appinstalled', handleInstalled)
-      window.removeEventListener('pageshow', hideIfInstalled)
-      document.removeEventListener('visibilitychange', hideIfInstalled)
     }
   }, [])
 
@@ -82,14 +86,11 @@ export default function InstallAppPrompt() {
 
       if (choice?.outcome === 'accepted') {
         setInstalled(true)
-        setVisible(false)
-      } else {
-        setVisible(false)
       }
     } catch (error) {
       console.warn('MarketMet install prompt failed:', error)
-      setVisible(false)
     } finally {
+      setVisible(false)
       setInstallEvent(null)
     }
   }
