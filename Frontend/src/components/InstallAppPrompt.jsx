@@ -1,30 +1,46 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Download, Share, X } from 'lucide-react'
 
 const isIOS = () =>
   /iphone|ipad|ipod/i.test(window.navigator.userAgent) ||
   (window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1)
 
-const isStandalone = () =>
-  window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true
+const isStandalone = () => {
+  const standaloneMedia = window.matchMedia('(display-mode: standalone)').matches
+  const legacyStandalone = window.navigator.standalone === true
+  return standaloneMedia || legacyStandalone
+}
 
 export default function InstallAppPrompt() {
   const [installEvent, setInstallEvent] = useState(null)
   const [visible, setVisible] = useState(false)
   const [installed, setInstalled] = useState(false)
   const [mobileIOS, setMobileIOS] = useState(false)
+  const timerRef = useRef(null)
 
   useEffect(() => {
+    const ios = isIOS()
+    setMobileIOS(ios)
+
+    const hideIfInstalled = () => {
+      if (isStandalone()) {
+        setInstalled(true)
+        setVisible(false)
+      }
+    }
+
+    // iOS Safari does not expose beforeinstallprompt. The only reliable
+    // flow is to show one in-page guide for Safari's Share > Add to Home Screen.
     if (isStandalone()) {
       setInstalled(true)
       return undefined
     }
 
-    const ios = isIOS()
-    setMobileIOS(ios)
-
     const showPrompt = () => {
-      window.setTimeout(() => setVisible(true), 900)
+      window.clearTimeout(timerRef.current)
+      timerRef.current = window.setTimeout(() => {
+        if (!isStandalone()) setVisible(true)
+      }, 900)
     }
 
     const handleBeforeInstallPrompt = (event) => {
@@ -41,14 +57,17 @@ export default function InstallAppPrompt() {
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
     window.addEventListener('appinstalled', handleInstalled)
+    window.addEventListener('pageshow', hideIfInstalled)
+    document.addEventListener('visibilitychange', hideIfInstalled)
 
-    // iOS Safari does not expose beforeinstallprompt. Show the same
-    // single install card and guide the user through Add to Home Screen.
-    if (ios) showPrompt()
+    showPrompt()
 
     return () => {
+      window.clearTimeout(timerRef.current)
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
       window.removeEventListener('appinstalled', handleInstalled)
+      window.removeEventListener('pageshow', hideIfInstalled)
+      document.removeEventListener('visibilitychange', hideIfInstalled)
     }
   }, [])
 
@@ -63,12 +82,15 @@ export default function InstallAppPrompt() {
 
       if (choice?.outcome === 'accepted') {
         setInstalled(true)
+        setVisible(false)
       } else {
         setVisible(false)
       }
     } catch (error) {
       console.warn('MarketMet install prompt failed:', error)
       setVisible(false)
+    } finally {
+      setInstallEvent(null)
     }
   }
 
