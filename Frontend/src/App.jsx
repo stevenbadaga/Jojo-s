@@ -8,6 +8,7 @@ import Layout from './components/Layout'
 import ErrorBoundary from './components/ErrorBoundary'
 import ProtectedRoute from './components/ProtectedRoute'
 import { LoadingSpinner } from './components/SkeletonLoader'
+import InstallAppPrompt from './components/InstallAppPrompt'
 
 const Home = lazy(() => import('./pages/Home'))
 const Login = lazy(() => import('./pages/Login'))
@@ -82,6 +83,7 @@ function App() {
                     </Route>
                   </Routes>
                 </Suspense>
+                <InstallAppPrompt />
               </Router>
             </ToastProvider>
           </CartProvider>
