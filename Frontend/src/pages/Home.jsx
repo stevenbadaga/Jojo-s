@@ -5,7 +5,7 @@ import ProductCard from '../components/ProductCard'
 import RecentlyViewed from '../components/RecentlyViewed'
 import Newsletter from '../components/Newsletter'
 import QuickViewModal from '../components/QuickViewModal'
-import { Search, ArrowRight, ShieldCheck, Zap, Clock, ShoppingBag, Percent, Sparkles, ChevronRight, CheckCircle2 } from 'lucide-react'
+import { Search, ArrowRight, ShieldCheck, Zap, Clock, ShoppingBag, Percent, Sparkles, ChevronRight, CheckCircle2, ShoppingCart, Leaf, Milk, Croissant, Package, GlassWater } from 'lucide-react'
 import { ProductGridSkeleton } from '../components/SkeletonLoader'
 import { EmptyProducts } from '../components/EmptyState'
 import { getImageUrl } from '../utils/imageUtils'
@@ -128,12 +128,12 @@ const HERO_SHOWCASE_LAYOUTS = [
 ]
 
 const CATEGORY_AISLES = [
-  { id: 'all', name: 'All Aisles', icon: '🛒' },
-  { id: 'Fruits & Vegetables', name: 'Produce', icon: '🥦' },
-  { id: 'Dairy & Eggs', name: 'Dairy & Eggs', icon: '🥛' },
-  { id: 'Bakery', name: 'Bakery', icon: '🍞' },
-  { id: 'Pantry', name: 'Pantry & Oils', icon: '🫒' },
-  { id: 'Beverages', name: 'Beverages', icon: '🧃' },
+  { id: 'all', name: 'All Aisles', icon: ShoppingCart },
+  { id: 'Fruits & Vegetables', name: 'Produce', icon: Leaf },
+  { id: 'Dairy & Eggs', name: 'Dairy & Eggs', icon: Milk },
+  { id: 'Bakery', name: 'Bakery', icon: Croissant },
+  { id: 'Pantry', name: 'Pantry & Oils', icon: Package },
+  { id: 'Beverages', name: 'Beverages', icon: GlassWater },
 ]
 
 const Home = () => {
@@ -360,7 +360,7 @@ const Home = () => {
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
               }`}
             >
-              <span className="text-base">{aisle.icon}</span>
+              <aisle.icon className="h-4 w-4 shrink-0" strokeWidth={1.9} />
               <span>{aisle.name}</span>
             </button>
           ))}
@@ -415,7 +415,7 @@ const Home = () => {
               <section className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">🥦</span>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#108910]/10 text-[#108910]"><Leaf className="h-5 w-5" strokeWidth={1.9} /></div>
                     <div>
                       <h2 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">
                         Farm Fresh Produce
@@ -449,7 +449,7 @@ const Home = () => {
               <section className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">🥛</span>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#108910]/10 text-[#108910]"><Milk className="h-5 w-5" strokeWidth={1.9} /></div>
                     <div>
                       <h2 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">
                         Dairy, Eggs & Juices
@@ -483,7 +483,7 @@ const Home = () => {
               <section className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">🍞</span>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#108910]/10 text-[#108910]"><Croissant className="h-5 w-5" strokeWidth={1.9} /></div>
                     <div>
                       <h2 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">
                         Fresh Bakery & Pantry
