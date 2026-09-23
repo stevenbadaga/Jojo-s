@@ -45,8 +45,6 @@ export default function InstallAppPrompt() {
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
     window.addEventListener('appinstalled', handleInstalled)
 
-    // iOS Safari does not expose beforeinstallprompt, so show a small
-    // Add to Home Screen guide instead.
     if (ios) showPrompt()
 
     return () => {
@@ -97,12 +95,12 @@ export default function InstallAppPrompt() {
         </div>
         <div>
           <p className="text-sm font-semibold text-gray-900 dark:text-white">
-            {mobileIOS ? 'Add MarketMet to your Home Screen' : 'Get MarketMet on your phone'}
+            {mobileIOS ? 'Add MarketMet to your Home Screen' : 'Download MarketMet on your device'}
           </p>
           <p className="mt-1 text-xs leading-5 text-gray-500 dark:text-gray-400">
             {mobileIOS
               ? 'Tap Share in Safari, then choose “Add to Home Screen”.'
-              : 'Install MarketMet for quick access from your phone.'}
+              : 'Download MarketMet for quick access from your device.'}
           </p>
         </div>
       </div>
@@ -113,7 +111,7 @@ export default function InstallAppPrompt() {
           onClick={install}
           className="mt-3 w-full rounded-xl bg-[#108910] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#0b740b] focus:outline-none focus:ring-2 focus:ring-[#108910]/30"
         >
-          Install MarketMet
+          Download MarketMet
         </button>
       ) : mobileIOS ? (
         <div className="mt-3 rounded-xl bg-[#108910]/10 px-3 py-2 text-center text-xs font-medium text-[#0b740b]">
